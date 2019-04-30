@@ -16,7 +16,7 @@ else{
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Bootstrap Multi Step Registration Form Template</title>
+	<title>GetDiesel - Merchant Registration</title>
 
 	<!-- CSS -->
 	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
@@ -43,53 +43,17 @@ else{
 
 <body>
 
-<!-- Top menu -->
-<nav class="navbar navbar-inverse navbar-no-bg" role="navigation">
-	<div class="container">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#top-navbar-1">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="index.html">Bootstrap Multi Step Registration Form Template</a>
-		</div>
-		<!-- Collect the nav links, forms, and other content for toggling -->
-		<div class="collapse navbar-collapse" id="top-navbar-1">
-			<ul class="nav navbar-nav navbar-right">
-				<li>
-							<span class="li-text">
-								Put some text or
-							</span>
-					<a href="#"><strong>links</strong></a>
-					<span class="li-text">
-								here, or some icons:
-							</span>
-					<span class="li-social">
-								<a href="#"><i class="fa fa-facebook"></i></a>
-								<a href="#"><i class="fa fa-twitter"></i></a>
-								<a href="#"><i class="fa fa-envelope"></i></a>
-								<a href="#"><i class="fa fa-skype"></i></a>
-							</span>
-				</li>
-			</ul>
-		</div>
-	</div>
-</nav>
-
-<!-- Top content -->
 <div class="top-content">
 
 	<div class="inner-bg">
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-8 col-sm-offset-2 text">
-					<h1><strong>Bootstrap</strong> Multi Step Registration Form</h1>
+					<h1><strong>GetDiesel</strong> - Merchant Registration</h1>
 					<div class="description">
 						<p>
-							This is a free responsive multi-step registration form made with Bootstrap.
-							Download it on <a href="http://azmind.com"><strong>AZMIND</strong></a>, customize and use it as you like!
+							Kindly Ensure you fill in your information accurately
+<!--							Download it on <a href="http://azmind.com"><strong>AZMIND</strong></a>, customize and use it as you like!-->
 						</p>
 					</div>
 				</div>
@@ -200,9 +164,10 @@ else{
 <script src="<?php echo base_url(); ?>assets/js/jquery.backstretch.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/retina-1.1.0.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/scripts.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/placeholder.js"></script>
 
 <!--[if lt IE 10]>
-<script src="<?php echo base_url(); ?>assets/js/placeholder.js"></script>
+
 <![endif]-->
 
 </body>
