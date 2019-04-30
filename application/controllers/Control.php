@@ -18,8 +18,34 @@ class Control extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+
+
+	public function __construct() {
+		parent::__construct();
+
+		//loading url helper
+		$this->load->helper('url');
+
+		// Load form helper library
+		$this->load->helper('form');
+
+		// Load form validation library
+		$this->load->library('form_validation');
+
+		// Load session library
+		$this->load->library('session');
+
+		// Load database
+//		$this->load->model('login_database');
+//		$this->load->model('dashboard');
+//
+//		$this->load->helper('pwd_hash');
+//		$this->load->helper('dashboard');
+	}
+
 	public function index()
 	{
-		$this->load->view('landing');
+		$this->load->view('register');
 	}
+
 }

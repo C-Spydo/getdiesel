@@ -181,34 +181,34 @@
 	<main class="content">
 		<h1>COMING SOON!</h1>
 
-		<div class="countdown">
-			<div class="countdown__days">
-				<div class="number"></div>
-				<span class>Days</span>
-			</div>
+<!--		<div class="countdown">-->
+<!--			<div class="countdown__days">-->
+<!--				<div class="number"></div>-->
+<!--				<span class>Days</span>-->
+<!--			</div>-->
+<!---->
+<!--			<div class="countdown__hours">-->
+<!--				<div class="number"></div>-->
+<!--				<span class>Hours</span>-->
+<!--			</div>-->
+<!---->
+<!--			<div class="countdown__minutes">-->
+<!--				<div class="number"></div>-->
+<!--				<span class>Minutes</span>-->
+<!--			</div>-->
+<!---->
+<!--			<div class="countdown__seconds">-->
+<!--				<div class="number"></div>-->
+<!--				<span class>Seconds</span>-->
+<!--			</div>-->
+<!--		</div>-->
 
-			<div class="countdown__hours">
-				<div class="number"></div>
-				<span class>Hours</span>
-			</div>
+		<p>Our website is under construction. We`ll be here soon<br />with our new awesome site</p>
 
-			<div class="countdown__minutes">
-				<div class="number"></div>
-				<span class>Minutes</span>
-			</div>
-
-			<div class="countdown__seconds">
-				<div class="number"></div>
-				<span class>Seconds</span>
-			</div>
-		</div>
-
-		<p>Our website is under construction. We`ll be here soon<br />with our new awesome site. Subscribe to be notified.</p>
-
-		<form action="">
-			<input id="form-email" name="form-email" type="email" placeholder="Your email address" />
-			<input type="submit" value="Notify me" />
-		</form>
+<!--		<form action="">-->
+<!--			<input id="form-email" name="form-email" type="email" placeholder="Your email address" />-->
+<!--			<input type="submit" value="Notify me" />-->
+<!--		</form>-->
 	</main>
 
 	<footer>
