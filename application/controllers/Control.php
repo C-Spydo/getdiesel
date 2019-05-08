@@ -45,6 +45,11 @@ class Control extends CI_Controller {
 
 	public function index()
 	{
+		$this->load->view('landing');
+	}
+
+	public function register()
+	{
 		$this->load->view('register');
 	}
 

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Control extends CI_Controller {
+class Teacher extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -36,10 +36,10 @@ class Control extends CI_Controller {
 		$this->load->library('session');
 
 		// Load database
-//		$this->load->model('login_database');
+		$this->load->model('Teacher_M');
 //		$this->load->model('dashboard');
 //
-//		$this->load->helper('pwd_hash');
+		$this->load->helper('control');
 //		$this->load->helper('dashboard');
 	}
 
@@ -51,92 +51,32 @@ class Control extends CI_Controller {
 	public function register() {
 
 		// Check validation for user input in SignUp form
-		$this->form_validation->set_rules('username', 'Username', 'trim|required');
+		$this->form_validation->set_rules('firstname', 'Username', 'trim|required');
 
-		$this->form_validation->set_rules('email', 'Email', 'trim|required');
+		$this->form_validation->set_rules('businessemail', 'Email', 'trim|required');
 
 		if ($this->form_validation->run() == FALSE) {
 			$this->load->view('register');
 		} else {
 
-			$uplink='default';
-			$uplink2='default';
-			$uplink3='default';
-
-			$uplink=$this->input->post('uplink');
-			$chkuplink=false;
-			$chkuplink=$this->dashboard->chkUser($uplink);
-			if ($uplink=='default'){
-
-				$data['message_display'] = 'Get your Sponsor link to Register';
-				$this->load->view('regiser', $data);
-
-				$uplink2='default';
-				$uplink3='default';
-				$uplink4='default';
-			}
-			elseif($chkuplink==false){
-				echo "<script> alert ('The Sponsor you entered does not Exist || Please Check and retry. !'); </script>";
-				$this->load->view('register');
-			}
-
-			else{
-
-				$uplink_cycle=$this->dashboard->getUplinkCycle($uplink);
-
-
-				$uplinkmodd=$uplink." -".(string)($uplink_cycle);
-				$uplink_no=$this->dashboard->countDirectDownlines($uplinkmodd);
-
-				$uplink=getSpillover($uplinkmodd,$uplink_no);
-				// echo $uplink_no;
-
-				// echo "Selected Uplink".$uplink;
-				$uplinkmod3=substr($uplink, 0, -3);
-
-				$uplink2=$this->getUplink($uplinkmod3);
-				$uplink2mod=substr($uplink2, 0, -3);
-
-				$uplink3=$this->getUplink($uplink2mod);
-				$uplink3mod=substr($uplink3, 0, -3);
-
-				$uplink4=$this->getUplink($uplink3mod);
-
-				// $uplink=$uplinkmodd;
-
-				// echo $uplink;
-				// echo $uplink2;
-				// echo $uplink3;
-
-
-
-				// }
-
 
 				$user_id=$this->makeId();
 				$data = array(
-					'username' => $this->input->post('username'),
-					'email' => $this->input->post('email'),
-					'password' => getHashedPassword($this->input->post('password')),
-					'fullname' => $this->input->post('fullname'),
-					'uplink' => $uplink,
-					'uplink2' => $uplink2,
-					'uplink3' => $uplink3,
-					'uplink4' => $uplink4,
-					'telephone' => $this->input->post('telephone'),
-					'gender' => $this->input->post('gender'),
+					'uuid',$user_id,
+					'firstname' => $this->input->post('firstname'),
+					'lastname' => $this->input->post('lastname'),
+					'business_name' => $this->input->post('businessname'),
+					'business_address' => $this->input->post('businessaddress'),
+					'business_email' => $this->input->post('businessemail'),
+					'business_phone' => $this->input->post('businessphone'),
 					'state' => $this->input->post('state'),
-					'user_id' => $user_id,
-					'regstatus' => 1,
-					'level'=>1
-
+					'lga' => $this->input->post('lga'),
+					'password' => getHashedPassword($this->input->post('password')),
+					'status'=>1
 				);
 
 				$data2=array(
-					'user_id'=>$this->input->post('username'),
-					'wallet_id'=>$this->makeWalletId(),
-					'balance'=>0
-
+					'value'=>$user_id
 				);
 
 				if(($this->input->post('password')) !=$this->input->post('confirm_password')){
@@ -146,8 +86,8 @@ class Control extends CI_Controller {
 				}
 
 				else{
-					$result = $this->login_database->registration_insert($data);
-					$result2 = $this->login_database->wallet_insert($data2);
+					$result = $this->Control->registration($data);
+					$result2 = $this->Control->uuid_insert($data2);
 
 					if ($result == TRUE) {
 						$data['message_display'] = 'Registration Successful, Proceed to Login !';
@@ -166,7 +106,6 @@ class Control extends CI_Controller {
 					}
 				}
 			}
-		}
 	}
 
 	public function user_account_update(){
@@ -196,5 +135,42 @@ class Control extends CI_Controller {
 			$this->load->view('admin_page');
 		}
 	}
+
+public function makeId()
+{
+	$keyspace = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	$keyspace2 = '0123456789';
+	$keyspace3 = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+
+	$str = '';
+	$max = mb_strlen($keyspace, '8bit') - 1;
+	for ($i = 0; $i < 3; ++$i) {
+		$str .= $keyspace[rand(0, $max)];
+	}
+
+	$max = mb_strlen($keyspace2, '8bit') - 1;
+	for ($i = 0; $i < 2; ++$i) {
+		$str .= $keyspace2[rand(0, $max)];
+	}
+
+	$max = mb_strlen($keyspace3, '8bit') - 1;
+	for ($i = 0; $i < 2; ++$i) {
+		$str .= $keyspace3[rand(0, $max)];
+	}
+
+	$result = $this->Teacher_M->idchecker($str);
+
+	if ($result == FALSE){
+		$data = array(
+			'value' => $str
+		);
+		$this->Teacher_M->uuid_insert($data);
+		return $str;
+	}else{
+		makeId();
+	}
+}
+
 
 }

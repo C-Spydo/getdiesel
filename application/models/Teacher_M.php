@@ -1,15 +1,15 @@
 <?php
 
-Class Teacher extends CI_Model {
+Class Teacher_M extends CI_Model {
 
 	// Insert registration data in database
 	public function registration($data) {
 
 		$checker=0;
 		// Query to check whether username already exist or not
-		$condition = "username =" . "'" . $data['username'] . "'";
+		$condition = "business_email =" . "'" . $data['business_email'] . "'";
 		$this->db->select('*');
-		$this->db->from('user_login');
+		$this->db->from('Teacher');
 		$this->db->where($condition);
 		$this->db->limit(1);
 		$query = $this->db->get();
@@ -19,25 +19,38 @@ Class Teacher extends CI_Model {
 
 		}
 
-
-
 		if ($checker==0){
 			// 	Query to insert data in database
-			$this->db->insert('user_login', $data);
+			$this->db->insert('Teacher', $data);
 			if ($this->db->affected_rows() > 0) {
 				return true;
 			}
 		}
 
 
-
-
-
 	}
 
-	public function wallet_insert($data) {
+	public function idchecker($data){
+		// Query to check whether username already exist or not
+		$condition = "value =" . "'" . $data . "'";
+		$this->db->select('*');
+		$this->db->from('uuid_te');
+		$this->db->where($condition);
+		$this->db->limit(1);
+		$query = $this->db->get();
+
+		if ($query->num_rows() == 0) {
+			return FALSE;
+
+		}
+		else{
+			return TRUE;
+		}
+	}
+
+	public function uuid_insert($data) {
 		// 	Query to insert data in database
-		$this->db->insert('wallets', $data);
+		$this->db->insert('uuid_te', $data);
 		if ($this->db->affected_rows() > 0) {
 			return true;
 		}
@@ -56,40 +69,7 @@ Class Teacher extends CI_Model {
 
 	}
 
-	public function idchecker($data){
-		// Query to check whether username already exist or not
-		$condition = "user_id =" . "'" . $data . "'";
-		$this->db->select('*');
-		$this->db->from('user_login');
-		$this->db->where($condition);
-		$this->db->limit(1);
-		$query = $this->db->get();
 
-		if ($query->num_rows() == 0) {
-			return FALSE;
-
-		}
-		else{
-			return TRUE;
-		}
-	}
-
-	public function walletidchecker($data){
-		$condition = "wallet_id =" . "'" . $data . "'";
-		$this->db->select('*');
-		$this->db->from('wallets');
-		$this->db->where($condition);
-		$this->db->limit(1);
-		$query = $this->db->get();
-
-		if ($query->num_rows() == 0) {
-			return FALSE;
-
-		}
-		else{
-			return TRUE;
-		}
-	}
 
 
 

@@ -10,167 +10,254 @@ else{
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+  <title>Register &mdash; Stisla</title>
 
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>GetDiesel - Merchant Registration</title>
+  <!-- General CSS Files -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
-	<!-- CSS -->
-	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
-	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/font-awesome/css/font-awesome.min.css">
-	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/form-elements.css">
-	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/style.css">
+  <!-- CSS Libraries -->
+  <link rel="stylesheet" href="<?php echo base_url(); ?>node_modules/selectric/public/selectric.css">
 
-	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-	<!--[if lt IE 9]>
-	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-	<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-	<![endif]-->
+  <!-- Template CSS -->
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/style.css">
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/components.css">
 
-	<!-- Favicon and touch icons -->
-	<link rel="shortcut icon" href="<?php echo base_url(); ?>assets/ico/favicon.png">
-	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?php echo base_url(); ?>assets/ico/apple-touch-icon-144-precomposed.png">
-	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?php echo base_url(); ?>assets/ico/apple-touch-icon-114-precomposed.png">
-	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?php echo base_url(); ?>assets/ico/apple-touch-icon-72-precomposed.png">
-	<link rel="apple-touch-icon-precomposed" href="<?php echo base_url(); ?>assets/ico/apple-touch-icon-57-precomposed.png">
-
+	<script src="<?php echo base_url(); ?>assets/js/jquery-1.11.1.min.js"></script>
 </head>
 
 <body>
+<?php echo form_open('Teacher/Register'); ?>
 
-<div class="top-content">
+<?php
+echo "<div class='error_msg'>";
+if (isset($error_message)) {
+	echo $error_message;
+}
+echo validation_errors();
+echo "</div>";
 
-	<div class="inner-bg">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-8 col-sm-offset-2 text">
-					<h1><strong>GetDiesel</strong> - Merchant Registration</h1>
-					<div class="description">
-						<p>
-							Kindly Ensure you fill in your information accurately
-<!--							Download it on <a href="http://azmind.com"><strong>AZMIND</strong></a>, customize and use it as you like!-->
-						</p>
+?>
+
+  <div id="app">
+    <section class="section">
+      <div class="container mt-5">
+        <div class="row">
+          <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
+            <div class="login-brand">
+              <img src="<?php echo base_url(); ?>assets/img/stisla-fill.svg" alt="logo" width="100" class="shadow-light rounded-circle">
+            </div>
+
+            <div class="card card-primary">
+              <div class="card-header"><h4>Register</h4></div>
+
+              <div class="card-body">
+                <form method="POST">
+					<div class="form-divider">
+						Tell us about yourself
 					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-6 col-sm-offset-3 form-box">
+                  <div class="row">
+                    <div class="form-group col-6">
+                      <label for="frist_name">First Name</label>
+                      <input id="frist_name" type="text" class="form-control" name="firstname" required autofocus>
+                    </div>
+                    <div class="form-group col-6">
+                      <label for="last_name">Last Name</label>
+                      <input id="last_name" type="text" class="form-control" name="lastname" required>
+                    </div>
+                  </div>
 
-					<form role="form" action="" method="post" class="registration-form">
 
-						<fieldset>
-							<div class="form-top">
-								<div class="form-top-left">
-									<h3>Step 1 / 3</h3>
-									<p>Tell us who you are:</p>
-								</div>
-								<div class="form-top-right">
-									<i class="fa fa-user"></i>
-								</div>
+                  <div class="form-divider">
+                    Tell us about your business
+                  </div>
+					<div class="row">
+						<div class="form-group col-12">
+							<label for="frist_name">Business Name</label>
+							<input id="frist_name" type="text" class="form-control" name="businessname" required autofocus>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="form-group col-12">
+							<label for="frist_name">Business Address</label>
+							<input id="frist_name" type="text" class="form-control" name="businessaddress" required autofocus>
+						</div>
+					</div>
+
+                  <div class="row">
+					  <div class="form-group col-6">
+						  <label>State</label>
+						  <select class="form-control selectric" name="state" id="state">
+							  <option selected value='' disabled>Business State</option>
+
+							  <option value='Abia' >Abia</option>
+							  <option value='Adamawa'>Adamawa</option>
+							  <option value='AkwaIbom' >AkwaIbom</option>
+							  <option value='Anambra' >Anambra</option>
+							  <option value='Bauchi' >Bauchi</option>
+							  <option value='Bayelsa' >Bayelsa</option>
+							  <option value='Benue' >Benue</option>
+							  <option value='Borno' >Borno</option>
+							  <option value='CrossRiver' >CrossRiver</option>
+							  <option value='Delta' >Delta</option>
+							  <option value='Ebonyi' >Ebonyi</option>
+							  <option value='Edo' > Edo</option>
+							  <option value='Ekiti' > Ekiti</option>
+							  <option value='Enugu' > Enugu</option>
+							  <option value='FCT' > FCT</option>
+							  <option value='Gombe' > Gombe</option>
+							  <option value='Imo' > Imo</option>
+							  <option value='Jigawa' > Jigawa</option>
+							  <option value='Kaduna' > Kaduna</option>
+							  <option value='Kano' > Kano</option>
+							  <option value='Katsina' > Katsina</option>
+							  <option value='Kebbi' > Kebbi</option>
+							  <option value='Kogi' > Kogi</option>
+							  <option value='Kwara' > Kwara</option>
+							  <option value='Lagos' > Lagos</option>
+							  <option value='Nassarawa' > Nassarawa</option>
+							  <option value='Niger' > Niger</option>
+							  <option value='Ogun' > Ogun</option>
+							  <option value='Ondo' > Ondo</option>
+							  <option value='Osun' > Osun</option>
+							  <option value='Oyo' > Oyo</option>
+							  <option value='Plateau' > Plateau</option>
+							  <option value='Rivers' > Rivers</option>
+							  <option value='Sokoto' > Sokoto</option>
+							  <option value='Taraba' > Taraba</option>
+							  <option value='Yobe' > Yobe</option>
+							  <option value='Zamfara' > Zamfara</option>
+						  </select>
+					  </div>
+					  <div class="form-group col-6">
+						  <label>Local Government Area</label>
+						  <select class="form-control selectric" id="localg" name="lga" required>
+							  <option selected value='' disabled>Local Government Area</option>
+						  </select>
+					  </div>
+				  </div>
+
+					<div class="row">
+					<div class="form-group col-6">
+						  <label for="email">Business Email</label>
+						  <input id="email" type="email" class="form-control" name="businessemail" required>
+						  <div class="invalid-feedback">
+						  </div>
+					  </div>
+
+						<div class="form-group col-6">
+							<label>Business Phone Number</label>
+							<input type="text" name="businessphone" required class="form-control">
+						</div>
+
+                  </div>
+					<div class="form-divider">
+						Enter Passwords
+					</div>
+					<div class="row">
+						<div class="form-group col-6">
+							<label for="password" class="d-block">Password</label>
+							<input id="password" type="password" class="form-control pwstrength"
+								   required data-indicator="pwindicator" name="password">
+							<div id="pwindicator" class="pwindicator">
+								<div class="bar"></div>
+								<div class="label"></div>
 							</div>
-							<div class="form-bottom">
-								<div class="form-group">
-									<label class="sr-only" for="form-first-name">First name</label>
-									<input type="text" name="form-first-name" placeholder="First name..." class="form-first-name form-control" id="form-first-name">
-								</div>
-								<div class="form-group">
-									<label class="sr-only" for="form-last-name">Last name</label>
-									<input type="text" name="form-last-name" placeholder="Last name..." class="form-last-name form-control" id="form-last-name">
-								</div>
-								<div class="form-group">
-									<label class="sr-only" for="form-about-yourself">About yourself</label>
-									<textarea name="form-about-yourself" placeholder="About yourself..."
-											  class="form-about-yourself form-control" id="form-about-yourself"></textarea>
-								</div>
-								<button type="button" class="btn btn-next">Next</button>
-							</div>
-						</fieldset>
-
-						<fieldset>
-							<div class="form-top">
-								<div class="form-top-left">
-									<h3>Step 2 / 3</h3>
-									<p>Set up your account:</p>
-								</div>
-								<div class="form-top-right">
-									<i class="fa fa-key"></i>
-								</div>
-							</div>
-							<div class="form-bottom">
-								<div class="form-group">
-									<label class="sr-only" for="form-email">Email</label>
-									<input type="text" name="form-email" placeholder="Email..." class="form-email form-control" id="form-email">
-								</div>
-								<div class="form-group">
-									<label class="sr-only" for="form-password">Password</label>
-									<input type="password" name="form-password" placeholder="Password..." class="form-password form-control" id="form-password">
-								</div>
-								<div class="form-group">
-									<label class="sr-only" for="form-repeat-password">Repeat password</label>
-									<input type="password" name="form-repeat-password" placeholder="Repeat password..."
-										   class="form-repeat-password form-control" id="form-repeat-password">
-								</div>
-								<button type="button" class="btn btn-previous">Previous</button>
-								<button type="button" class="btn btn-next">Next</button>
-							</div>
-						</fieldset>
-
-						<fieldset>
-							<div class="form-top">
-								<div class="form-top-left">
-									<h3>Step 3 / 3</h3>
-									<p>Social media profiles:</p>
-								</div>
-								<div class="form-top-right">
-									<i class="fa fa-twitter"></i>
-								</div>
-							</div>
-							<div class="form-bottom">
-								<div class="form-group">
-									<label class="sr-only" for="form-facebook">Facebook</label>
-									<input type="text" name="form-facebook" placeholder="Facebook..." class="form-facebook form-control" id="form-facebook">
-								</div>
-								<div class="form-group">
-									<label class="sr-only" for="form-twitter">Twitter</label>
-									<input type="text" name="form-twitter" placeholder="Twitter..." class="form-twitter form-control" id="form-twitter">
-								</div>
-								<div class="form-group">
-									<label class="sr-only" for="form-google-plus">Google plus</label>
-									<input type="text" name="form-google-plus" placeholder="Google plus..." class="form-google-plus form-control" id="form-google-plus">
-								</div>
-								<button type="button" class="btn btn-previous">Previous</button>
-								<button type="submit" class="btn">Sign me up!</button>
-							</div>
-						</fieldset>
-
-					</form>
-
-				</div>
-			</div>
-		</div>
-	</div>
-
-</div>
+						</div>
+						<div class="form-group col-6">
+							<label for="password2" class="d-block">Password Confirmation</label>
+							<input id="password2" type="password" class="form-control"
+								   name="password-confirm" required>
+						</div>
+					</div>
 
 
-<!-- Javascript -->
-<script src="<?php echo base_url(); ?>assets/js/jquery-1.11.1.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/bootstrap/js/bootstrap.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/js/jquery.backstretch.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/js/retina-1.1.0.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/js/scripts.js"></script>
-<script src="<?php echo base_url(); ?>assets/js/placeholder.js"></script>
+                  <div class="form-group">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" required name="agree" class="custom-control-input" id="agree">
+                      <label class="custom-control-label" for="agree">I agree with the terms and conditions</label>
+                    </div>
+                  </div>
 
+                  <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">
+                      Register
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="simple-footer">
+              Copyright &copy; GetDiesel 2019
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+<script src="<?php echo base_url() ?>assets/js/state.js"></script>
 <!--[if lt IE 10]>
 
 <![endif]-->
+<script>
 
+	$(function(){
+
+
+		var items = [];
+
+		$.each(state['Abia'],function(i,val){
+
+			items.push( "<option value = '" + val + "'>"+ val +"</option>");
+		});
+
+		$('#localg').append(items);
+
+
+		$(document).on("change",'#state',function(){
+
+			var st_p = $(this).val();
+
+			$('#localg').html("");
+			var items = [];
+
+			$.each(state[st_p],function(i,val){
+
+				items.push( "<option value = '" + val + "'>"+ val +"</option>");
+
+			});
+
+			$('#localg').append(items);
+		});
+
+
+	});
+
+
+</script>
+  <!-- General JS Scripts -->
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/js/stisla.js"></script>
+
+  <!-- JS Libraies -->
+  <script src="<?php echo base_url(); ?>node_modules/jquery-pwstrength/jquery.pwstrength.min.js"></script>
+  <script src="<?php echo base_url(); ?>node_modules/selectric/public/jquery.selectric.min.js"></script>
+
+
+  <!-- Template JS File -->
+  <script src="<?php echo base_url(); ?>assets/js/scripts.js"></script>
+  <script src="<?php echo base_url(); ?>assets/js/custom.js"></script>
+
+  <!-- Page Specific JS File -->
+  <script src="<?php echo base_url(); ?>assets/js/page/auth-register.js"></script>
 </body>
-
 </html>
-
