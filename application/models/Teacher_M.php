@@ -9,7 +9,7 @@ Class Teacher_M extends CI_Model {
 		// Query to check whether username already exist or not
 		$condition = "business_email =" . "'" . $data['business_email'] . "'";
 		$this->db->select('*');
-		$this->db->from('Teacher');
+		$this->db->from('teachers');
 		$this->db->where($condition);
 		$this->db->limit(1);
 		$query = $this->db->get();
@@ -21,13 +21,62 @@ Class Teacher_M extends CI_Model {
 
 		if ($checker==0){
 			// 	Query to insert data in database
-			$this->db->insert('Teacher', $data);
+			$this->db->insert('teachers', $data);
 			if ($this->db->affected_rows() > 0) {
 				return true;
 			}
 		}
 
 
+	}
+
+	// Read data using username and password
+	public function login($data) {
+		$this->load->helper('control');
+		$password=$data['password'];
+
+		$condition = "business_email =" . "'" . $data['business_email']. "'";
+		$this->db->select('*');
+		$this->db->from('teachers');
+		$this->db->where($condition);
+		$this->db->limit(1);
+		$query = $this->db->get();
+
+		if ($query->num_rows() == 1) {
+
+
+			$q=$query->result_array();
+
+
+			if(verifyHashedPassword($password, $q[0]['password'])){
+				// echo 'Yes , I got here';
+				return true;
+			}
+			else{
+				return 1;
+			}
+
+		} else {
+			return 2;
+		}
+
+	}
+
+	// Read data from database to show data in admin page
+	public function read_user_information($business_email) {
+
+		$condition = "business_email =" . "'" . $business_email . "'";
+		$this->db->select('*');
+		$this->db->from('teachers');
+		$this->db->where($condition);
+		$this->db->limit(1);
+		$query = $this->db->get();
+
+		if ($query->num_rows() == 1) {
+			return $query->result();
+		} else {
+			return false;
+		}
 	}
 
 	public function idchecker($data){
@@ -73,54 +122,6 @@ Class Teacher_M extends CI_Model {
 
 
 
-	// Read data using username and password
-	public function login($data) {
-		$this->load->helper('pwd_hash');
-		$password=$data['password'];
-
-		$condition = "username =" . "'" . $data['username']. "'";
-		$this->db->select('*');
-		$this->db->from('user_login');
-		$this->db->where($condition);
-		$this->db->limit(1);
-		$query = $this->db->get();
-
-		if ($query->num_rows() == 1) {
-
-
-			$q=$query->result_array();
-
-
-			if(verifyHashedPassword($password, $q[0]['password'])){
-				// echo 'Yes , I got here';
-				return true;
-			}
-			else{
-				return false;
-			}
-
-		} else {
-			return false;
-		}
-
-	}
-
-	// Read data from database to show data in admin page
-	public function read_user_information($username) {
-
-		$condition = "username =" . "'" . $username . "'";
-		$this->db->select('*');
-		$this->db->from('user_login');
-		$this->db->where($condition);
-		$this->db->limit(1);
-		$query = $this->db->get();
-
-		if ($query->num_rows() == 1) {
-			return $query->result();
-		} else {
-			return false;
-		}
-	}
 
 	public function user_profile_update($data){
 

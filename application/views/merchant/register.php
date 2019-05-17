@@ -1,12 +1,13 @@
 <?php
-if (isset($this->session->userdata['logged_in'])) {
-	$user_id = ($this->session->userdata['logged_in']['user_id']);
-}
-else{
-	$user_id='unknown';
-}
-
-?>
+//if (isset($this->session->userdata['logged_in'])) {
+//	$user_id = ($this->session->userdata['logged_in']['uuid']);
+//}
+//else{
+//	$user_id='unknown';
+//}
+//
+////$this->session->userdata['logged_in']['username']
+//?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -55,7 +56,15 @@ echo "</div>";
               <div class="card-header"><h4>Register</h4></div>
 
               <div class="card-body">
-                <form method="POST">
+				  <?php echo "<div class='error_msg'>";
+				  if (isset($message_display)) {
+					  echo $message_display;
+				  }
+				  echo "</div>";
+
+				  ?>
+
+                <form method="POST" action="../../index.html">
 					<div class="form-divider">
 						Tell us about yourself
 					</div>

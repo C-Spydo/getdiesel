@@ -45,7 +45,17 @@ class Teacher extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('register');
+		$this->load->view('merchant/login');
+	}
+
+	public function register_v()
+	{
+		$this->load->view('merchant/register');
+	}
+
+	public function login_v()
+	{
+		$this->load->view('merchant/login');
 	}
 
 	public function register() {
@@ -56,13 +66,13 @@ class Teacher extends CI_Controller {
 		$this->form_validation->set_rules('businessemail', 'Email', 'trim|required');
 
 		if ($this->form_validation->run() == FALSE) {
-			$this->load->view('register');
+			$this->load->view('merchant/register');
 		} else {
 
 
 				$user_id=$this->makeId();
 				$data = array(
-					'uuid',$user_id,
+					'uuid'=>$user_id,
 					'firstname' => $this->input->post('firstname'),
 					'lastname' => $this->input->post('lastname'),
 					'business_name' => $this->input->post('businessname'),
@@ -75,19 +85,39 @@ class Teacher extends CI_Controller {
 					'status'=>1
 				);
 
-				$data2=array(
+				$session_data = array(
+					'uuid'=>$user_id,
+					'firstname' => $this->input->post('firstname'),
+					'lastname' => $this->input->post('lastname'),
+					'business_name' => $this->input->post('businessname'),
+					'business_address' => $this->input->post('businessaddress'),
+					'business_email' => $this->input->post('businessemail'),
+					'business_phone' => $this->input->post('businessphone'),
+					'state' => $this->input->post('state'),
+					'lga' => $this->input->post('lga'),
+					'password' => getHashedPassword($this->input->post('password')),
+					'status'=>1
+				);
+
+				$this->session->set_userdata('logged_in', $session_data);
+
+
+
+
+			$data2=array(
 					'value'=>$user_id
 				);
 
-				if(($this->input->post('password')) !=$this->input->post('confirm_password')){
+				if(($this->input->post('password')) !=$this->input->post('password-confirm')){
 
 					$data['message_display'] = 'Passwords Do Not Match';
-					$this->load->view('register', $data);
+					$this->load->view('merchant/register', $data);
+					//echo 'Passwords Do Not Match';
 				}
 
 				else{
-					$result = $this->Control->registration($data);
-					$result2 = $this->Control->uuid_insert($data2);
+					$result = $this->Teacher_M->registration($data);
+					$result2 = $this->Teacher_M->uuid_insert($data2);
 
 					if ($result == TRUE) {
 						$data['message_display'] = 'Registration Successful, Proceed to Login !';
@@ -95,11 +125,11 @@ class Teacher extends CI_Controller {
 						// echo "Selected Uplink".$uplink;
 
 						echo "<script> alert ('Registration Successful, Proceed to Login !'); </script>";
-						$this->send_welcome_email($data['email'],$data['username'],$this->input->post('password'));
-						$this->load->view('login_form', $data);
+						$this->send_welcome_email($data['business_email'],$this->input->post('password'));
+						$this->load->view('login', $data);
 					} elseif($result==1) {
-						$data['message_display'] = 'Username  already exists, Try another!';
-						$this->load->view('register', $data);
+						$data['message_display'] = 'Email  already exists, Try another!';
+						$this->load->view('merchant/register', $data);
 					}
 					else{
 
@@ -107,6 +137,84 @@ class Teacher extends CI_Controller {
 				}
 			}
 	}
+
+	public function login() {
+
+//		$this->form_validation->set_rules('email', 'Username', 'trim|required');
+//		$this->form_validation->set_rules('password', 'Password', 'trim');
+//
+//		if ($this->form_validation->run() == FALSE) {
+//			if(isset($this->session->userdata['logged_in'])){
+//				$this->load->view('merchant/dashboard');
+//			}else{
+//				$this->load->view('merchant/login');
+//			}
+//		} else {
+			$data = array(
+				'business_email' => $this->input->post('email'),
+				'password' => $this->input->post('password')
+			);
+			$result = $this->Teacher_M->login($data);
+			if ($result == TRUE) {
+
+				$username = $this->input->post('email');
+				$result = $this->Teacher_M->read_user_information($username);
+
+				if ($result ==true) {
+					$regstatus=$result[0]->status;
+					if($regstatus==1){
+						$session_data = array(
+//							'username' => $result[0]->username,
+//							'email' => $result[0]->email,
+//							'fullname'=>$result[0]->fullname,
+//							'user_id'=>$result[0]->user_id,
+//							'level'=>$result[0]->level,
+//							'uplink'=>$result[0]->uplink,
+//							'uplink2'=>$result[0]->uplink2,
+//							'uplink3'=>$result[0]->uplink3,
+//							'telephone'=>$result[0]->telephone,
+//							'password'=>$result[0]->password,
+//							'joindate'=>$result[0]->datetime,
+//							'cycle'=>$result[0]->cycle
+						);
+						// Add user data in session
+						$this->session->set_userdata('logged_in', $session_data);
+
+
+
+						$this->load->view('merchant/dashboard');
+					}
+
+					elseif($regstatus==2){
+
+					}
+					else{
+
+					}
+				}
+
+			}
+			else if($result==1){
+				$data = array(
+					'error_message' => 'Invalid Password'
+				);
+				$this->load->view('merchant/login', $data);
+			}
+			else if($result==2){
+				$data = array(
+					'error_message' => 'Invalid Email'
+				);
+				$this->load->view('merchant/login', $data);
+			}
+
+			else {
+				$data = array(
+					'error_message' => 'Invalid Email or Password'
+				);
+				$this->load->view('merchant/login', $data);
+			}
+		}
+//	}
 
 	public function user_account_update(){
 		$data = array(
@@ -127,16 +235,16 @@ class Teacher extends CI_Controller {
 			$this->session->userdata['logged_in']['fullname']=$data['fullname'];
 			$this->session->userdata['logged_in']['telephone']=$data['telephone'];
 
-			$this->load->view('admin_page');
+			$this->load->view('merchant/dashboard');
 
 		}
 
 		else{
-			$this->load->view('admin_page');
+			$this->load->view('merchant/dashboard');
 		}
 	}
 
-public function makeId()
+	public function makeId()
 {
 	$keyspace = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 	$keyspace2 = '0123456789';
@@ -165,12 +273,34 @@ public function makeId()
 		$data = array(
 			'value' => $str
 		);
-		$this->Teacher_M->uuid_insert($data);
+		//$this->Teacher_M->uuid_insert($data);
 		return $str;
 	}else{
 		makeId();
 	}
 }
 
+
+	public function send_welcome_email($email,$password){
+		$this->load->library('email');
+
+
+		$email_subject='GetDiesel || Registration Successful';
+		$email_message='You have Successfully Registered, Welcome to GetDiesel'."\n\n"."Email: ".$email.
+			"\n"."Password: ".$password
+
+		;
+
+		$email_from='info@getdiesel.ng';
+		$headers = 'From: '.$email_from."\r\n".
+			'Reply-To: '.$email_from."\r\n" .
+			'X-Mailer: PHP/' . phpversion();
+
+		@mail($email, $email_subject, $email_message, $headers);
+
+		echo "<script> alert ('Hello, You have been sent a Registration Email'); </script>";
+
+
+	}
 
 }
