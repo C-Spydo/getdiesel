@@ -31,7 +31,7 @@
 </head>
 
 <body>
-<?php echo form_open('Teacher/Register'); ?>
+<?php echo form_open('Merchant/Register'); ?>
 
 <?php
 echo "<div class='error_msg'>";

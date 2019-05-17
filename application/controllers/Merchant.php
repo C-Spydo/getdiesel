@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Teacher extends CI_Controller {
+class Merchant extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -45,20 +45,20 @@ class Teacher extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('merchant/login');
+		$this->load->view('merchants/login');
 	}
 
 	public function register_v()
 	{
-		$this->load->view('merchant/register');
+		$this->load->view('merchants/register');
 	}
 
 	public function login_v()
 	{
-		$this->load->view('merchant/login');
+		$this->load->view('merchants/login');
 	}
 
-	public function register() {
+	public function sign_up() {
 
 		// Check validation for user input in SignUp form
 		$this->form_validation->set_rules('firstname', 'Username', 'trim|required');
@@ -138,7 +138,8 @@ class Teacher extends CI_Controller {
 			}
 	}
 
-	public function login() {
+	public function sign_in() {
+
 
 //		$this->form_validation->set_rules('email', 'Username', 'trim|required');
 //		$this->form_validation->set_rules('password', 'Password', 'trim');
@@ -154,8 +155,9 @@ class Teacher extends CI_Controller {
 				'business_email' => $this->input->post('email'),
 				'password' => $this->input->post('password')
 			);
-			$result = $this->Teacher_M->login($data);
-			if ($result == TRUE) {
+			$resulter = $this->Teacher_M->login($data);
+
+			if ($resulter == 1) {
 
 				$username = $this->input->post('email');
 				$result = $this->Teacher_M->read_user_information($username);
@@ -164,25 +166,25 @@ class Teacher extends CI_Controller {
 					$regstatus=$result[0]->status;
 					if($regstatus==1){
 						$session_data = array(
-//							'username' => $result[0]->username,
-//							'email' => $result[0]->email,
-//							'fullname'=>$result[0]->fullname,
-//							'user_id'=>$result[0]->user_id,
-//							'level'=>$result[0]->level,
-//							'uplink'=>$result[0]->uplink,
-//							'uplink2'=>$result[0]->uplink2,
-//							'uplink3'=>$result[0]->uplink3,
-//							'telephone'=>$result[0]->telephone,
+							'uuid'=>$result[0]->uuid,
+							'firstname' => $result[0]->firstname,
+							'lastname' => $result[0]->lastname,
+							'business_name'=>$result[0]->business_name,
+							'business_email'=>$result[0]->business_email,
+							'business_address'=>$result[0]->business_address,
+							'business_phone'=>$result[0]->business_phone,
+							'state'=>$result[0]->state,
+							'lga'=>$result[0]->lga,
 //							'password'=>$result[0]->password,
-//							'joindate'=>$result[0]->datetime,
-//							'cycle'=>$result[0]->cycle
+							'status'=>$result[0]->status,
+							'datetime'=>$result[0]->datetime
 						);
 						// Add user data in session
 						$this->session->set_userdata('logged_in', $session_data);
 
 
 
-						$this->load->view('merchant/dashboard');
+						$this->load->view('merchants/dashboard');
 					}
 
 					elseif($regstatus==2){
@@ -194,24 +196,25 @@ class Teacher extends CI_Controller {
 				}
 
 			}
-			else if($result==1){
+			else if($resulter==2){
 				$data = array(
 					'error_message' => 'Invalid Password'
 				);
-				$this->load->view('merchant/login', $data);
+				$this->load->view('merchants/login', $data);
 			}
-			else if($result==2){
+			else if($resulter==3){
 				$data = array(
 					'error_message' => 'Invalid Email'
 				);
-				$this->load->view('merchant/login', $data);
+				$this->load->view('merchants/login', $data);
 			}
 
 			else {
+				echo 'someting Wrong';
 				$data = array(
 					'error_message' => 'Invalid Email or Password'
 				);
-				$this->load->view('merchant/login', $data);
+				$this->load->view('merchants/login', $data);
 			}
 		}
 //	}

@@ -50,14 +50,14 @@ Class Teacher_M extends CI_Model {
 
 			if(verifyHashedPassword($password, $q[0]['password'])){
 				// echo 'Yes , I got here';
-				return true;
+				return 1;
 			}
 			else{
-				return 1;
+				return 2;
 			}
 
 		} else {
-			return 2;
+			return 3;
 		}
 
 	}

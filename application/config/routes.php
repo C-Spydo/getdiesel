@@ -57,6 +57,6 @@ $route['translate_uri_dashes'] = TRUE;
 
 
 //Merchant Routes
-$route['merchant/register'] = "teacher/register_v";
-$route['merchant/login'] = "teacher/login_v";
-$route['merchant'] = "teacher/login_v";
+$route['merchant/register'] = "merchant/register_v";
+$route['merchant/login'] = "merchant/login_v";
+$route['merchant'] = "merchant/login_v";

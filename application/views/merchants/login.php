@@ -1,10 +1,10 @@
 <?php
-if (isset($this->session->userdata['logged_in'])) {
-	$user_id = ($this->session->userdata['logged_in']['uuid']);
-}
-else{
-	$user_id='unknown';
-}
+//if (isset($this->session->userdata['logged_in'])) {
+//	$user_id = ($this->session->userdata['logged_in']['uuid']);
+//}
+//else{
+//	$user_id='unknown';
+//}
 
 //$this->session->userdata['logged_in']['username']
 //?>
@@ -29,7 +29,7 @@ else{
 </head>
 
 <body>
-<?php echo form_open('Teacher/Login'); ?>
+<?php echo form_open('merchant/sign_in'); ?>
 <div id="app">
 	<section class="section">
 		<div class="d-flex flex-wrap align-items-stretch">
