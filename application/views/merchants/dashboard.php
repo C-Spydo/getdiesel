@@ -9,6 +9,10 @@ if (isset($this->session->userdata['logged_in'])) {
 
 }
 else{
+
+	header("location: sign_in");
+	//$this->view('merchants/login');
+	//redirect('merchant/login');
 	//header("location: login");
 }
 	?>
@@ -167,6 +171,9 @@ else{
 						}
 						if($link=='3'){
 							$this->view('merchants/viewpayments');
+						}
+						if($link=='5'){
+							$this->view('merchants/profile');
 						}
 					}
 					?>

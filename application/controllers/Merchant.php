@@ -189,7 +189,8 @@ class Merchant extends CI_Controller {
 
 
 
-						$this->load->view('merchants/dashboard');
+						//$this->load->view('merchants/dashboard');
+						header("location: dashboard");
 					}
 
 					elseif($regstatus==2){

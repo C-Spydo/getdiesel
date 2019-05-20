@@ -2863,6 +2863,13 @@ body.layout-3 .main-footer {
   width: 100%;
   position: relative; }
 
+.main-content2 {
+	padding-left: 10px;
+	padding-right: 30px;
+	padding-top: 5px;
+	width: 100%;
+	position: relative; }
+
 .main-footer {
   padding: 20px 30px 20px 280px;
   margin-top: 40px;
