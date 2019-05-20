@@ -106,11 +106,11 @@ Class Teacher_M extends CI_Model {
 	}
 
 
-	public function user_account_updates($data){
+	public function update_profile($data){
 
-		$u_id = $data['user_id'];
-		$this->db->where('user_id',$u_id);
-		$this->db->update('user_login', $data);
+		$u_id = $data['uuid'];
+		$this->db->where('uuid',$u_id);
+		$this->db->update('teachers', $data);
 
 		if ($this->db->affected_rows() > 0) {
 			return true;

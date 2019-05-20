@@ -63,6 +63,21 @@ class Merchant extends CI_Controller {
 		$this->load->view('merchants/login');
 	}
 
+	// Logout from admin page
+	public function logout() {
+
+		// Removing session data
+		$sess_array = array(
+			'username' => ''
+		);
+
+		$this->session->unset_userdata('logged_in', $sess_array);
+		$data['message_display'] = 'Successfully Logout';
+
+		header("location: sign_in");
+		//$this->load->view('login_form', $data);
+	}
+
 	public function sign_up() {
 
 		// Check validation for user input in SignUp form
@@ -224,31 +239,40 @@ class Merchant extends CI_Controller {
 		}
 //	}
 
-	public function user_account_update(){
+	public function update_profile(){
 		$data = array(
-			'email' => $this->input->post('email'),
-			'fullname' => $this->input->post('fullname'),
-			'telephone' => $this->input->post('telephone'),
-			'user_id'=>$this->input->post('huserid')
+			'uuid'=>$this->session->userdata['logged_in']['uuid'],
+			'firstname' => $this->input->post('firstname'),
+			'lastname' => $this->input->post('lastname'),
+			'business_name' => $this->input->post('businessname'),
+			'business_address' => $this->input->post('businessaddress'),
+			'business_email' => $this->input->post('businessemail'),
+			'business_phone' => $this->input->post('businessphone'),
 		);
 
-		$result = $this->login_database->user_account_updates($data);
+		$result = $this->Teacher_M->update_profile($data);
 
 		if ($result == TRUE) {
 			$data['message_display'] = 'Account Update Successful, Welcome !';
 
+
 			// echo "<script> alert ('Account Update Successful'); </script>";
 
-			$this->session->userdata['logged_in']['email']=$data['email'];
-			$this->session->userdata['logged_in']['fullname']=$data['fullname'];
-			$this->session->userdata['logged_in']['telephone']=$data['telephone'];
+			$this->session->userdata['logged_in']['business_email']=$data['business_email'];
+			$this->session->userdata['logged_in']['firstname']=$data['firstname'];
+			$this->session->userdata['logged_in']['lastname']=$data['lastname'];
+			$this->session->userdata['logged_in']['business_phone']=$data['business_phone'];
+			$this->session->userdata['logged_in']['business_name']=$data['business_name'];
+			$this->session->userdata['logged_in']['business_address']=$data['business_address'];
 
-			$this->load->view('merchant/dashboard');
+			$this->load->view('merchants/dashboard', $data);
 
 		}
 
 		else{
-			$this->load->view('merchant/dashboard');
+			$data['message_display'] = 'Error! Update Not Successful, Try Again!';
+
+			$this->load->view('merchants/dashboard', $data);
 		}
 	}
 

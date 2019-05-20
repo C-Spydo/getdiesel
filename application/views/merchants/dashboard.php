@@ -1,4 +1,6 @@
 <?php
+
+
 if (isset($this->session->userdata['logged_in'])) {
 
 	//print_r($this->session->userdata['logged_in']);
@@ -56,11 +58,11 @@ else{
 						<img alt="image" src="<?php echo base_url(); ?>assets/img/avatar/avatar-1.png" class="rounded-circle mr-1">
 						<div class="d-sm-none d-lg-inline-block"><?php echo $business_name ?></div></a>
 					<div class="dropdown-menu dropdown-menu-right">
-						<a href="features-profile.html" class="dropdown-item has-icon">
+						<a href="?link=5" class="dropdown-item has-icon">
 							<i class="far fa-user"></i> Profile
 						</a>
 						<div class="dropdown-divider"></div>
-						<a href="#" class="dropdown-item has-icon text-danger">
+						<a href="logout" class="dropdown-item has-icon text-danger">
 							<i class="fas fa-sign-out-alt"></i> Logout
 						</a>
 					</div>
@@ -82,7 +84,7 @@ else{
 					<li><a class="nav-link" href="?link=3"><i class="far fa-square"></i> <span>View Payments</span></a></li>
 					<li><a class="nav-link" href="?link=4"><i class="far fa-square"></i> <span>Bank Accounts</span></a></li>
 					<li><a class="nav-link" href="?link=5"><i class="far fa-square"></i> <span>Profile</span></a></li>
-					<li><a class="nav-link" href="?link=6"><i class="far fa-square"></i> <span>Logout</span></a></li>
+					<li><a class="nav-link" href="logout"><i class="far fa-square"></i> <span>Logout</span></a></li>
 				</ul>
 
 				<div class="mt-4 mb-4 p-3 hide-sidebar-mini">
