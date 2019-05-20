@@ -53,6 +53,11 @@ class Merchant extends CI_Controller {
 		$this->load->view('merchants/register');
 	}
 
+	public function dashboard()
+	{
+		$this->load->view('merchants/dashboard');
+	}
+
 	public function login_v()
 	{
 		$this->load->view('merchants/login');
@@ -210,7 +215,6 @@ class Merchant extends CI_Controller {
 			}
 
 			else {
-				echo 'someting Wrong';
 				$data = array(
 					'error_message' => 'Invalid Email or Password'
 				);

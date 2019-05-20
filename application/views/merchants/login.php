@@ -14,7 +14,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-	<title>Login &mdash; Stisla</title>
+	<title>Login &mdash; GetDiesel</title>
 
 	<!-- General CSS Files -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -37,8 +37,8 @@
 				<div class="absolute-bottom-left index-2">
 					<div class="text-light p-5 pb-2">
 						<div class="mb-5 pb-3">
-							<h1 class="mb-2 display-4 font-weight-bold">Good Mornig</h1>
-							<h5 class="font-weight-normal text-muted-transparent">Bali, Indonesia</h5>
+							<h1 class="mb-2 display-4 font-weight-bold">GetDiesel</h1>
+							<h5 class="font-weight-normal text-muted-transparent">...instant fueling</h5>
 						</div>
 <!--						Photo by <a class="text-light bb" target="_blank" href="https://unsplash.com/photos/a8lTjWJJgLA">Justin Kauffman</a> on <a class="text-light bb" target="_blank" href="https://unsplash.com">Unsplash</a>-->
 					</div>

@@ -9,7 +9,7 @@ if (isset($this->session->userdata['logged_in'])) {
 
 }
 else{
-	header("location: login");
+	//header("location: login");
 }
 	?>
 
@@ -49,7 +49,7 @@ else{
 			<ul class="navbar-nav navbar-right">
 
 				<li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-						<img alt="image" src="../assets/img/avatar/avatar-1.png" class="rounded-circle mr-1">
+						<img alt="image" src="<?php echo base_url(); ?>assets/img/avatar/avatar-1.png" class="rounded-circle mr-1">
 						<div class="d-sm-none d-lg-inline-block"><?php echo $business_name ?></div></a>
 					<div class="dropdown-menu dropdown-menu-right">
 						<a href="features-profile.html" class="dropdown-item has-icon">
@@ -66,29 +66,24 @@ else{
 		<div class="main-sidebar">
 			<aside id="sidebar-wrapper">
 				<div class="sidebar-brand">
-					<a href="index.html">GetDiesel</a>
+					<a href="?link=1">GetDiesel</a>
 				</div>
 				<div class="sidebar-brand sidebar-brand-sm">
-					<a href="index.html">GD</a>
+					<a href="?link=1">GD</a>
 				</div>
 				<ul class="sidebar-menu">
 
-					<li class="menu-header">Starter</li>
-					<li class="nav-item dropdown">
-						<a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Layout</span></a>
-						<ul class="dropdown-menu">
-							<li><a class="nav-link" href="layout-default.html">Default Layout</a></li>
-							<li><a class="nav-link" href="layout-transparent.html">Transparent Sidebar</a></li>
-							<li><a class="nav-link" href="layout-top-navigation.html">Top Navigation</a></li>
-						</ul>
-					</li>
-					<li><a class="nav-link" href="blank.html"><i class="far fa-square"></i> <span>Blank Page</span></a></li>
-					<li><a class="nav-link" href="credits.html"><i class="fas fa-pencil-ruler"></i> <span>Credits</span></a></li>
+					<li class="menu-header">Menu</li>
+					<li><a class="nav-link" href="?link=2"><i class="far fa-square"></i> <span>View Orders</span></a></li>
+					<li><a class="nav-link" href="?link=3"><i class="far fa-square"></i> <span>View Payments</span></a></li>
+					<li><a class="nav-link" href="?link=4"><i class="far fa-square"></i> <span>Bank Accounts</span></a></li>
+					<li><a class="nav-link" href="?link=5"><i class="far fa-square"></i> <span>Profile</span></a></li>
+					<li><a class="nav-link" href="?link=6"><i class="far fa-square"></i> <span>Logout</span></a></li>
 				</ul>
 
 				<div class="mt-4 mb-4 p-3 hide-sidebar-mini">
-					<a href="https://getstisla.com/docs" class="btn btn-primary btn-lg btn-block btn-icon-split">
-						<i class="fas fa-rocket"></i> Documentation
+					<a href="?link=7" class="btn btn-primary btn-lg btn-block btn-icon-split">
+						<i class="fas fa-rocket"></i> Help & Support
 					</a>
 				</div>
 			</aside>
@@ -161,6 +156,20 @@ else{
 							</div>
 						</div>
 					</div>
+				</div>
+				<div class="row">
+					<?php
+					if(isset($_GET['link'])){
+						$link= $_GET['link'];
+
+						if($link=='2'){
+							$this->view('merchants/vieworders');
+						}
+						if($link=='3'){
+							$this->view('merchants/viewpayments');
+						}
+					}
+					?>
 				</div>
 			</section>
 		</div>
