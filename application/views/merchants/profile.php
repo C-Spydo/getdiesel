@@ -1,11 +1,11 @@
 <?php
 
-$firstname="";
-$lastname="";
-$email="";
-$business_name="";
-$phone="";
-$address="";
+//$firstname="";
+//$lastname="";
+//$email="";
+//$business_name="";
+//$phone="";
+//$address="";
 
 if (isset($this->session->userdata['logged_in'])) {
 
@@ -39,7 +39,7 @@ else{
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="card">
-						<form method="post" action="updateprofile" class="needs-validation" novalidate="">
+						<form method="post" action="<?php echo site_url('merchant/updateprofile');?>" class="needs-validation" novalidate="">
 							<div class="card-header">
 								<h4>Edit Profile</h4>
 							</div>
