@@ -60,6 +60,7 @@ $route['translate_uri_dashes'] = TRUE;
 $route['merchant/register'] = "merchant/register_v";
 $route['merchant/login'] = "merchant/login_v";
 $route['merchant/logout'] = "merchant/logout";
+$route['merchant/forgotpassword'] = "merchant/forgotpassword_v";
 $route['merchant'] = "merchant/login_v";
 $route['merchant/dashboard'] = "merchant/dashboard";
 $route['merchant/updateprofile'] = "merchant/update_profile";
