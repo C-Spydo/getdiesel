@@ -64,3 +64,13 @@ $route['merchant/forgotpassword'] = "merchant/forgotpassword_v";
 $route['merchant'] = "merchant/login_v";
 $route['merchant/dashboard'] = "merchant/dashboard";
 $route['merchant/updateprofile'] = "merchant/update_profile";
+
+
+//Admin Routes
+$route['retractor/register'] = "admin/register_v";
+$route['admin/login'] = "admin/login_v";
+$route['admin/logout'] = "admin/logout";
+$route['admin/forgotpassword'] = "admin/forgotpassword_v";
+$route['admin'] = "admin/login_v";
+$route['admin/dashboard'] = "admin/dashboard";
+$route['admin/updateprofile'] = "admin/update_profile";

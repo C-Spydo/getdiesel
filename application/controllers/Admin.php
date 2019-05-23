@@ -45,27 +45,27 @@ class Admin extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('merchants/login');
+		$this->load->view('admins/login');
 	}
 
 	public function register_v()
 	{
-		$this->load->view('merchants/register');
+		$this->load->view('admins/register');
 	}
 
 	public function dashboard()
 	{
-		$this->load->view('merchants/dashboard');
+		$this->load->view('admins/dashboard');
 	}
 
 	public function login_v()
 	{
-		$this->load->view('merchants/login');
+		$this->load->view('admins/login');
 	}
 
 	public function forgotpassword_v()
 	{
-		$this->load->view('merchants/forgotpassword');
+		$this->load->view('admins/forgotpassword');
 	}
 
 	// Logout from admin page
@@ -209,7 +209,7 @@ class Admin extends CI_Controller {
 
 
 
-					//$this->load->view('merchants/dashboard');
+					//$this->load->view('admins/dashboard');
 					header("location: dashboard");
 				}
 
@@ -226,20 +226,20 @@ class Admin extends CI_Controller {
 			$data = array(
 				'error_message' => 'Invalid Password'
 			);
-			$this->load->view('merchants/login', $data);
+			$this->load->view('admins/login', $data);
 		}
 		else if($resulter==3){
 			$data = array(
 				'error_message' => 'Invalid Email'
 			);
-			$this->load->view('merchants/login', $data);
+			$this->load->view('admins/login', $data);
 		}
 
 		else {
 			$data = array(
 				'error_message' => 'Invalid Email or Password'
 			);
-			$this->load->view('merchants/login', $data);
+			$this->load->view('admins/login', $data);
 		}
 	}
 //	}
@@ -270,14 +270,14 @@ class Admin extends CI_Controller {
 			$this->session->userdata['logged_in']['business_name']=$data['business_name'];
 			$this->session->userdata['logged_in']['business_address']=$data['business_address'];
 
-			$this->load->view('merchants/dashboard', $data);
+			$this->load->view('admins/dashboard', $data);
 
 		}
 
 		else{
 			$data['message_display'] = 'Error! Update Not Successful, Try Again!';
 
-			$this->load->view('merchants/dashboard', $data);
+			$this->load->view('admins/dashboard', $data);
 		}
 	}
 

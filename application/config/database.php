@@ -73,12 +73,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $active_group = 'default';
 $query_builder = TRUE;
 
+
+
 $db['default'] = array(
 	'dsn'	=> '',
+
+
+//	'hostname' => 'localhost',
+//	'username' => 'getdiese_cspydo',
+//	'password' => '1YTn+j]~oLJF',
+//	'database' => 'getdiese_fueling',
+
 	'hostname' => 'localhost',
 	'username' => 'root',
 	'password' => 'cspydo',
 	'database' => 'getdiesel',
+
+
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
