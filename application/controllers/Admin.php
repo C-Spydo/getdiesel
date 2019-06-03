@@ -36,11 +36,11 @@ class Admin extends CI_Controller {
 		$this->load->library('session');
 
 		// Load database
-		$this->load->model('Teacher_M');
+		$this->load->model('Admin_M');
 //		$this->load->model('dashboard');
 //
 		$this->load->helper('control');
-//		$this->load->helper('dashboard');
+		$this->load->helper('admin');
 	}
 
 	public function index()
@@ -100,12 +100,8 @@ class Admin extends CI_Controller {
 				'uuid'=>$user_id,
 				'firstname' => $this->input->post('firstname'),
 				'lastname' => $this->input->post('lastname'),
-				'business_name' => $this->input->post('businessname'),
-				'business_address' => $this->input->post('businessaddress'),
-				'business_email' => $this->input->post('businessemail'),
-				'business_phone' => $this->input->post('businessphone'),
-				'state' => $this->input->post('state'),
-				'lga' => $this->input->post('lga'),
+				'email' => $this->input->post('businessemail'),
+				'phone' => $this->input->post('businessphone'),
 				'password' => getHashedPassword($this->input->post('password')),
 				'status'=>1
 			);
@@ -114,12 +110,8 @@ class Admin extends CI_Controller {
 				'uuid'=>$user_id,
 				'firstname' => $this->input->post('firstname'),
 				'lastname' => $this->input->post('lastname'),
-				'business_name' => $this->input->post('businessname'),
-				'business_address' => $this->input->post('businessaddress'),
-				'business_email' => $this->input->post('businessemail'),
-				'business_phone' => $this->input->post('businessphone'),
-				'state' => $this->input->post('state'),
-				'lga' => $this->input->post('lga'),
+				'email' => $this->input->post('businessemail'),
+				'phone' => $this->input->post('businessphone'),
 				'password' => getHashedPassword($this->input->post('password')),
 				'status'=>1
 			);
@@ -136,13 +128,13 @@ class Admin extends CI_Controller {
 			if(($this->input->post('password')) !=$this->input->post('password-confirm')){
 
 				$data['message_display'] = 'Passwords Do Not Match';
-				$this->load->view('merchant/register', $data);
+				$this->load->view('admins/register', $data);
 				//echo 'Passwords Do Not Match';
 			}
 
 			else{
-				$result = $this->Teacher_M->registration($data);
-				$result2 = $this->Teacher_M->uuid_insert($data2);
+				$result = $this->Admin_M->registration($data);
+				$result2 = $this->Admin_M->uuid_insert($data2);
 
 				if ($result == TRUE) {
 					$data['message_display'] = 'Registration Successful, Proceed to Login !';
@@ -151,10 +143,10 @@ class Admin extends CI_Controller {
 
 					echo "<script> alert ('Registration Successful, Proceed to Login !'); </script>";
 					$this->send_welcome_email($data['business_email'],$this->input->post('password'));
-					$this->load->view('login', $data);
+					$this->load->view('admins/register', $data);
 				} elseif($result==1) {
 					$data['message_display'] = 'Email  already exists, Try another!';
-					$this->load->view('merchant/register', $data);
+					$this->load->view('admins/register', $data);
 				}
 				else{
 
@@ -177,15 +169,15 @@ class Admin extends CI_Controller {
 //			}
 //		} else {
 		$data = array(
-			'business_email' => $this->input->post('email'),
+			'email' => $this->input->post('email'),
 			'password' => $this->input->post('password')
 		);
-		$resulter = $this->Teacher_M->login($data);
+		$resulter = $this->Admin_M->login($data);
 
 		if ($resulter == 1) {
 
 			$username = $this->input->post('email');
-			$result = $this->Teacher_M->read_user_information($username);
+			$result = $this->Admin_M->read_user_information($username);
 
 			if ($result ==true) {
 				$regstatus=$result[0]->status;
@@ -194,12 +186,8 @@ class Admin extends CI_Controller {
 						'uuid'=>$result[0]->uuid,
 						'firstname' => $result[0]->firstname,
 						'lastname' => $result[0]->lastname,
-						'business_name'=>$result[0]->business_name,
-						'business_email'=>$result[0]->business_email,
-						'business_address'=>$result[0]->business_address,
-						'business_phone'=>$result[0]->business_phone,
-						'state'=>$result[0]->state,
-						'lga'=>$result[0]->lga,
+						'email'=>$result[0]->business_email,
+						'phone'=>$result[0]->business_phone,
 //							'password'=>$result[0]->password,
 						'status'=>$result[0]->status,
 						'datetime'=>$result[0]->datetime
@@ -255,7 +243,7 @@ class Admin extends CI_Controller {
 			'business_phone' => $this->input->post('businessphone'),
 		);
 
-		$result = $this->Teacher_M->update_profile($data);
+		$result = $this->Admin_M->update_profile($data);
 
 		if ($result == TRUE) {
 			$data['message_display'] = 'Account Update Successful, Welcome !';
@@ -304,13 +292,13 @@ class Admin extends CI_Controller {
 			$str .= $keyspace3[rand(0, $max)];
 		}
 
-		$result = $this->Teacher_M->idchecker($str);
+		$result = $this->Admin_M->idchecker($str);
 
 		if ($result == FALSE){
 			$data = array(
 				'value' => $str
 			);
-			//$this->Teacher_M->uuid_insert($data);
+			//$this->Admin_M->uuid_insert($data);
 			return $str;
 		}else{
 			makeId();

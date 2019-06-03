@@ -29,7 +29,7 @@
 </head>
 
 <body>
-<?php echo form_open('merchant/sign_in'); ?>
+<?php echo form_open('Admin/sign_in'); ?>
 <div id="app">
 	<section class="section">
 		<div class="d-flex flex-wrap align-items-stretch">

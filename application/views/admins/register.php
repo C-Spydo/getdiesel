@@ -14,7 +14,7 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>Register &mdash; Stisla</title>
+  <title>Register &mdash; GetDiesel</title>
 
   <!-- General CSS Files -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -31,7 +31,7 @@
 </head>
 
 <body>
-<?php echo form_open('Merchant/Register'); ?>
+<?php echo form_open('Admin/sign_up'); ?>
 
 <?php
 echo "<div class='error_msg'>";
@@ -53,7 +53,7 @@ echo "</div>";
             </div>
 
             <div class="card card-primary">
-              <div class="card-header"><h4>Register</h4></div>
+              <div class="card-header"><h4>Register-Administrator</h4></div>
 
               <div class="card-body">
 				  <?php echo "<div class='error_msg'>";
@@ -80,86 +80,17 @@ echo "</div>";
                   </div>
 
 
-                  <div class="form-divider">
-                    Tell us about your business
-                  </div>
-					<div class="row">
-						<div class="form-group col-12">
-							<label for="frist_name">Business Name</label>
-							<input id="frist_name" type="text" class="form-control" name="businessname" required autofocus>
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="form-group col-12">
-							<label for="frist_name">Business Address</label>
-							<input id="frist_name" type="text" class="form-control" name="businessaddress" required autofocus>
-						</div>
-					</div>
-
-                  <div class="row">
-					  <div class="form-group col-6">
-						  <label>State</label>
-						  <select class="form-control selectric" name="state" id="state">
-							  <option selected value='' disabled>Business State</option>
-
-							  <option value='Abia' >Abia</option>
-							  <option value='Adamawa'>Adamawa</option>
-							  <option value='AkwaIbom' >AkwaIbom</option>
-							  <option value='Anambra' >Anambra</option>
-							  <option value='Bauchi' >Bauchi</option>
-							  <option value='Bayelsa' >Bayelsa</option>
-							  <option value='Benue' >Benue</option>
-							  <option value='Borno' >Borno</option>
-							  <option value='CrossRiver' >CrossRiver</option>
-							  <option value='Delta' >Delta</option>
-							  <option value='Ebonyi' >Ebonyi</option>
-							  <option value='Edo' > Edo</option>
-							  <option value='Ekiti' > Ekiti</option>
-							  <option value='Enugu' > Enugu</option>
-							  <option value='FCT' > FCT</option>
-							  <option value='Gombe' > Gombe</option>
-							  <option value='Imo' > Imo</option>
-							  <option value='Jigawa' > Jigawa</option>
-							  <option value='Kaduna' > Kaduna</option>
-							  <option value='Kano' > Kano</option>
-							  <option value='Katsina' > Katsina</option>
-							  <option value='Kebbi' > Kebbi</option>
-							  <option value='Kogi' > Kogi</option>
-							  <option value='Kwara' > Kwara</option>
-							  <option value='Lagos' > Lagos</option>
-							  <option value='Nassarawa' > Nassarawa</option>
-							  <option value='Niger' > Niger</option>
-							  <option value='Ogun' > Ogun</option>
-							  <option value='Ondo' > Ondo</option>
-							  <option value='Osun' > Osun</option>
-							  <option value='Oyo' > Oyo</option>
-							  <option value='Plateau' > Plateau</option>
-							  <option value='Rivers' > Rivers</option>
-							  <option value='Sokoto' > Sokoto</option>
-							  <option value='Taraba' > Taraba</option>
-							  <option value='Yobe' > Yobe</option>
-							  <option value='Zamfara' > Zamfara</option>
-						  </select>
-					  </div>
-					  <div class="form-group col-6">
-						  <label>Local Government Area</label>
-						  <select class="form-control selectric" id="localg" name="lga" required>
-							  <option selected value='' disabled>Local Government Area</option>
-						  </select>
-					  </div>
-				  </div>
 
 					<div class="row">
 					<div class="form-group col-6">
-						  <label for="email">Business Email</label>
+						  <label for="email">Email</label>
 						  <input id="email" type="email" class="form-control" name="businessemail" required>
 						  <div class="invalid-feedback">
 						  </div>
 					  </div>
 
 						<div class="form-group col-6">
-							<label>Business Phone Number</label>
+							<label>Phone Number</label>
 							<input type="text" name="businessphone" required class="form-control">
 						</div>
 
@@ -185,12 +116,6 @@ echo "</div>";
 					</div>
 
 
-                  <div class="form-group">
-                    <div class="custom-control custom-checkbox">
-                      <input type="checkbox" required name="agree" class="custom-control-input" id="agree">
-                      <label class="custom-control-label" for="agree">I agree with the terms and conditions</label>
-                    </div>
-                  </div>
 
                   <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-lg btn-block">

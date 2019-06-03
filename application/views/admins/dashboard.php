@@ -5,9 +5,9 @@ if (isset($this->session->userdata['logged_in'])) {
 
 	//print_r($this->session->userdata['logged_in']);
 	$firstname = ($this->session->userdata['logged_in']['firstname']);
-	$email = ($this->session->userdata['logged_in']['business_email']);
+	$email = ($this->session->userdata['logged_in']['email']);
 	$lastname = ($this->session->userdata['logged_in']['lastname']);
-	$business_name = ($this->session->userdata['logged_in']['business_name']);
+	$name = $firstname." ".$lastname;
 
 }
 else{
@@ -39,6 +39,8 @@ else{
 	<!-- Template CSS -->
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/style.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/components.css">
+
+
 </head>
 
 <body>
@@ -56,7 +58,7 @@ else{
 
 				<li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
 						<img alt="image" src="<?php echo base_url(); ?>assets/img/avatar/avatar-1.png" class="rounded-circle mr-1">
-						<div class="d-sm-none d-lg-inline-block"><?php echo $business_name ?></div></a>
+						<div class="d-sm-none d-lg-inline-block"><?php echo $name ?></div></a>
 					<div class="dropdown-menu dropdown-menu-right">
 						<a href="?link=5" class="dropdown-item has-icon">
 							<i class="far fa-user"></i> Profile
@@ -99,7 +101,7 @@ else{
 		<div class="main-content">
 			<section class="section">
 				<div class="section-header">
-					<h1><?php echo $business_name." - " ?>Merchant Dashboard</h1>
+					<h1><?php echo $name." - " ?>Site Admin Dashboard</h1>
 				</div>
 				<div class="row">
 					<div class="col-lg-3 col-md-6 col-sm-6 col-12">
@@ -169,7 +171,10 @@ else{
 						$link= $_GET['link'];
 
 						if($link=='2'){
-							$this->view('merchants/vieworders');
+							$this->view('admins/vieworders');
+						}
+						if($link=='201'){
+							$this->view('admins/vieworder');
 						}
 						if($link=='3'){
 							$this->view('merchants/viewpayments');
@@ -212,6 +217,8 @@ else{
 <!-- Template JS File -->
 <script src="<?php echo base_url(); ?>assets/js/scripts.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/custom.js"></script>
+
+<script src="<?php echo base_url(); ?>assets/js/page/bootstrap-modal.js"></script>
 
 <!-- Page Specific JS File -->
 <script src="<?php echo base_url(); ?>assets/js/page/index-0.js"></script>

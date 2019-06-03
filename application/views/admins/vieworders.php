@@ -50,6 +50,10 @@
 </style>
 
 
+<?php
+
+$allorders=getOrders();
+?>
 <div class="container">
 	<div class="header_wrap">
 		<h5><strong>View Orders</strong></h5>
@@ -79,17 +83,61 @@
 
 		<thead>
 		<tr>
-			<th>User</th>
-			<th>User Details</th>
+			<th>S/N</th>
+			<th>Quantity</th>
+			<th>Price</th>
 			<th>Amount</th>
-			<th>Agent</th>
+			<th>Client</th>
+			<th>Merchant</th>
 			<th>Status</th>
+			<th>Date</th>
+			<th>Actions</th>
 		</tr>
 		</thead>
+
 		<tbody>
-			<tr>
-				<td></td>
-			</tr>
+
+		<?php
+		$x=1; foreach($allorders as $row){
+
+
+				?>
+				<tr>
+					<td><?php echo $x; ?></td>
+					<td><?php echo $row['quantity'];?></td>
+
+					<td><?php echo $row['price'];?></td>
+
+					<td><?php echo $row['amount'];?></td>
+					<td><?php echo
+						$row['name']."<br>".$row['email']."<br>".$row['phone'];
+					?></td>
+
+					<td><?php
+						$mchant=getMerchantWithId($row['merchant']);
+//						print_r($mchant);
+						echo $mchant['business_name'];
+						?></td>
+					<td><?php echo $row['status'];?></td>
+					<td><?php echo $row['datetime'];?></td>
+
+					<td>
+						<?php
+						$editUrl="dashboard?link=201&order_id=" . $row['id'];
+
+
+						if($row['merchant']!='') {
+							?>
+
+							<a href="<?php echo $editUrl ?>"><font color="green">View Order</font></a>
+
+							</td>
+							</tr>
+							<?php
+						}
+			$x=$x+1;
+		}?>
+
 		</tbody>
 	</table>
 
