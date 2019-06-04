@@ -168,9 +168,52 @@ Class Admin_M extends CI_Model {
 
 	}
 
+	public function getOrderWithId($id) {
+
+		$this->db->select('*');
+		$this->db->from('students');
+		$this->db->where('uuid', $id);
+		$this->db->limit(1);
+		$query = $this->db->get();
+
+		if ($query->num_rows() == 1) {
+			return $query->result_array();
+		} else {
+			return false;
+		}
+
+	}
 
 
+	public function getMerchantsInState($state) {
+		$this->db->select('*');
+		$this->db->from('teachers');
+		$this->db->where('state', $state);
+		$query = $this->db->get();
 
+		$q=array();
+		if ($query->num_rows() >0) {
+			$q=$query->result_array();
+		}
+
+		$allusers=$q;
+		return $allusers;
+
+	}
+
+
+	public function assign_merchant($data){
+
+		print_r($data);
+		$u_id = $data['uuid'];
+		$this->db->where('uuid',$u_id);
+		$this->db->update('students', $data);
+
+		if ($this->db->affected_rows() > 0) {
+			return true;
+		}
+
+	}
 
 	public function user_profile_update($data){
 

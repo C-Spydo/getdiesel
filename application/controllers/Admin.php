@@ -269,6 +269,32 @@ class Admin extends CI_Controller {
 		}
 	}
 
+	public function assign_merchant(){
+		$data = array(
+			'uuid' => $this->input->post('uuid'),
+			'merchant' => $this->input->post('merchant'),
+		);
+
+		$result = $this->Admin_M->assign_merchant($data);
+
+
+
+		if ($result == TRUE) {
+			$eUrl=base_url()."admin/dashboard?link=201&order_id=" . $data['uuid']."&msg=Successful, Merchant has been Assigned";
+			redirect($eUrl);
+//			$this->load->view('admins/dashboard', $data);
+
+		}
+
+		else{
+			$eUrl=base_url()."admin/dashboard?link=201&order_id=" . $data['uuid']."&msg=Not Successful, Try Again";
+			redirect($eUrl);
+			$data['message_display'] = 'Error! Not Successful, Try Again!';
+
+//			$this->load->view('admins/dashboard', $data);
+		}
+	}
+
 	public function makeId()
 	{
 		$keyspace = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';

@@ -9,7 +9,7 @@
 	}
 
 	table tr:nth-child(even){
-		background-color: #e4e3e3
+		background-color: #ffffff
 	}
 
 	th {
@@ -54,107 +54,112 @@
 
 $allorders=getOrders();
 ?>
-<div class="container">
-	<div class="header_wrap">
-		<h5><strong>View Orders</strong></h5>
-		<div class="num_rows">
+<section class="section">
+	<div class="card">
 
-			<div class="form-group"> 	<!--		Show Numbers Of Rows 		-->
-				<select class  ="form-control" name="state" id="maxRows">
+			<div class="container">
+			<div class="header_wrap">
+				<h5><strong>View Orders</strong></h5>
+				<div class="num_rows">
+
+					<div class="form-group"> 	<!--		Show Numbers Of Rows 		-->
+						<select class  ="form-control" name="state" id="maxRows">
 
 
-					<option value="10">10</option>
-					<option value="15">15</option>
-					<option value="20">20</option>
-					<option value="50">50</option>
-					<option value="70">70</option>
-					<option value="100">100</option>
-					<option value="5000">Show ALL Rows</option>
-				</select>
+							<option value="10">10</option>
+							<option value="15">15</option>
+							<option value="20">20</option>
+							<option value="50">50</option>
+							<option value="70">70</option>
+							<option value="100">100</option>
+							<option value="5000">Show ALL Rows</option>
+						</select>
 
+					</div>
+				</div>
+				<div class="tb_search">
+					<input type="text" id="search_input_all" onkeyup="FilterkeyWord_all_table()" placeholder="Search.." class="form-control">
+				</div>
 			</div>
-		</div>
-		<div class="tb_search">
-			<input type="text" id="search_input_all" onkeyup="FilterkeyWord_all_table()" placeholder="Search.." class="form-control">
-		</div>
-	</div>
-	<table class="table table-striped table-class" id= "table-id" border="1">
+				<div class="card-body">
+			<table class="table"  id= "table-id" border="1">
 
 
-		<thead>
-		<tr>
-			<th>S/N</th>
-			<th>Quantity</th>
-			<th>Price</th>
-			<th>Amount</th>
-			<th>Client</th>
-			<th>Merchant</th>
-			<th>Status</th>
-			<th>Date</th>
-			<th>Actions</th>
-		</tr>
-		</thead>
-
-		<tbody>
-
-		<?php
-		$x=1; foreach($allorders as $row){
-
-
-				?>
+				<thead>
 				<tr>
-					<td><?php echo $x; ?></td>
-					<td><?php echo $row['quantity'];?></td>
+					<th>S/N</th>
+					<th>Quantity/Amount</th>
+<!--					<th>Price</th>-->
+<!--					<th>Amount</th>-->
+					<th>Client</th>
+					<th>Merchant</th>
+					<th>Status</th>
+					<th>Date</th>
+					<th>Actions</th>
+				</tr>
+				</thead>
 
-					<td><?php echo $row['price'];?></td>
+				<tbody>
 
-					<td><?php echo $row['amount'];?></td>
-					<td><?php echo
-						$row['name']."<br>".$row['email']."<br>".$row['phone'];
-					?></td>
-
-					<td><?php
-						$mchant=getMerchantWithId($row['merchant']);
-//						print_r($mchant);
-						echo $mchant['business_name'];
-						?></td>
-					<td><?php echo $row['status'];?></td>
-					<td><?php echo $row['datetime'];?></td>
-
-					<td>
-						<?php
-						$editUrl="dashboard?link=201&order_id=" . $row['id'];
+				<?php
+				$x=1; foreach($allorders as $row){
 
 
-						if($row['merchant']!='') {
-							?>
+						?>
+						<tr>
+							<td><?php echo $x; ?></td>
+							<td><?php echo $row['quantity']." litres"."<br>".$row['amount']." naira";?></td>
 
-							<a href="<?php echo $editUrl ?>"><font color="green">View Order</font></a>
+<!--							<td>--><?php //echo $row['price'];?><!--</td>-->
 
-							</td>
-							</tr>
-							<?php
-						}
-			$x=$x+1;
-		}?>
+<!--							<td>--><?php //echo $row['amount'];?><!--</td>-->
+							<td><?php echo
+								$row['name']."<br>".$row['email']."<br>".$row['phone'];
+							?></td>
 
-		</tbody>
-	</table>
+							<td><?php
+								$mchant=getMerchantWithId($row['merchant']);
+		//						print_r($mchant);
+								echo $mchant['business_name'];
+								?></td>
+							<td><?php echo $row['status'];?></td>
+							<td><?php echo $row['datetime'];?></td>
 
-	<!--		Start Pagination -->
-	<div class='pagination-container'>
-		<nav>
-			<ul class="pagination">
-				<!--	Here the JS Function Will Add the Rows -->
-			</ul>
-		</nav>
+							<td>
+								<?php
+								$editUrl="dashboard?link=201&order_id=" . $row['uuid'];
+
+
+		//						if($row['merchant']!='') {
+									?>
+
+									<a href="<?php echo $editUrl ?>"><font color="green">View Order</font></a>
+
+									</td>
+									</tr>
+									<?php
+		//						}
+					$x=$x+1;
+				}?>
+
+				</tbody>
+			</table>
+				</div>
+			<!--		Start Pagination -->
+			<div class='pagination-container'>
+				<nav>
+					<ul class="pagination">
+						<!--	Here the JS Function Will Add the Rows -->
+					</ul>
+				</nav>
+			</div>
+			<div class="rows_count">Showing 11 to 20 of 91 entries</div>
+
+		</div> <!-- 		End of Container -->
+
+
 	</div>
-	<div class="rows_count">Showing 11 to 20 of 91 entries</div>
-
-</div> <!-- 		End of Container -->
-
-
-
+</section>
 
 
 
