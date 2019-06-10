@@ -54,7 +54,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'control';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = TRUE;
-
+$route['register'] = "control/register";
+$route['login'] = "control/login";
+$route['about'] = "control/about";
+$route['index'] = "control/index";
+$route['contact'] = "control/contact";
 
 //Merchant Routes
 $route['merchant/register'] = "merchant/register_v";

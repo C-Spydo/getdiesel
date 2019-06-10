@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Control extends CI_Controller {
+class Order extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
