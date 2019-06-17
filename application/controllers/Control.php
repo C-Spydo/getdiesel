@@ -36,8 +36,7 @@ class Control extends CI_Controller {
 		$this->load->library('session');
 
 		// Load database
-//		$this->load->model('login_database');
-//		$this->load->model('dashboard');
+		$this->load->model('Control_M');
 //
 //		$this->load->helper('pwd_hash');
 //		$this->load->helper('dashboard');
@@ -69,83 +68,50 @@ class Control extends CI_Controller {
 	}
 
 	public function make_order() {
+			$order_id=$this->makeId();
 
-		// Check validation for user input in SignUp form
-		$this->form_validation->set_rules('firstname', 'Username', 'trim|required');
-
-		$this->form_validation->set_rules('businessemail', 'Email', 'trim|required');
-
-		if ($this->form_validation->run() == FALSE) {
-			$this->load->view('merchant/register');
-		} else {
-
-
-			$user_id=$this->makeId();
+			//Hey Idiot, Remember to remove the next line once you build the price component, yaaay
+			$this->session->userdata['current_price']=165.78;
+			$current_price=$this->session->userdata['current_price'];
 			$data = array(
-				'uuid'=>$user_id,
-				'firstname' => $this->input->post('firstname'),
-				'lastname' => $this->input->post('lastname'),
-				'business_name' => $this->input->post('businessname'),
-				'business_address' => $this->input->post('businessaddress'),
-				'business_email' => $this->input->post('businessemail'),
-				'business_phone' => $this->input->post('businessphone'),
+				'uuid'=>$order_id,
+				'name' => $this->input->post('name'),
+				'company_name' => $this->input->post('company_name'),
+				'email' => $this->input->post('email'),
+				'phone' => $this->input->post('phone'),
 				'state' => $this->input->post('state'),
-				'lga' => $this->input->post('lga'),
-				'password' => getHashedPassword($this->input->post('password')),
+				'address' => $this->input->post('address'),
+				'quantity' => $this->input->post('litres'),
+				'price' => $current_price,
+				'amount' => number_format($this->input->post('litres')*$current_price,2),
+//				'lga' => $this->input->post('lga'),
 				'status'=>1
 			);
-
-			$session_data = array(
-				'uuid'=>$user_id,
-				'firstname' => $this->input->post('firstname'),
-				'lastname' => $this->input->post('lastname'),
-				'business_name' => $this->input->post('businessname'),
-				'business_address' => $this->input->post('businessaddress'),
-				'business_email' => $this->input->post('businessemail'),
-				'business_phone' => $this->input->post('businessphone'),
-				'state' => $this->input->post('state'),
-				'lga' => $this->input->post('lga'),
-				'password' => getHashedPassword($this->input->post('password')),
-				'status'=>1
-			);
-
-			$this->session->set_userdata('logged_in', $session_data);
-
-
-
 
 			$data2=array(
-				'value'=>$user_id
+				'value'=>$order_id
 			);
-
-			if(($this->input->post('password')) !=$this->input->post('password-confirm')){
-
-				$data['message_display'] = 'Passwords Do Not Match';
-				$this->load->view('merchant/register', $data);
-				//echo 'Passwords Do Not Match';
-			}
-
-			else{
-				$result = $this->Teacher_M->registration($data);
-				$result2 = $this->Teacher_M->uuid_insert($data2);
+			
+				$result = $this->Control_M->make_order($data);
+				$result2 = $this->Control_M->uuid_insert($data2);
 
 				if ($result == TRUE) {
-					$data['message_display'] = 'Registration Successful, Proceed to Login !';
+					$data['message_display'] = 'Order Placed Successfully, You will receive Email and SMS Alerts';
 
 					// echo "Selected Uplink".$uplink;
 
-					echo "<script> alert ('Registration Successful, Proceed to Login !'); </script>";
-					$this->send_welcome_email($data['business_email'],$this->input->post('password'));
-					$this->load->view('login', $data);
-				} elseif($result==1) {
-					$data['message_display'] = 'Email  already exists, Try another!';
-					$this->load->view('merchant/register', $data);
+					echo "<script> alert ('Order Placed Successfully, You will receive Email and SMS Alerts !'); </script>";
+					$this->send_order_email($data);
+					$eUrl=base_url()."index?msg=Order Placed Successfully, You will receive Email and SMS Alerts";
+					redirect($eUrl);
 				}
-				else{
+				else {
+					$eUrl=base_url()."index?msg=Order Not Successful, Please Try Again";
+					redirect($eUrl);
+					//$data['message_display'] = 'Order Not Successful, Please Try Again';
+					echo "<script> alert ('Order Not Successful, Please Try Again !'); </script>";
+				}
 
-				}
-			}
-		}
 	}
 
 	public function makeId()
@@ -171,13 +137,13 @@ class Control extends CI_Controller {
 			$str .= $keyspace3[rand(0, $max)];
 		}
 
-		$result = $this->Teacher_M->idchecker($str);
+		$result = $this->Control_M->idchecker($str);
 
 		if ($result == FALSE){
 			$data = array(
 				'value' => $str
 			);
-			//$this->Teacher_M->uuid_insert($data);
+			//$this->Control_M->uuid_insert($data);
 			return $str;
 		}else{
 			makeId();
@@ -185,13 +151,14 @@ class Control extends CI_Controller {
 	}
 
 
-	public function send_welcome_email($email,$password){
+	public function send_order_email($data){
 		$this->load->library('email');
 
 
-		$email_subject='GetDiesel || Registration Successful';
-		$email_message='You have Successfully Registered, Welcome to GetDiesel'."\n\n"."Email: ".$email.
-			"\n"."Password: ".$password
+		$email_subject='GetDiesel || Order Successful';
+		$email_message='You have Successfully Place an order'."\n\n"."Quantity: ".$data['quantity']." litres".
+			"\n"."Amount: ".$data['amount']."\n"."Order Code: ".$data['order_id']
+			."\n"."State: ".$data['state']."\n"."Address: ".$data['address'];
 
 		;
 
@@ -200,9 +167,9 @@ class Control extends CI_Controller {
 			'Reply-To: '.$email_from."\r\n" .
 			'X-Mailer: PHP/' . phpversion();
 
-		@mail($email, $email_subject, $email_message, $headers);
+		@mail($data['email'], $email_subject, $email_message, $headers);
 
-		echo "<script> alert ('Hello, You have been sent a Registration Email'); </script>";
+		//echo "<script> alert ('Hello, You have been sent a Registration Email'); </script>";
 
 
 	}

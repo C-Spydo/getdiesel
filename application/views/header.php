@@ -1,4 +1,10 @@
 <?php
+
+$currentPrice=0;
+if (isset($this->session->userdata['current_price'])) {
+	$currentPrice = ($this->session->userdata['current_price']);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -141,7 +147,7 @@
 									<li> <a href=""></a></li>
 									<li> <a href=""></a></li>
 
-									<li><a class="custom_btn__block">Price/litre: N165</a></li>
+									<li><a class="custom_btn__block">Price/litre: <?php echo 'N '.$currentPrice ?></a></li>
 
 							</div>
 						</div>
