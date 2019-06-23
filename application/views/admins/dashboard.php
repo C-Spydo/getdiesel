@@ -24,7 +24,7 @@ else{
 <head>
 	<meta charset="UTF-8">
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-	<title>Merchant Dashboard &mdash; GetDiesel</title>
+	<title>Admin Dashboard &mdash; GetDiesel</title>
 
 	<!-- General CSS Files -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -85,8 +85,8 @@ else{
 					<li class="menu-header">Menu</li>
 					<li><a class="nav-link" href="?link=2"><i class="far fa-square"></i> <span>View Orders</span></a></li>
 					<li><a class="nav-link" href="?link=3"><i class="far fa-square"></i> <span>View Payments</span></a></li>
-					<li><a class="nav-link" href="?link=4"><i class="far fa-square"></i> <span>Bank Accounts</span></a></li>
-					<li><a class="nav-link" href="?link=5"><i class="far fa-square"></i> <span>Profile</span></a></li>
+					<li><a class="nav-link" href="?link=4"><i class="far fa-square"></i> <span>Set Diesel Price</span></a></li>
+<!--					<li><a class="nav-link" href="?link=5"><i class="far fa-square"></i> <span>Profile</span></a></li>-->
 					<li><a class="nav-link" href="logout"><i class="far fa-square"></i> <span>Logout</span></a></li>
 				</ul>
 
@@ -115,7 +115,7 @@ else{
 									<h4>Orders</h4>
 								</div>
 								<div class="card-body">
-									10
+									<?php echo countOrders(); ?>
 								</div>
 							</div>
 						</div>
@@ -127,10 +127,10 @@ else{
 							</div>
 							<div class="card-wrap">
 								<div class="card-header">
-									<h4>Litres</h4>
+									<h4>Clients</h4>
 								</div>
 								<div class="card-body">
-									42.8
+									<?php echo countClients(); ?>
 								</div>
 							</div>
 						</div>
@@ -142,10 +142,10 @@ else{
 							</div>
 							<div class="card-wrap">
 								<div class="card-header">
-									<h4>Collected</h4>
+									<h4>Merchants</h4>
 								</div>
 								<div class="card-body">
-									N 12,500
+									<?php echo countMerchants(); ?>
 								</div>
 							</div>
 						</div>
@@ -157,10 +157,10 @@ else{
 							</div>
 							<div class="card-wrap">
 								<div class="card-header">
-									<h4>Pending</h4>
+									<h4>Price</h4>
 								</div>
 								<div class="card-body">
-									N4700
+									<?php echo "N ".number_format(currentPrice(),2); ?>
 								</div>
 							</div>
 						</div>
@@ -177,8 +177,11 @@ else{
 						if($link=='201'){
 							$this->view('admins/vieworder');
 						}
-						if($link=='3'){
-							$this->view('merchants/viewpayments');
+//						if($link=='3'){
+//							$this->view('merchants/viewpayments');
+//						}
+						if($link=='4'){
+							$this->view('admins/setdieselprice');
 						}
 						if($link=='5'){
 							$this->view('merchants/profile');

@@ -147,7 +147,7 @@ if (isset($this->session->userdata['current_price'])) {
 									<li> <a href=""></a></li>
 									<li> <a href=""></a></li>
 
-									<li><a class="custom_btn__block">Price/litre: <?php echo 'N '.$currentPrice ?></a></li>
+									<li><a class="custom_btn__block">Price/litre: <?php echo 'N '.currentPrice(); ?></a></li>
 
 							</div>
 						</div>

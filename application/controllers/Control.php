@@ -38,8 +38,8 @@ class Control extends CI_Controller {
 		// Load database
 		$this->load->model('Control_M');
 //
-//		$this->load->helper('pwd_hash');
-//		$this->load->helper('dashboard');
+		$this->load->helper('control');;
+
 	}
 
 	public function index()
@@ -71,8 +71,8 @@ class Control extends CI_Controller {
 			$order_id=$this->makeId();
 
 			//Hey Idiot, Remember to remove the next line once you build the price component, yaaay
-			$this->session->userdata['current_price']=165.78;
-			$current_price=$this->session->userdata['current_price'];
+			//$this->session->userdata['current_price']=165.78;
+			$current_price=currentPrice();
 			$data = array(
 				'uuid'=>$order_id,
 				'name' => $this->input->post('name'),
@@ -96,9 +96,11 @@ class Control extends CI_Controller {
 				$result2 = $this->Control_M->uuid_insert($data2);
 
 				if ($result == TRUE) {
+					// Proceed to payment here
+
+
 					$data['message_display'] = 'Order Placed Successfully, You will receive Email and SMS Alerts';
 
-					// echo "Selected Uplink".$uplink;
 
 					echo "<script> alert ('Order Placed Successfully, You will receive Email and SMS Alerts !'); </script>";
 					$this->send_order_email($data);

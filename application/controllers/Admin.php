@@ -37,7 +37,7 @@ class Admin extends CI_Controller {
 
 		// Load database
 		$this->load->model('Admin_M');
-//		$this->load->model('dashboard');
+		$this->load->model('Control_M');
 //
 		$this->load->helper('control');
 		$this->load->helper('admin');
@@ -157,17 +157,6 @@ class Admin extends CI_Controller {
 
 	public function sign_in() {
 
-
-//		$this->form_validation->set_rules('email', 'Username', 'trim|required');
-//		$this->form_validation->set_rules('password', 'Password', 'trim');
-//
-//		if ($this->form_validation->run() == FALSE) {
-//			if(isset($this->session->userdata['logged_in'])){
-//				$this->load->view('merchant/dashboard');
-//			}else{
-//				$this->load->view('merchant/login');
-//			}
-//		} else {
 		$data = array(
 			'email' => $this->input->post('email'),
 			'password' => $this->input->post('password')
@@ -186,8 +175,8 @@ class Admin extends CI_Controller {
 						'uuid'=>$result[0]->uuid,
 						'firstname' => $result[0]->firstname,
 						'lastname' => $result[0]->lastname,
-						'email'=>$result[0]->business_email,
-						'phone'=>$result[0]->business_phone,
+						'email'=>$result[0]->email,
+						'phone'=>$result[0]->phone,
 //							'password'=>$result[0]->password,
 						'status'=>$result[0]->status,
 						'datetime'=>$result[0]->datetime
@@ -353,5 +342,24 @@ class Admin extends CI_Controller {
 
 
 	}
+
+	public function set_price() {
+
+		$data = array(
+			'amount' => $this->input->post('amount'),
+		);
+		$result = $this->Admin_M->set_price($data);
+			if ($result ==true) {
+				$eUrl=base_url()."admin/dashboard?link=4&msg=Successful, New Price has been set";
+				redirect($eUrl);
+			}
+			else{
+				$eUrl=base_url()."admin/dashboard?link=4&msg=Error Occured, Please try Again";
+				redirect($eUrl);
+			}
+	}
+
+
+
 
 }

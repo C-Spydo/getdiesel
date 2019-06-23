@@ -2,15 +2,15 @@
 include 'header.php';
 
 $msg='';
-$currentPrice=0.00;
+$currentPrice=currentPrice();
 $currentDelivery=0.00;
 if (isset($_GET['msg'])) {
 	$msg = $_GET['msg'];
 }
 
-if (isset($this->session->userdata['current_price'])) {
-	$currentPrice = ($this->session->userdata['current_price']);
-}
+//if (isset($this->session->userdata['current_price'])) {
+//	$currentPrice = ($this->session->userdata['current_price']);
+//}
 
 ?>
   <!--End mainmenu area--> 

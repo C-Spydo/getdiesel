@@ -11,6 +11,21 @@ Class Control_M extends CI_Model {
 			}
 	}
 
+	public function currentPrice() {
+
+		$this->db->select('*');
+		$this->db->from('price');
+		$this->db->order_by("id", "desc");
+		$this->db->limit(1);
+		$query = $this->db->get();
+
+		if ($query->num_rows() == 1) {
+			return $query->result_array();
+		} else {
+			return false;
+		}
+	}
+
 	// Read data using username and password
 	public function login($data) {
 		$this->load->helper('control');
@@ -85,6 +100,8 @@ Class Control_M extends CI_Model {
 			return true;
 		}
 	}
+
+
 
 
 	public function update_profile($data){

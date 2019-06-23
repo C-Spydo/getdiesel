@@ -105,6 +105,14 @@ Class Admin_M extends CI_Model {
 		}
 	}
 
+	public function set_price($data) {
+		// 	Query to insert data in database
+		$this->db->insert('price', $data);
+		if ($this->db->affected_rows() > 0) {
+			return true;
+		}
+	}
+
 
 	public function update_profile($data){
 
@@ -219,6 +227,33 @@ Class Admin_M extends CI_Model {
 
 	}
 
+
+	public function countOrders() {
+
+		$this->db->select('*');
+		$this->db->from('students');
+		$query = $this->db->get();
+		return $query->num_rows() ;
+
+	}
+
+	public function countMerchants() {
+
+		$this->db->select('*');
+		$this->db->from('teachers');
+		$query = $this->db->get();
+		return $query->num_rows() ;
+
+	}
+
+	public function countClients() {
+
+		$this->db->select('*');
+		$this->db->from('pupils');
+		$query = $this->db->get();
+		return $query->num_rows() ;
+
+	}
 
 
 //	public function read_user2_information($user_id) {

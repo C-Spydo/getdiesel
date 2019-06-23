@@ -41,4 +41,25 @@ function statusToText($status){
 	return $stext;
 }
 
+
+function countOrders(){
+	$CI = get_instance();
+	$result = $CI->Admin_M->countOrders();
+	return $result;
+
+}
+
+function countClients(){
+	$CI = get_instance();
+	$result = $CI->Admin_M->countClients();
+	return $result;
+
+}
+
+function countMerchants(){
+	$CI = get_instance();
+	$result = $CI->Admin_M->countMerchants();
+	return $result;
+
+}
 ?>

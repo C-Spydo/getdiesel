@@ -58,4 +58,11 @@ if(!function_exists('verifyHashedPassword'))
 
 	}
 }
+
+
+function currentPrice(){
+	$CI = get_instance();
+	$result = $CI->Control_M->currentPrice();
+	return $result[0]["amount"];
+}
 ?>
