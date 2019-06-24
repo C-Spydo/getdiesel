@@ -48,7 +48,7 @@ if (isset($_GET['msg'])) {
 											</div>
 											<div class="row">
 												<div class="col-sm-12">
-													<input type="text" name="company_name" required placeholder="Company(optional)">
+													<input type="text" name="company_name" placeholder="Company(optional)">
 												</div>
 											</div>
 											<div class="row">

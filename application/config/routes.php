@@ -59,6 +59,8 @@ $route['login'] = "control/login";
 $route['about'] = "control/about";
 $route['index'] = "control/index";
 $route['contact'] = "control/contact";
+$route['ravepay'] = "control/ravepay";
+$route['ravepay_2'] = "control/ravepay_2";
 
 //Merchant Routes
 $route['merchant/register'] = "merchant/register_v";

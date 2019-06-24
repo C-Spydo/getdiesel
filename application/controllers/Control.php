@@ -67,6 +67,17 @@ class Control extends CI_Controller {
 		$this->load->view('contact');
 	}
 
+	public function ravepay()
+	{
+		$this->load->view('ravepay');
+	}
+
+	public function ravepay_2()
+	{
+		$this->load->view('ravepay_2');
+	}
+
+
 	public function make_order() {
 			$order_id=$this->makeId();
 
@@ -98,14 +109,15 @@ class Control extends CI_Controller {
 				if ($result == TRUE) {
 					// Proceed to payment here
 
+					$eUrl=base_url()."ravepay?email=".$data['email']."&phone=".$data['phone'].
+						"&amount=".$data['amount']."&altRef=".$data['uuid'];
 
-					$data['message_display'] = 'Order Placed Successfully, You will receive Email and SMS Alerts';
-
-
-					echo "<script> alert ('Order Placed Successfully, You will receive Email and SMS Alerts !'); </script>";
-					$this->send_order_email($data);
-					$eUrl=base_url()."index?msg=Order Placed Successfully, You will receive Email and SMS Alerts";
 					redirect($eUrl);
+
+//					echo "<script> alert ('Order Placed Successfully, You will receive Email and SMS Alerts !'); </script>";
+//					$this->send_order_email($data);
+//					$eUrl=base_url()."index?msg=Order Placed Successfully, You will receive Email and SMS Alerts";
+//					redirect($eUrl);
 				}
 				else {
 					$eUrl=base_url()."index?msg=Order Not Successful, Please Try Again";
