@@ -1,8 +1,18 @@
 <?php
 
 $currentPrice=0;
+$name='';
 if (isset($this->session->userdata['current_price'])) {
 	$currentPrice = ($this->session->userdata['current_price']);
+}
+
+if (isset($this->session->userdata['client_in'])) {
+
+	$firstname = ($this->session->userdata['client_in']['firstname']);
+	$email = ($this->session->userdata['client_in']['email']);
+	$lastname = ($this->session->userdata['client_in']['lastname']);
+	$name = $firstname." ".$lastname;
+
 }
 
 ?>
@@ -15,6 +25,7 @@ if (isset($this->session->userdata['current_price'])) {
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Getdiesel.ng</title>
 	<!-- Favicone Icon -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 	<link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600,700,800%7CLato:300,400,700" rel="stylesheet" type="text/css">
 	<link href="<?php echo base_url(); ?>assetsfe/css/bootstrap.css" rel="stylesheet" type="text/css">
@@ -47,7 +58,7 @@ if (isset($this->session->userdata['current_price'])) {
 				<div class="row">
 					<div class="col-sm-7">
 						<p>
-							Welcome to Getdiesel.ng
+							Welcome <?php echo ": ".$name; ?>
 						</p>
 					</div>
 					<div class="col-sm-5">

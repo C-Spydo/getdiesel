@@ -36,7 +36,7 @@ class Client extends CI_Controller {
 		$this->load->library('session');
 
 		// Load database
-		$this->load->model('Teacher_M');
+		$this->load->model('Client_M');
 //		$this->load->model('dashboard');
 //
 		$this->load->helper('control');
@@ -76,7 +76,7 @@ class Client extends CI_Controller {
 			'username' => ''
 		);
 
-		$this->session->unset_userdata('logged_in', $sess_array);
+		$this->session->unset_userdata('client_in', $sess_array);
 		$data['message_display'] = 'Successfully Logout';
 
 		header("location: sign_in");
@@ -85,27 +85,16 @@ class Client extends CI_Controller {
 
 	public function sign_up() {
 
-		// Check validation for user input in SignUp form
-		$this->form_validation->set_rules('firstname', 'Username', 'trim|required');
-
-		$this->form_validation->set_rules('businessemail', 'Email', 'trim|required');
-
-		if ($this->form_validation->run() == FALSE) {
-			$this->load->view('merchant/register');
-		} else {
-
-
 			$user_id=$this->makeId();
 			$data = array(
 				'uuid'=>$user_id,
 				'firstname' => $this->input->post('firstname'),
 				'lastname' => $this->input->post('lastname'),
-				'business_name' => $this->input->post('businessname'),
-				'business_address' => $this->input->post('businessaddress'),
-				'business_email' => $this->input->post('businessemail'),
-				'business_phone' => $this->input->post('businessphone'),
+				'address' => $this->input->post('address'),
+				'email' => $this->input->post('email'),
+				'phone' => $this->input->post('phone'),
 				'state' => $this->input->post('state'),
-				'lga' => $this->input->post('lga'),
+//				'lga' => $this->input->post('lga'),
 				'password' => getHashedPassword($this->input->post('password')),
 				'status'=>1
 			);
@@ -114,18 +103,16 @@ class Client extends CI_Controller {
 				'uuid'=>$user_id,
 				'firstname' => $this->input->post('firstname'),
 				'lastname' => $this->input->post('lastname'),
-				'business_name' => $this->input->post('businessname'),
-				'business_address' => $this->input->post('businessaddress'),
-				'business_email' => $this->input->post('businessemail'),
-				'business_phone' => $this->input->post('businessphone'),
+				'address' => $this->input->post('address'),
+				'email' => $this->input->post('email'),
+				'phone' => $this->input->post('phone'),
 				'state' => $this->input->post('state'),
-				'lga' => $this->input->post('lga'),
+//				'lga' => $this->input->post('lga'),
 				'password' => getHashedPassword($this->input->post('password')),
 				'status'=>1
 			);
 
-			$this->session->set_userdata('logged_in', $session_data);
-
+			$this->session->set_userdata('client_in', $session_data);
 
 
 
@@ -135,57 +122,43 @@ class Client extends CI_Controller {
 
 			if(($this->input->post('password')) !=$this->input->post('password-confirm')){
 
-				$data['message_display'] = 'Passwords Do Not Match';
-				$this->load->view('merchant/register', $data);
-				//echo 'Passwords Do Not Match';
+				$eUrl=base_url()."register?msg=Passwords do not Match";
+				redirect($eUrl);
+
 			}
 
 			else{
-				$result = $this->Teacher_M->registration($data);
-				$result2 = $this->Teacher_M->uuid_insert($data2);
+				$result = $this->Client_M->registration($data);
+				$result2 = $this->Client_M->uuid_insert($data2);
 
 				if ($result == TRUE) {
-					$data['message_display'] = 'Registration Successful, Proceed to Login !';
-
-					// echo "Selected Uplink".$uplink;
-
 					echo "<script> alert ('Registration Successful, Proceed to Login !'); </script>";
 					$this->send_welcome_email($data['business_email'],$this->input->post('password'));
-					$this->load->view('login', $data);
+					$eUrl=base_url()."login";
+					redirect($eUrl);
+
 				} elseif($result==1) {
-					$data['message_display'] = 'Email  already exists, Try another!';
-					$this->load->view('merchant/register', $data);
+					$eUrl=base_url()."register?msg=Email  already exists, Try another";
+					redirect($eUrl);
 				}
 				else{
 
 				}
 			}
-		}
 	}
 
 	public function sign_in() {
 
-
-//		$this->form_validation->set_rules('email', 'Username', 'trim|required');
-//		$this->form_validation->set_rules('password', 'Password', 'trim');
-//
-//		if ($this->form_validation->run() == FALSE) {
-//			if(isset($this->session->userdata['logged_in'])){
-//				$this->load->view('merchant/dashboard');
-//			}else{
-//				$this->load->view('merchant/login');
-//			}
-//		} else {
 		$data = array(
-			'business_email' => $this->input->post('email'),
+			'email' => $this->input->post('email'),
 			'password' => $this->input->post('password')
 		);
-		$resulter = $this->Teacher_M->login($data);
+		$resulter = $this->Client_M->login($data);
 
 		if ($resulter == 1) {
 
 			$username = $this->input->post('email');
-			$result = $this->Teacher_M->read_user_information($username);
+			$result = $this->Client_M->read_user_information($username);
 
 			if ($result ==true) {
 				$regstatus=$result[0]->status;
@@ -194,23 +167,17 @@ class Client extends CI_Controller {
 						'uuid'=>$result[0]->uuid,
 						'firstname' => $result[0]->firstname,
 						'lastname' => $result[0]->lastname,
-						'business_name'=>$result[0]->business_name,
-						'business_email'=>$result[0]->business_email,
-						'business_address'=>$result[0]->business_address,
-						'business_phone'=>$result[0]->business_phone,
+						'address'=>$result[0]->address,
+						'email'=>$result[0]->email,
+						'phone'=>$result[0]->phone,
 						'state'=>$result[0]->state,
 						'lga'=>$result[0]->lga,
-//							'password'=>$result[0]->password,
 						'status'=>$result[0]->status,
 						'datetime'=>$result[0]->datetime
 					);
 					// Add user data in session
-					$this->session->set_userdata('logged_in', $session_data);
-
-
-
-					//$this->load->view('merchants/dashboard');
-					header("location: dashboard");
+					$this->session->set_userdata('client_in', $session_data);
+					redirect('index');
 				}
 
 				elseif($regstatus==2){
@@ -223,23 +190,17 @@ class Client extends CI_Controller {
 
 		}
 		else if($resulter==2){
-			$data = array(
-				'error_message' => 'Invalid Password'
-			);
-			$this->load->view('merchants/login', $data);
+			$eUrl=base_url()."login?msg=Invalid Password";
+			redirect($eUrl);
 		}
 		else if($resulter==3){
-			$data = array(
-				'error_message' => 'Invalid Email'
-			);
-			$this->load->view('merchants/login', $data);
+			$eUrl=base_url()."login?msg=Invalid Email";
+			redirect($eUrl);
 		}
 
 		else {
-			$data = array(
-				'error_message' => 'Invalid Email or Password'
-			);
-			$this->load->view('merchants/login', $data);
+			$eUrl=base_url()."register?msg=Invalid Email or Password";
+			redirect($eUrl);
 		}
 	}
 //	}
@@ -304,13 +265,9 @@ class Client extends CI_Controller {
 			$str .= $keyspace3[rand(0, $max)];
 		}
 
-		$result = $this->Teacher_M->idchecker($str);
+		$result = $this->Client_M->idchecker($str);
 
 		if ($result == FALSE){
-			$data = array(
-				'value' => $str
-			);
-			//$this->Teacher_M->uuid_insert($data);
 			return $str;
 		}else{
 			makeId();

@@ -8,9 +8,30 @@ if (isset($_GET['msg'])) {
 	$msg = $_GET['msg'];
 }
 
-//if (isset($this->session->userdata['current_price'])) {
-//	$currentPrice = ($this->session->userdata['current_price']);
-//}
+
+
+$email='';
+$phone='';
+$address='';
+$state='';
+$name='';
+if (isset($this->session->userdata['current_price'])) {
+	$currentPrice = ($this->session->userdata['current_price']);
+}
+
+if (isset($this->session->userdata['client_in'])) {
+
+	$firstname = ($this->session->userdata['client_in']['firstname']);
+	$email = ($this->session->userdata['client_in']['email']);
+	$phone = ($this->session->userdata['client_in']['phone']);
+	$address = ($this->session->userdata['client_in']['address']);
+	$state = ($this->session->userdata['client_in']['state']);
+	$lastname = ($this->session->userdata['client_in']['lastname']);
+	$name = $firstname." ".$lastname;
+
+}
+
+
 
 ?>
   <!--End mainmenu area--> 
@@ -39,21 +60,26 @@ if (isset($_GET['msg'])) {
 
 											<div class="row">
 												<div class="col-sm-6">
-													<input type="text" name="name" placeholder="Name" required>
+													<label>Name</label>
+													<input type="text" name="name" placeholder="Name" required
+													value="<?php echo $name ?>">
 												</div>
 												<div class="col-sm-6">
+													<label>Quantity</label>
 													<input type="number"id="quantity"  onchange="litreChange()"
+
 														   name="litres" placeholder="Number of Litres" required>
 												</div>
 											</div>
 											<div class="row">
 												<div class="col-sm-12">
+													<label>Company Name</label>
 													<input type="text" name="company_name" placeholder="Company(optional)">
 												</div>
 											</div>
 											<div class="row">
 												<div class="col-sm-6">
-<!--													<label>State</label>-->
+													<label>State</label>
 													<select class="form-control selectric" name="state" id="state" required>
 														<option selected value='' disabled>State</option>
 
@@ -97,16 +123,23 @@ if (isset($_GET['msg'])) {
 													</select>
 												</div>
 												<div class="col-sm-6">
-													<input type="text" name="address" placeholder="Address" required>
+													<label>Address</label>
+													<input type="text" name="address"
+														   value="<?php echo $address ?>"
+														   placeholder="Address" required>
 												</div>
 											</div>
 
 											<div class="row">
 												<div class="col-sm-6">
-													<input type="text" name="email" placeholder="Email" required>
+													<label>Email</label>
+													<input type="text" name="email" placeholder="Email"
+														   value="<?php echo $email ?>"required>
 												</div>
 												<div class="col-sm-6">
-													<input type="text" name="phone" placeholder="Phone" required>
+													<label>Phone Number</label>
+													<input type="text" name="phone"
+														   value="<?php echo $phone ?>" placeholder="Phone" required>
 												</div>
 											</div>
 
@@ -168,6 +201,23 @@ if (isset($_GET['msg'])) {
 		amt.innerText = 'N '+(qnt * price).toFixed(2).toString();
 		tot.innerText= 'N '+((qnt*price)+parseFloat('<?php echo $currentDelivery ?>')).toFixed(2).toString();
 	}
+
+	var sel = document.getElementById('state');
+	var val = '<?php echo $state ?>';
+	for(var i = 0, j = sel.options.length; i < j; ++i) {
+
+		var a=((sel.options[i].innerHTML).toString()).toLowerCase().trim();
+		var b=(val.toString()).toLowerCase().trim();
+
+		// document.write(a.trim().length.toString()+"<br>");
+
+		if(a===b) {
+			sel.selectedIndex = i;
+			break;
+		}
+	}
+
+	// sel.selectedIndex = 16;
 </script>		<!-- FOOTER -->
 
 <?php
