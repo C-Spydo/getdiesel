@@ -40,33 +40,19 @@ class Client extends CI_Controller {
 //		$this->load->model('dashboard');
 //
 		$this->load->helper('control');
-//		$this->load->helper('dashboard');
+		$this->load->helper('client');
 	}
 
 	public function index()
 	{
-		$this->load->view('merchants/login');
-	}
 
-	public function register_v()
-	{
-		$this->load->view('merchants/register');
 	}
 
 	public function dashboard()
 	{
-		$this->load->view('merchants/dashboard');
+		$this->load->view('clients/dashboard');
 	}
 
-	public function login_v()
-	{
-		$this->load->view('merchants/login');
-	}
-
-	public function forgotpassword_v()
-	{
-		$this->load->view('merchants/forgotpassword');
-	}
 
 	// Logout from admin page
 	public function logout() {
@@ -79,7 +65,7 @@ class Client extends CI_Controller {
 		$this->session->unset_userdata('client_in', $sess_array);
 		$data['message_display'] = 'Successfully Logout';
 
-		header("location: sign_in");
+		header("location: login");
 		//$this->load->view('login_form', $data);
 	}
 
@@ -207,38 +193,35 @@ class Client extends CI_Controller {
 
 	public function update_profile(){
 		$data = array(
-			'uuid'=>$this->session->userdata['logged_in']['uuid'],
+			'uuid'=>$this->input->post('uuid'),
 			'firstname' => $this->input->post('firstname'),
 			'lastname' => $this->input->post('lastname'),
-			'business_name' => $this->input->post('businessname'),
-			'business_address' => $this->input->post('businessaddress'),
-			'business_email' => $this->input->post('businessemail'),
-			'business_phone' => $this->input->post('businessphone'),
+			'address' => $this->input->post('address'),
+			'email' => $this->input->post('email'),
+			'phone' => $this->input->post('phone'),
+			'state' => $this->input->post('state')
 		);
 
-		$result = $this->Teacher_M->update_profile($data);
+		$result = $this->Client_M->update_profile($data);
 
 		if ($result == TRUE) {
 			$data['message_display'] = 'Account Update Successful, Welcome !';
 
+			$this->session->userdata['client_in']['email']=$data['email'];
+			$this->session->userdata['client_in']['firstname']=$data['firstname'];
+			$this->session->userdata['client_in']['lastname']=$data['lastname'];
+			$this->session->userdata['client_in']['phone']=$data['phone'];
+			$this->session->userdata['client_in']['address']=$data['address'];
 
-			// echo "<script> alert ('Account Update Successful'); </script>";
-
-			$this->session->userdata['logged_in']['business_email']=$data['business_email'];
-			$this->session->userdata['logged_in']['firstname']=$data['firstname'];
-			$this->session->userdata['logged_in']['lastname']=$data['lastname'];
-			$this->session->userdata['logged_in']['business_phone']=$data['business_phone'];
-			$this->session->userdata['logged_in']['business_name']=$data['business_name'];
-			$this->session->userdata['logged_in']['business_address']=$data['business_address'];
-
-			$this->load->view('merchants/dashboard', $data);
+			$eUrl=base_url()."dashboard?link=5&msg=Update Successful";
+			redirect($eUrl);
 
 		}
 
 		else{
-			$data['message_display'] = 'Error! Update Not Successful, Try Again!';
 
-			$this->load->view('merchants/dashboard', $data);
+			$eUrl=base_url()."dashboard?link=5&msg=Update Not Successful, Try Again!";
+			redirect($eUrl);
 		}
 	}
 

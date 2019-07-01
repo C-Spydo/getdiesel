@@ -15,6 +15,7 @@ $phone='';
 $address='';
 $state='';
 $name='';
+$uuid='';
 if (isset($this->session->userdata['current_price'])) {
 	$currentPrice = ($this->session->userdata['current_price']);
 }
@@ -28,6 +29,8 @@ if (isset($this->session->userdata['client_in'])) {
 	$state = ($this->session->userdata['client_in']['state']);
 	$lastname = ($this->session->userdata['client_in']['lastname']);
 	$name = $firstname." ".$lastname;
+
+	$uuid=($this->session->userdata['client_in']['uuid']);
 
 }
 
@@ -54,6 +57,9 @@ if (isset($this->session->userdata['client_in'])) {
 										</font>
 										<div class="check_form_left common_input">
 											<div class="heading-box pb-30">
+												<p>
+													<?php if($name!='')echo "Welcome : ".$name; ?>
+												</p>
 												<h2><span>Make</span> Order</h2>
 												<span class="b-line l-left"></span>
 											</div>
@@ -170,6 +176,8 @@ if (isset($this->session->userdata['client_in'])) {
 													</li>
 												</ul>
 											</div>
+											<input type="hidden" name="uuid"
+												   value="<?php echo $uuid ?>"required>
 											<div class="romana_select_method ">
 												
 												<button type="submit" class="btn-text white-btn">place order</button>
@@ -178,6 +186,8 @@ if (isset($this->session->userdata['client_in'])) {
 									</div>
 								</div>
 							</div>
+
+
 						</form>
 						<!-- column End -->
 					</div>

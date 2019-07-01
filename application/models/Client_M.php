@@ -119,12 +119,77 @@ Class Client_M extends CI_Model {
 
 	}
 
-
-
-
-
-
 	public function user_profile_update($data){
+
+	}
+
+	public function countOrders($u_id) {
+
+		$this->db->select('*');
+		$this->db->from('students');
+		$this->db->where('user',$u_id);
+		$query = $this->db->get();
+
+		return $query->num_rows() ;
+
+	}
+
+	public function getDelivered($u_id) {
+
+		$this->db->select_sum('quantity');
+		$this->db->where('user',$u_id);
+		$this->db->where('status',5);
+		$query = $this->db->get('students')->row();
+		return $query->quantity;
+
+	}
+
+	public function getPending($u_id) {
+
+		$this->db->select_sum('quantity');
+		$this->db->where('user',$u_id);
+		$this->db->where('status',1);
+		$query = $this->db->get('students')->row();
+		return $query->quantity;
+
+	}
+
+	public function getLitres($u_id) {
+
+		$this->db->select_sum('quantity');
+		$this->db->where('user',$u_id);
+		$query = $this->db->get('students')->row();
+		return $query->quantity;
+
+	}
+
+	public function getClientOrders($uuid) {
+		$this->db->select('*');
+		$this->db->from('students');
+		$this->db->where('user',$uuid);
+		$query = $this->db->get();
+
+		$q=array();
+		if ($query->num_rows() >0) {
+			$q=$query->result_array();
+		}
+		return $q;
+
+	}
+
+	public function getMerchantWithId($id) {
+
+		$this->db->select('*');
+		$this->db->from('teachers');
+		$this->db->where('uuid', $id);
+		$this->db->limit(1);
+		$query = $this->db->get();
+
+		if ($query->num_rows() == 1) {
+			return $query->result_array();
+		} else {
+			return false;
+		}
 
 	}
 

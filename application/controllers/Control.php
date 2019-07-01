@@ -87,6 +87,7 @@ class Control extends CI_Controller {
 			$data = array(
 				'uuid'=>$order_id,
 				'name' => $this->input->post('name'),
+				'user' => $this->input->post('uuid'),
 				'company_name' => $this->input->post('company_name'),
 				'email' => $this->input->post('email'),
 				'phone' => $this->input->post('phone'),
@@ -112,7 +113,8 @@ class Control extends CI_Controller {
 					$eUrl=base_url()."ravepay?email=".$data['email']."&phone=".$data['phone'].
 						"&amount=".$data['amount']."&altRef=".$data['uuid'];
 
-					redirect($eUrl);
+
+//					redirect($eUrl);
 
 //					echo "<script> alert ('Order Placed Successfully, You will receive Email and SMS Alerts !'); </script>";
 //					$this->send_order_email($data);

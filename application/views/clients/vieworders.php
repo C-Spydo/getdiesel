@@ -9,7 +9,7 @@
 	}
 
 	table tr:nth-child(even){
-		background-color: #e4e3e3
+		background-color: #ffffff
 	}
 
 	th {
@@ -49,64 +49,111 @@
 	}
 </style>
 
-
-<div class="container">
-	<div class="header_wrap">
-		<h5><strong>View Orders</strong></h5>
-		<div class="num_rows">
-
-			<div class="form-group"> 	<!--		Show Numbers Of Rows 		-->
-				<select class  ="form-control" name="state" id="maxRows">
+<?php
 
 
-					<option value="10">10</option>
-					<option value="15">15</option>
-					<option value="20">20</option>
-					<option value="50">50</option>
-					<option value="70">70</option>
-					<option value="100">100</option>
-					<option value="5000">Show ALL Rows</option>
-				</select>
+if (isset($this->session->userdata['client_in'])) {
 
+	$uuid=($this->session->userdata['client_in']['uuid']);
+
+}
+else{
+
+	redirect(base_url()+"login");
+}
+?>
+
+<?php
+
+$allorders=getClientOrders($uuid);
+?>
+<section class="section">
+	<div class="card">
+
+		<div class="container">
+			<div class="header_wrap">
+				<h5><strong>My Orders</strong></h5>
+				<div class="num_rows">
+
+					<div class="form-group"> 	<!--		Show Numbers Of Rows 		-->
+						<select class  ="form-control" name="state" id="maxRows">
+
+
+							<option value="10">10</option>
+							<option value="15">15</option>
+							<option value="20">20</option>
+							<option value="50">50</option>
+							<option value="70">70</option>
+							<option value="100">100</option>
+							<option value="5000">Show ALL Rows</option>
+						</select>
+
+					</div>
+				</div>
+				<div class="tb_search">
+					<input type="text" id="search_input_all" onkeyup="FilterkeyWord_all_table()" placeholder="Search.." class="form-control">
+				</div>
 			</div>
-		</div>
-		<div class="tb_search">
-			<input type="text" id="search_input_all" onkeyup="FilterkeyWord_all_table()" placeholder="Search.." class="form-control">
-		</div>
+			<div class="card-body">
+				<table class="table"  id= "table-id" border="1">
+
+
+					<thead>
+					<tr>
+						<th>S/N</th>
+						<th>Quantity</th>
+						<th>Price</th>
+						<th>Amount</th>
+						<th>Merchant</th>
+						<th>Status</th>
+						<th>Date</th>
+					</tr>
+					</thead>
+
+					<tbody>
+
+					<?php
+					$x=1; foreach($allorders as $row){
+
+
+						?>
+						<tr>
+							<td><?php echo $x; ?></td>
+							<td><?php echo $row['quantity']." litres";?></td>
+							<td><?php echo "N ".$row['price'];?></td>
+							<td><?php echo "N ".$row['amount'];?></td>
+
+							<td><?php
+								$mchant=getMerchantWithId($row['merchant']);
+								//						print_r($mchant);
+								echo $mchant['business_name'];
+								?></td>
+							<td><?php echo statusToText($row['status']);?></td>
+							<td><?php echo $row['datetime'];?></td>
+						</tr>
+						<?php
+						//						}
+						$x=$x+1;
+					}?>
+
+					</tbody>
+				</table>
+			</div>
+			<!--		Start Pagination -->
+			<div class='pagination-container'>
+				<nav>
+					<ul class="pagination">
+						<!--	Here the JS Function Will Add the Rows -->
+					</ul>
+				</nav>
+			</div>
+			<div class="rows_count">Showing 11 to 20 of 91 entries</div>
+
+		</div> <!-- 		End of Container -->
+
+
 	</div>
-	<table class="table table-striped table-class" id= "table-id" border="1">
-
-
-		<thead>
-		<tr>
-			<th>User</th>
-			<th>User Details</th>
-			<th>Amount</th>
-			<th>Agent</th>
-			<th>Status</th>
-		</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td></td>
-			</tr>
-		</tbody>
-	</table>
-
-	<!--		Start Pagination -->
-	<div class='pagination-container'>
-		<nav>
-			<ul class="pagination">
-				<!--	Here the JS Function Will Add the Rows -->
-			</ul>
-		</nav>
-	</div>
-	<div class="rows_count">Showing 11 to 20 of 91 entries</div>
-
-</div> <!-- 		End of Container -->
-
-
-
+</section>
 
 
 

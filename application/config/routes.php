@@ -56,6 +56,7 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = TRUE;
 $route['register'] = "control/register";
 $route['login'] = "control/login";
+$route['logout'] = "logout";
 $route['forgot_password'] = "control/forgot_password";
 
 $route['about'] = "control/about";
@@ -63,6 +64,13 @@ $route['index'] = "control/index";
 $route['contact'] = "control/contact";
 $route['ravepay'] = "control/ravepay";
 $route['ravepay_2'] = "control/ravepay_2";
+
+
+//Client Routes
+
+$route['logout'] = "client/logout";
+$route['dashboard'] = "client/dashboard";
+$route['updateprofile'] = "client/update_profile";
 
 //Merchant Routes
 $route['merchant/register'] = "merchant/register_v";

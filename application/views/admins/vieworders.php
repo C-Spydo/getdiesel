@@ -122,7 +122,7 @@ $allorders=getOrders();
 		//						print_r($mchant);
 								echo $mchant['business_name'];
 								?></td>
-							<td><?php echo $row['status'];?></td>
+							<td><?php echo statusToText($row['status']);?></td>
 							<td><?php echo $row['datetime'];?></td>
 
 							<td>

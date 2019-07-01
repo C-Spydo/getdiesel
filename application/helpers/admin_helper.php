@@ -62,4 +62,14 @@ function countMerchants(){
 	return $result;
 
 }
+
+
+/*Statuses:
+1- saved
+2- Paid
+3- Assigned to Merchant
+4- En Route
+5- Delivered
+
+*/
 ?>

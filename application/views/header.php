@@ -2,6 +2,8 @@
 
 $currentPrice=0;
 $name='';
+$loginroute='login';
+$logintext='Login';
 if (isset($this->session->userdata['current_price'])) {
 	$currentPrice = ($this->session->userdata['current_price']);
 }
@@ -12,6 +14,9 @@ if (isset($this->session->userdata['client_in'])) {
 	$email = ($this->session->userdata['client_in']['email']);
 	$lastname = ($this->session->userdata['client_in']['lastname']);
 	$name = $firstname." ".$lastname;
+
+	$loginroute='dashboard';
+	$logintext='Dashboard';
 
 }
 
@@ -135,7 +140,7 @@ if (isset($this->session->userdata['client_in'])) {
 										</ul>
 									</li>
 
-									<li> <a href="login">Login</a>
+									<li> <a href="<?php echo $loginroute ?>"><?php echo $logintext ?></a>
 <!--										<ul class="dropdown-menu">-->
 <!--											<li> <a href="login">Login</a></li>-->
 <!--											<li> <a href="register">Sign Up</a></li>-->

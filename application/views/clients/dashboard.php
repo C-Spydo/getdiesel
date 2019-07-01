@@ -1,21 +1,19 @@
 <?php
 
 
-if (isset($this->session->userdata['logged_in'])) {
+if (isset($this->session->userdata['client_in'])) {
 
-	//print_r($this->session->userdata['logged_in']);
-	$firstname = ($this->session->userdata['logged_in']['firstname']);
-	$email = ($this->session->userdata['logged_in']['business_email']);
-	$lastname = ($this->session->userdata['logged_in']['lastname']);
-	$business_name = ($this->session->userdata['logged_in']['business_name']);
+	//print_r($this->session->userdata['client_in']);
+	$firstname = ($this->session->userdata['client_in']['firstname']);
+	$email = ($this->session->userdata['client_in']['email']);
+	$lastname = ($this->session->userdata['client_in']['lastname']);
+	$name=$firstname." ".$lastname;
+	$uuid=($this->session->userdata['client_in']['uuid']);
 
 }
 else{
 
-	header("location: sign_in");
-	//$this->view('merchants/login');
-	//redirect('merchant/login');
-	//header("location: login");
+	redirect(base_url()+"login");
 }
 	?>
 
@@ -24,7 +22,7 @@ else{
 <head>
 	<meta charset="UTF-8">
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-	<title>Merchant Dashboard &mdash; GetDiesel</title>
+	<title>User Dashboard &mdash; GetDiesel</title>
 
 	<!-- General CSS Files -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -56,7 +54,7 @@ else{
 
 				<li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
 						<img alt="image" src="<?php echo base_url(); ?>assets/img/avatar/avatar-1.png" class="rounded-circle mr-1">
-						<div class="d-sm-none d-lg-inline-block"><?php echo $business_name ?></div></a>
+						<div class="d-sm-none d-lg-inline-block"><?php echo $name ?></div></a>
 					<div class="dropdown-menu dropdown-menu-right">
 						<a href="?link=5" class="dropdown-item has-icon">
 							<i class="far fa-user"></i> Profile
@@ -81,8 +79,6 @@ else{
 
 					<li class="menu-header">Menu</li>
 					<li><a class="nav-link" href="?link=2"><i class="far fa-square"></i> <span>View Orders</span></a></li>
-					<li><a class="nav-link" href="?link=3"><i class="far fa-square"></i> <span>View Payments</span></a></li>
-					<li><a class="nav-link" href="?link=4"><i class="far fa-square"></i> <span>Bank Accounts</span></a></li>
 					<li><a class="nav-link" href="?link=5"><i class="far fa-square"></i> <span>Profile</span></a></li>
 					<li><a class="nav-link" href="logout"><i class="far fa-square"></i> <span>Logout</span></a></li>
 				</ul>
@@ -99,7 +95,7 @@ else{
 		<div class="main-content">
 			<section class="section">
 				<div class="section-header">
-					<h1><?php echo $business_name." - " ?>Merchant Dashboard</h1>
+					<h1><?php echo $name." - " ?>User Dashboard</h1>
 				</div>
 				<div class="row">
 					<div class="col-lg-3 col-md-6 col-sm-6 col-12">
@@ -109,10 +105,10 @@ else{
 							</div>
 							<div class="card-wrap">
 								<div class="card-header">
-									<h4>Orders</h4>
+									<h4>Total Orders</h4>
 								</div>
 								<div class="card-body">
-									10
+									<?php echo countOrders($uuid)." ltrs"; ?>
 								</div>
 							</div>
 						</div>
@@ -124,10 +120,10 @@ else{
 							</div>
 							<div class="card-wrap">
 								<div class="card-header">
-									<h4>Litres</h4>
+									<h4>Total Orders</h4>
 								</div>
 								<div class="card-body">
-									42.8
+									<?php echo getLitres($uuid)." ltrs"; ?>
 								</div>
 							</div>
 						</div>
@@ -139,10 +135,10 @@ else{
 							</div>
 							<div class="card-wrap">
 								<div class="card-header">
-									<h4>Collected</h4>
+									<h4>Delivered</h4>
 								</div>
 								<div class="card-body">
-									N 12,500
+									<?php echo getDelivered($uuid)." ltrs"; ?>
 								</div>
 							</div>
 						</div>
@@ -157,7 +153,7 @@ else{
 									<h4>Pending</h4>
 								</div>
 								<div class="card-body">
-									N4700
+									<?php echo getPending($uuid)." ltrs"; ?>
 								</div>
 							</div>
 						</div>
@@ -169,13 +165,10 @@ else{
 						$link= $_GET['link'];
 
 						if($link=='2'){
-							$this->view('merchants/vieworders');
-						}
-						if($link=='3'){
-							$this->view('merchants/viewpayments');
+							$this->view('clients/vieworders');
 						}
 						if($link=='5'){
-							$this->view('merchants/profile');
+							$this->view('clients/profile');
 						}
 					}
 					?>
