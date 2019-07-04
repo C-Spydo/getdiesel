@@ -13,7 +13,7 @@ if (isset($this->session->userdata['client_in'])) {
 }
 else{
 
-	redirect(base_url()+"login");
+	redirect(base_url()."login");
 }
 	?>
 

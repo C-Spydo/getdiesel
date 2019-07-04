@@ -122,8 +122,58 @@ Class Teacher_M extends CI_Model {
 
 
 
+	public function countOrders($u_id) {
 
-	public function user_profile_update($data){
+		$this->db->select('*');
+		$this->db->from('students');
+		$this->db->where('merchant',$u_id);
+		$query = $this->db->get();
+
+		return $query->num_rows() ;
+
+	}
+
+	public function getDelivered($u_id) {
+
+		$this->db->select('*');
+		$this->db->from('students');
+		$this->db->where('merchant',$u_id);
+		$this->db->where('status',5);
+		$query = $this->db->get();
+		return $query->num_rows() ;
+
+	}
+
+	public function getPending($u_id) {
+
+		$this->db->select('*');
+		$this->db->from('students');
+		$this->db->where('merchant',$u_id);
+		$this->db->where('status <',5);
+		$query = $this->db->get();
+		return $query->num_rows() ;
+
+	}
+
+	public function getPendingRevenue($u_id) {
+
+		$this->db->select_sum('amount');
+		$this->db->where('merchant',$u_id);
+		$query = $this->db->get('payments')->row();
+		return $query->amount;
+	}
+
+	public function getMerchantOrders($uuid) {
+		$this->db->select('*');
+		$this->db->from('students');
+		$this->db->where('merchant',$uuid);
+		$query = $this->db->get();
+
+		$q=array();
+		if ($query->num_rows() >0) {
+			$q=$query->result_array();
+		}
+		return $q;
 
 	}
 

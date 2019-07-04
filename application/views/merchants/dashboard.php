@@ -8,6 +8,7 @@ if (isset($this->session->userdata['logged_in'])) {
 	$email = ($this->session->userdata['logged_in']['business_email']);
 	$lastname = ($this->session->userdata['logged_in']['lastname']);
 	$business_name = ($this->session->userdata['logged_in']['business_name']);
+	$uuid = ($this->session->userdata['logged_in']['uuid']);
 
 }
 else{
@@ -112,7 +113,7 @@ else{
 									<h4>Orders</h4>
 								</div>
 								<div class="card-body">
-									10
+									<?php echo countOrders($uuid); ?>
 								</div>
 							</div>
 						</div>
@@ -124,10 +125,10 @@ else{
 							</div>
 							<div class="card-wrap">
 								<div class="card-header">
-									<h4>Litres</h4>
+									<h4>Delivered Orders</h4>
 								</div>
 								<div class="card-body">
-									42.8
+									<?php echo getDelivered($uuid); ?>
 								</div>
 							</div>
 						</div>
@@ -139,10 +140,10 @@ else{
 							</div>
 							<div class="card-wrap">
 								<div class="card-header">
-									<h4>Collected</h4>
+									<h4>Pending Orders</h4>
 								</div>
 								<div class="card-body">
-									N 12,500
+									<?php echo getPending($uuid); ?>
 								</div>
 							</div>
 						</div>
@@ -157,7 +158,7 @@ else{
 									<h4>Pending</h4>
 								</div>
 								<div class="card-body">
-									N4700
+									<?php echo "N ".getPendingRevenue($uuid); ?>
 								</div>
 							</div>
 						</div>

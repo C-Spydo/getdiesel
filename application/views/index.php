@@ -58,7 +58,14 @@ if (isset($this->session->userdata['client_in'])) {
 										<div class="check_form_left common_input">
 											<div class="heading-box pb-30">
 												<p>
-													<?php if($name!='')echo "Welcome : ".$name; ?>
+													<?php
+													if($name!='') {
+														echo "Welcome : " . $name;
+													}
+													else{
+														echo "You can Login to AutoFill your Details";
+													}
+													?>
 												</p>
 												<h2><span>Make</span> Order</h2>
 												<span class="b-line l-left"></span>

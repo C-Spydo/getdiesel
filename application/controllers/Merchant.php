@@ -40,7 +40,7 @@ class Merchant extends CI_Controller {
 //		$this->load->model('dashboard');
 //
 		$this->load->helper('control');
-//		$this->load->helper('dashboard');
+		$this->load->helper('merchant');
 	}
 
 	public function index()
@@ -253,6 +253,7 @@ class Merchant extends CI_Controller {
 			'business_address' => $this->input->post('businessaddress'),
 			'business_email' => $this->input->post('businessemail'),
 			'business_phone' => $this->input->post('businessphone'),
+			'state' => $this->input->post('state')
 		);
 
 		$result = $this->Teacher_M->update_profile($data);
@@ -269,15 +270,16 @@ class Merchant extends CI_Controller {
 			$this->session->userdata['logged_in']['business_phone']=$data['business_phone'];
 			$this->session->userdata['logged_in']['business_name']=$data['business_name'];
 			$this->session->userdata['logged_in']['business_address']=$data['business_address'];
+			$this->session->userdata['logged_in']['state']=$data['state'];
 
-			$this->load->view('merchants/dashboard', $data);
+			$eUrl=base_url()."merchant/dashboard?link=5&msg=Update Successful";
+			redirect($eUrl);
 
 		}
 
 		else{
-			$data['message_display'] = 'Error! Update Not Successful, Try Again!';
-
-			$this->load->view('merchants/dashboard', $data);
+			$eUrl=base_url()."merchant/dashboard?link=5&msg=Update Not Successful, Try Again!";
+			redirect($eUrl);
 		}
 	}
 

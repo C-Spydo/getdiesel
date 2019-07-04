@@ -65,4 +65,33 @@ function currentPrice(){
 	$result = $CI->Control_M->currentPrice();
 	return $result[0]["amount"];
 }
+
+function statusToText($status){
+	$stext='';
+	if($status==1){
+		$stext='ORDER SAVED';
+	}
+	else{
+		$stext='UNKNOWN';
+	}
+	return $stext;
+}
+
+
+/* Order Statuses:
+1- saved
+2- Paid
+3- Assigned to Merchant
+4- En Route
+5- Delivered
+
+*/
+
+/*
+ * PAYMENT STATUSES
+ * 1- Saved
+ * 2- Paid
+ * 3- Received
+ * 4- Unknown
+ */
 ?>

@@ -26,13 +26,13 @@
 
 function countOrders($u_id){
 	$CI = get_instance();
-	$result = $CI->Client_M->countOrders($u_id);
+	$result = $CI->Teacher_M->countOrders($u_id);
 	return $result;
 }
 
-function getLitres($u_id){
+function getPendingRevenue($u_id){
 	$CI = get_instance();
-	$result = $CI->Client_M->getLitres($u_id);
+	$result = $CI->Teacher_M->getPendingRevenue($u_id);
 	if($result==null){
 		$result=0;
 	}
@@ -41,7 +41,7 @@ function getLitres($u_id){
 
 function getDelivered($u_id){
 	$CI = get_instance();
-	$result = $CI->Client_M->getDelivered($u_id);
+	$result = $CI->Teacher_M->getDelivered($u_id);
 	if($result==null){
 		$result=0;
 	}
@@ -50,7 +50,7 @@ function getDelivered($u_id){
 
 function getPending($u_id){
 	$CI = get_instance();
-	$result = $CI->Client_M->getPending($u_id);
+	$result = $CI->Teacher_M->getPending($u_id);
 	if($result==null){
 		$result=0;
 	}
@@ -58,9 +58,9 @@ function getPending($u_id){
 }
 
 
-function getClientOrders($uuid){
+function getMerchantOrders($uuid){
 	$CI = get_instance();
-	$result = $CI->Client_M->getClientOrders($uuid);
+	$result = $CI->Teacher_M->getMerchantOrders($uuid);
 	return $result;
 }
 
@@ -70,3 +70,4 @@ function getMerchantWithId($id){
 	return $result[0];
 }
 ?>
+

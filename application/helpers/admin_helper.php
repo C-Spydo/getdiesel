@@ -30,16 +30,7 @@ function getMerchantsInState($state){
 	return $result;
 }
 
-function statusToText($status){
-	$stext='';
-	if($status==1){
-		$stext='ORDER SAVED';
-	}
-	else{
-		$stext='UNKNOWN';
-	}
-	return $stext;
-}
+
 
 
 function countOrders(){
@@ -64,12 +55,5 @@ function countMerchants(){
 }
 
 
-/*Statuses:
-1- saved
-2- Paid
-3- Assigned to Merchant
-4- En Route
-5- Delivered
 
-*/
 ?>

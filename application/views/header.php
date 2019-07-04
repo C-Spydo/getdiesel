@@ -4,6 +4,11 @@ $currentPrice=0;
 $name='';
 $loginroute='login';
 $logintext='Login';
+
+
+$signuproute='register';
+$signuptext='Sign Up';
+
 if (isset($this->session->userdata['current_price'])) {
 	$currentPrice = ($this->session->userdata['current_price']);
 }
@@ -17,6 +22,10 @@ if (isset($this->session->userdata['client_in'])) {
 
 	$loginroute='dashboard';
 	$logintext='Dashboard';
+
+	$signuproute='logout';
+	$signuptext='Logout';
+
 
 }
 
@@ -147,7 +156,7 @@ if (isset($this->session->userdata['client_in'])) {
 <!---->
 <!--										</ul>-->
 									</li>
-									<li> <a href="register">Sign Up</a></li>-->
+									<li> <a href="<?php echo $signuproute ?>"><?php echo $signuptext ?></a>
 
 									<li> <a href="merchant/login">Merchants</a>
 <!--										<ul class="dropdown-menu">-->
