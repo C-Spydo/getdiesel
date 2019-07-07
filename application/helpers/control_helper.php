@@ -71,6 +71,18 @@ function statusToText($status){
 	if($status==1){
 		$stext='ORDER SAVED';
 	}
+	else if($status==2){
+		$stext='PAID';
+	}
+	else if($status==3){
+		$stext='ASSIGNED';
+	}
+	else if($status==4){
+		$stext='EN ROUTE';
+	}
+	else if($status==5){
+		$stext='DELIVERED';
+	}
 	else{
 		$stext='UNKNOWN';
 	}

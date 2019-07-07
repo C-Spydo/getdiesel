@@ -119,6 +119,31 @@ Class Teacher_M extends CI_Model {
 	}
 
 
+	public function confirmDelivery($order_id,$confirm_id,$amount,$merchant){
+		$this->db->where('uuid', $order_id);
+		$this->db->update('students', array('status' => 5));
+
+		if ($this->db->affected_rows() > 0) {
+
+			$data = array(
+				'merchant'=>$merchant,
+				'amount' => $amount,
+				'status'=>1
+			);
+			$this->db->insert('payments', $data);
+			if ($this->db->affected_rows() > 0) {
+				return 1;
+			}
+			else{
+				return 0;
+			}
+		}
+		else{
+			return 0;
+		}
+
+	}
+
 
 
 
@@ -175,6 +200,20 @@ Class Teacher_M extends CI_Model {
 		}
 		return $q;
 
+	}
+
+	public function getBankAccount($uuid) {
+		$this->db->select('*');
+		$this->db->from('bank_accounts');
+		$this->db->where('merchant',$uuid);
+		$this->db->limit(1);
+		$query = $this->db->get();
+
+		$q=array();
+		if ($query->num_rows() >0) {
+			$q=$query->result_array();
+		}
+		return $q;
 	}
 
 }

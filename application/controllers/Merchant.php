@@ -68,6 +68,11 @@ class Merchant extends CI_Controller {
 		$this->load->view('merchants/forgotpassword');
 	}
 
+	public function confirmdelivery()
+	{
+		$this->load->view('merchants/confirmdelivery');
+	}
+
 	// Logout from admin page
 	public function logout() {
 
@@ -282,6 +287,8 @@ class Merchant extends CI_Controller {
 			redirect($eUrl);
 		}
 	}
+
+
 
 	public function makeId()
 {

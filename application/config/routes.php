@@ -80,6 +80,7 @@ $route['merchant/forgotpassword'] = "merchant/forgotpassword_v";
 $route['merchant'] = "merchant/login_v";
 $route['merchant/dashboard'] = "merchant/dashboard";
 $route['merchant/updateprofile'] = "merchant/update_profile";
+$route['merchant/confirmdelivery'] = "merchant/confirmdelivery";
 
 
 //Admin Routes

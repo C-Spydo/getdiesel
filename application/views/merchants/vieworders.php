@@ -65,15 +65,28 @@ else{
 ?>
 
 <?php
+$msg='';
+if (isset($_GET['msg'])) {
+	$msg = $_GET['msg'];
+}
 
 $allorders=getMerchantOrders($uuid);
 ?>
+
+
 <section class="section">
 	<div class="card">
 
 		<div class="container">
 			<div class="header_wrap">
 				<h5><strong>View Orders</strong></h5>
+				<font color="red">
+					<?php echo "<div class='error_msg'>";
+					echo $msg;
+					echo "</div>";
+
+					?>
+				</font>
 				<div class="num_rows">
 
 					<div class="form-group"> 	<!--		Show Numbers Of Rows 		-->
@@ -135,13 +148,20 @@ $allorders=getMerchantOrders($uuid);
 
 							<td>
 								<?php
-								$editUrl="dashboard?link=201&order_id=" . $row['uuid'];
 
 
+									if($row['status']==3){
 								//						if($row['merchant']!='') {
 								?>
 
-								<a href="<?php echo $editUrl ?>"><font color="green">Confirm Delivery</font></a>
+								<button onclick="confirmOrder('<?php echo base64_encode(strrev($row['uuid'])); ?>'
+									,'<?php echo base64_encode(strrev($row['amount'])); ?>'
+									,'<?php echo base64_encode(strrev($uuid)); ?>')" class="btn btn-primary">
+									Confirm Delivery</button>
+							  <?php } ?>
+<!--								<a href="--><?php //echo $editUrl ?><!--"-->
+<!--								   class="btn btn-primary btn-lg btn-block btn-icon-split"-->
+<!--								><font color="white"><strong>Confirm Delivery</strong></font></a>-->
 
 							</td>
 						</tr>
@@ -169,6 +189,21 @@ $allorders=getMerchantOrders($uuid);
 	</div>
 </section>
 
+
+
+
+<script type="text/javascript">
+
+	function confirmOrder(travis,thugger,jeffrey) {
+		var scott = prompt("Enter Confirmation Code Here");
+		var eUrl="confirmdelivery/?travis="+travis+"&scott="+scott+"&thugger="+thugger+"&jeffrey="+jeffrey;
+		window.location.replace(eUrl);
+	}
+
+
+
+
+</script>
 
 
 <script>

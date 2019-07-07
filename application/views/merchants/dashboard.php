@@ -40,6 +40,7 @@ else{
 	<!-- Template CSS -->
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/style.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/components.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -83,7 +84,7 @@ else{
 					<li class="menu-header">Menu</li>
 					<li><a class="nav-link" href="?link=2"><i class="far fa-square"></i> <span>View Orders</span></a></li>
 					<li><a class="nav-link" href="?link=3"><i class="far fa-square"></i> <span>View Payments</span></a></li>
-					<li><a class="nav-link" href="?link=4"><i class="far fa-square"></i> <span>Bank Accounts</span></a></li>
+					<li><a class="nav-link" href="?link=4"><i class="far fa-square"></i> <span>Bank Account</span></a></li>
 					<li><a class="nav-link" href="?link=5"><i class="far fa-square"></i> <span>Profile</span></a></li>
 					<li><a class="nav-link" href="logout"><i class="far fa-square"></i> <span>Logout</span></a></li>
 				</ul>
@@ -174,6 +175,9 @@ else{
 						}
 						if($link=='3'){
 							$this->view('merchants/viewpayments');
+						}
+						if($link=='4'){
+							$this->view('merchants/bank_account');
 						}
 						if($link=='5'){
 							$this->view('merchants/profile');
