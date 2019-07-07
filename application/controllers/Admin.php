@@ -262,6 +262,7 @@ class Admin extends CI_Controller {
 		$data = array(
 			'uuid' => $this->input->post('uuid'),
 			'merchant' => $this->input->post('merchant'),
+			'status'=>3,
 		);
 
 		$result = $this->Admin_M->assign_merchant($data);

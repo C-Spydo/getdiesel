@@ -64,6 +64,9 @@ $route['index'] = "control/index";
 $route['contact'] = "control/contact";
 $route['ravepay'] = "control/ravepay";
 $route['ravepay_2'] = "control/ravepay_2";
+$route['paystack'] = "control/paystack";
+$route['paystack_verify'] = "control/paystack_verify";
+$route['paystack_confirm'] = "control/paystack_confirm";
 
 
 //Client Routes

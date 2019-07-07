@@ -94,7 +94,7 @@ if($bankAccount!=null){
 										<label>Account Name</label>
 										<input type="text" class="form-control" name="accountname" value="<?php echo $accountname ?>" required>
 										<div class="invalid-feedback">
-											Please fill in the last name
+											Please fill in Account Name
 										</div>
 									</div>
 
@@ -106,13 +106,13 @@ if($bankAccount!=null){
 										<label>Account Number</label>
 										<input type="number" maxlength="10" class="form-control" name="accountnumber" value="<?php echo $accountnumber ?>" required>
 										<div class="invalid-feedback">
-											Please fill in the business name
+											Please fill in Account Number
 										</div>
 									</div>
 
 								</div>
 
-
+							<input name="uuid" value="<?php echo $uuid ?>" type="hidden">
 							</div>
 							<div class="card-footer ">
 								<button type="submit" class="btn btn-primary">Save Changes</button>

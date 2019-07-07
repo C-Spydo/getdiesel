@@ -60,6 +60,12 @@ if(!function_exists('verifyHashedPassword'))
 }
 
 
+function confirmPayment($id){
+	$CI = get_instance();
+	$result = $CI->Control_M->confirmPayment($id);
+	return $result;
+}
+
 function currentPrice(){
 	$CI = get_instance();
 	$result = $CI->Control_M->currentPrice();

@@ -142,12 +142,6 @@ Class Admin_M extends CI_Model {
 
 			foreach ($q as $row)
 			{
-//				$user=array();
-//				$user['fullname']=$row['fullname'];
-//				$user['username']=$row['username'];
-//				$user['state']=$row['state'];
-//				$user['level']=$row['level'];
-//				$user['uplink']=$row['uplink'];
 				$user=$row;
 
 				array_push($allusers,$user);

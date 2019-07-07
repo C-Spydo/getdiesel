@@ -288,6 +288,29 @@ class Merchant extends CI_Controller {
 		}
 	}
 
+	public function updateaccount(){
+		$data = array(
+			'merchant'=>$this->input->post('uuid'),
+			'bankname' => $this->input->post('bankname'),
+			'accountname' => $this->input->post('accountname'),
+			'accountnumber' => $this->input->post('accountnumber')
+		);
+
+		$result = $this->Teacher_M->updateaccount($data);
+
+		if ($result == TRUE) {
+
+			$eUrl=base_url()."merchant/dashboard?link=4&msg=Update Successful";
+			redirect($eUrl);
+
+		}
+
+		else{
+			$eUrl=base_url()."merchant/dashboard?link=4&msg=Update Not Successful, Try Again!";
+			redirect($eUrl);
+		}
+	}
+
 
 
 	public function makeId()

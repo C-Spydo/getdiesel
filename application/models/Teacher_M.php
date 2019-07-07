@@ -118,6 +118,18 @@ Class Teacher_M extends CI_Model {
 
 	}
 
+	public function updateaccount($data){
+
+		$u_id = $data['merchant'];
+		$this->db->where('merchant',$u_id);
+		$this->db->update('bank_accounts', $data);
+
+		if ($this->db->affected_rows() > 0) {
+			return true;
+		}
+
+	}
+
 
 	public function confirmDelivery($order_id,$confirm_id,$amount,$merchant){
 		$this->db->where('uuid', $order_id);

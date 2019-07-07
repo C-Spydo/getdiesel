@@ -113,7 +113,18 @@ Class Control_M extends CI_Model {
 		if ($this->db->affected_rows() > 0) {
 			return true;
 		}
+	}
 
+	public function confirmPayment($order_id){
+		$this->db->where('uuid', $order_id);
+		$this->db->update('students', array('status' => 2));
+
+		if ($this->db->affected_rows() > 0) {
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 
 

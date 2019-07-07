@@ -69,12 +69,26 @@ class Control extends CI_Controller {
 
 	public function ravepay()
 	{
-		$this->load->view('ravepay');
+		$this->load->view('payments/ravepay');
 	}
 
 	public function ravepay_2()
 	{
-		$this->load->view('ravepay_2');
+		$this->load->view('payments/ravepay_2');
+	}
+
+	public function paystack()
+	{
+		$this->load->view('payments/paystack');
+	}
+
+	public function paystack_verify()
+	{
+		$this->load->view('payments/paystack_verify');
+	}
+	public function paystack_confirm()
+	{
+		$this->load->view('payments/paystack_confirm');
 	}
 
 
@@ -93,7 +107,7 @@ class Control extends CI_Controller {
 				'phone' => $this->input->post('phone'),
 				'state' => $this->input->post('state'),
 				'address' => $this->input->post('address'),
-				'quantity' => $this->input->post('litres'),
+				'quantity' => abs($this->input->post('litres')),
 				'price' => $current_price,
 				'amount' => number_format($this->input->post('litres')*$current_price,2),
 //				'lga' => $this->input->post('lga'),
@@ -110,11 +124,12 @@ class Control extends CI_Controller {
 				if ($result == TRUE) {
 					// Proceed to payment here
 
-					$eUrl=base_url()."ravepay?email=".$data['email']."&phone=".$data['phone'].
+					//echo $data['amount'];
+					$eUrl=base_url()."paystack?email=".$data['email']."&phone=".$data['phone'].
 						"&amount=".$data['amount']."&altRef=".$data['uuid'];
 
-
-//					redirect($eUrl);
+					//echo $eUrl;
+					redirect($eUrl);
 
 //					echo "<script> alert ('Order Placed Successfully, You will receive Email and SMS Alerts !'); </script>";
 //					$this->send_order_email($data);
