@@ -9,10 +9,12 @@ else{
 }
 
 $order_id='';
+$amount=0;
 
 if (isset($_GET['travis'])){
 	$order_id=$_GET['travis'];
-	$rez=confirmPayment($order_id);
+	$amount=$_GET['scott'];
+	$rez=confirmPayment($order_id,$amount);
 	if($rez==true){
 		$eUrl=base_url()."index?msg=Payment Successful, Order will soon be on the way";
 		redirect($eUrl);

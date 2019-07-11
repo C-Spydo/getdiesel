@@ -60,9 +60,9 @@ if(!function_exists('verifyHashedPassword'))
 }
 
 
-function confirmPayment($id,$amount){
+function confirmPayment($id){
 	$CI = get_instance();
-	$result = $CI->Control_M->confirmPayment($id,$amount);
+	$result = $CI->Control_M->confirmPayment($id);
 	return $result;
 }
 

@@ -124,11 +124,12 @@ class Control extends CI_Controller {
 				if ($result == TRUE) {
 					// Proceed to payment here
 
-					//echo $data['amount'];
 					$eUrl=base_url()."paystack?email=".$data['email']."&phone=".$data['phone'].
 						"&amount=".$data['amount']."&altRef=".$data['uuid'];
 
-					//echo $eUrl;
+					$this->session->userdata['client_in']['current_amount']=$data['amount'];
+					$this->send_order_email($data);
+
 					redirect($eUrl);
 
 //					echo "<script> alert ('Order Placed Successfully, You will receive Email and SMS Alerts !'); </script>";
@@ -187,7 +188,10 @@ class Control extends CI_Controller {
 
 
 		$email_subject='GetDiesel || Order Successful';
-		$email_message='You have Successfully Place an order'."\n\n"."Quantity: ".$data['quantity']." litres".
+		$email_message="You have Successfully Placed an order.
+		\n\nA payment receipt will be sent once payment is confirmed.
+		\n\nKindly give the Payment Code to the Merchant once your Order is delivered.\n\nThanks.
+		"."\n\n"."Quantity: ".$data['quantity']." litres".
 			"\n"."Amount: ".$data['amount']."\n"."Order Code: ".$data['order_id']
 			."\n"."State: ".$data['state']."\n"."Address: ".$data['address'];
 

@@ -154,6 +154,26 @@ Class Admin_M extends CI_Model {
 
 	}
 
+	public function getPayments() {
+		$allusers=array();
+
+		$this->db->select('*');
+		$this->db->from('payments');
+		$query = $this->db->get();
+
+		$q=array();
+		if ($query->num_rows() >0) {
+			$q=$query->result_array();
+			foreach ($q as $row)
+			{
+				$user=$row;
+				array_push($allusers,$user);
+			}
+		}
+		$allusers=$q;
+		return $allusers;
+	}
+
 	public function getMerchantWithId($id) {
 
 		$this->db->select('*');
@@ -217,9 +237,7 @@ Class Admin_M extends CI_Model {
 
 	}
 
-	public function user_profile_update($data){
 
-	}
 
 
 	public function countOrders() {
@@ -250,21 +268,6 @@ Class Admin_M extends CI_Model {
 	}
 
 
-//	public function read_user2_information($user_id) {
-//
-//		$condition = "user_id =" . "'" . $user_id . "'";
-//		$this->db->select('*');
-//		$this->db->from('user_login');
-//		$this->db->where($condition);
-//		$this->db->limit(1);
-//		$query = $this->db->get();
-//
-//		if ($query->num_rows() == 1) {
-//			return $query->result_array();
-//		} else {
-//			return false;
-//		}
-//	}
 
 }
 

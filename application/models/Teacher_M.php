@@ -131,7 +131,7 @@ Class Teacher_M extends CI_Model {
 	}
 
 
-	public function confirmDelivery($order_id,$confirm_id,$amount,$merchant){
+	public function confirmDelivery($order_id,$confirm_id,$amount,$merchant,$bankAccount){
 		$this->db->where('uuid', $order_id);
 		$this->db->update('students', array('status' => 5));
 
@@ -140,7 +140,10 @@ Class Teacher_M extends CI_Model {
 			$data = array(
 				'merchant'=>$merchant,
 				'amount' => $amount,
-				'status'=>1
+				'status'=>1,
+				'bankname'=>$bankAccount['bankname'],
+				'accountname'=>$bankAccount['accountname'],
+				'accountnumber'=>$bankAccount['accountnumber']
 			);
 			$this->db->insert('payments', $data);
 			if ($this->db->affected_rows() > 0) {

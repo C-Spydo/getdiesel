@@ -177,14 +177,14 @@ else{
 						if($link=='201'){
 							$this->view('admins/vieworder');
 						}
-//						if($link=='3'){
-//							$this->view('merchants/viewpayments');
-//						}
+						if($link=='3'){
+							$this->view('admins/viewpayments');
+						}
 						if($link=='4'){
 							$this->view('admins/setdieselprice');
 						}
 						if($link=='5'){
-							$this->view('merchants/profile');
+							$this->view('admins/profile');
 						}
 					}
 					?>

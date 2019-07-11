@@ -21,9 +21,12 @@ if (isset($_GET['travis']) && isset($_GET['scott']) && isset($_GET['thugger'])&&
 	$order_id=strrev(base64_decode($order_id));
 	$amount=strrev(base64_decode($amount));
 	$merchant=strrev(base64_decode($merchant));
+
+	$bankAccount=getBankAccount($merchant);
+
 	$confirm_id = $_GET['scott'];
 
-	$conf=confirmDelivery($order_id,$confirm_id,$amount,$merchant);
+	$conf=confirmDelivery($order_id,$confirm_id,$amount,$merchant,$bankAccount);
 
 	echo $conf;
 	if($conf==1) {

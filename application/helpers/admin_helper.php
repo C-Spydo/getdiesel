@@ -8,6 +8,15 @@ function getOrders(){
 
 }
 
+function getPayments(){
+	$CI = get_instance();
+
+	$result = $CI->Admin_M->getPayments();
+
+	return $result;
+
+}
+
 function getMerchantWithId($id){
 	$CI = get_instance();
 

@@ -49,7 +49,9 @@
 	}
 </style>
 
-
+<?php
+$allpayments=getPayments();
+?>
 <div class="container">
 	<div class="header_wrap">
 		<h5><strong>View Payments</strong></h5>
@@ -79,17 +81,41 @@
 
 		<thead>
 		<tr>
-			<th>User</th>
-			<th>User Details</th>
+			<th>S/N</th>
+			<th>Merchant</th>
 			<th>Amount</th>
-			<th>Agent</th>
+			<th>Bank Details</th>
 			<th>Status</th>
+			<th>Actions</th>
 		</tr>
 		</thead>
 		<tbody>
+		<?php
+		$x=1; foreach($allpayments as $row){
+
+
+		?>
 		<tr>
+			<td><?php echo $x; ?></td>
+			<td><?php
+				$mchant=getMerchantWithId($row['merchant']);
+				echo $mchant['business_name'];
+				?></td>
+			<td><?php echo $row['amount']; ?></td>
 			<td></td>
+			<td><?php echo $row['status']; ?></td>
+			<td>
+				<?php
+				$editUrl="dashboard?link=201&order_id=" . $row['id'];
+				?>
+
+				<a href="<?php echo $editUrl ?>"><font color="green">Confirm Payment</font></a>
+
+			</td>
 		</tr>
+			<?php
+			$x=$x+1;
+		}?>
 		</tbody>
 	</table>
 

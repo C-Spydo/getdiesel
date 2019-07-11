@@ -226,35 +226,29 @@ class Admin extends CI_Controller {
 			'uuid'=>$this->session->userdata['logged_in']['uuid'],
 			'firstname' => $this->input->post('firstname'),
 			'lastname' => $this->input->post('lastname'),
-			'business_name' => $this->input->post('businessname'),
-			'business_address' => $this->input->post('businessaddress'),
-			'business_email' => $this->input->post('businessemail'),
-			'business_phone' => $this->input->post('businessphone'),
+//			'email' => $this->input->post('email'),
+			'phone' => $this->input->post('phone')
 		);
 
 		$result = $this->Admin_M->update_profile($data);
 
 		if ($result == TRUE) {
-			$data['message_display'] = 'Account Update Successful, Welcome !';
 
 
-			// echo "<script> alert ('Account Update Successful'); </script>";
-
-			$this->session->userdata['logged_in']['business_email']=$data['business_email'];
+//			$this->session->userdata['logged_in']['email']=$data['email'];
 			$this->session->userdata['logged_in']['firstname']=$data['firstname'];
 			$this->session->userdata['logged_in']['lastname']=$data['lastname'];
-			$this->session->userdata['logged_in']['business_phone']=$data['business_phone'];
-			$this->session->userdata['logged_in']['business_name']=$data['business_name'];
-			$this->session->userdata['logged_in']['business_address']=$data['business_address'];
+			$this->session->userdata['logged_in']['phone']=$data['phone'];
 
-			$this->load->view('admins/dashboard', $data);
+
+			$eUrl=base_url()."admin/dashboard?link=5&msg=Update Successful";
+			redirect($eUrl);
 
 		}
 
 		else{
-			$data['message_display'] = 'Error! Update Not Successful, Try Again!';
-
-			$this->load->view('admins/dashboard', $data);
+			$eUrl=base_url()."admin/dashboard?link=5&msg=Update Not Successful, Try Again!";
+			redirect($eUrl);
 		}
 	}
 
