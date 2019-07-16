@@ -48,11 +48,40 @@
 		color: #999;
 	}
 </style>
+<?php
 
 
+if (isset($this->session->userdata['logged_in'])) {
+
+	$uuid=($this->session->userdata['logged_in']['uuid']);
+
+}
+else{
+
+	redirect(base_url()."merchant/login");
+}
+
+?>
+
+<?php
+$allpayments=getMerchantPayments($uuid);
+
+$msg='';
+if (isset($_GET['msg'])) {
+	$msg = $_GET['msg'];
+}
+
+?>
 <div class="container">
 	<div class="header_wrap">
 		<h5><strong>View Payments</strong></h5>
+		<font color="red">
+			<?php echo "<div class='error_msg'>";
+			echo $msg;
+			echo "</div>";
+
+			?>
+		</font>
 		<div class="num_rows">
 
 			<div class="form-group"> 	<!--		Show Numbers Of Rows 		-->
@@ -79,17 +108,32 @@
 
 		<thead>
 		<tr>
-			<th>User</th>
-			<th>User Details</th>
+<!--			<th>S/N</th>-->
 			<th>Amount</th>
-			<th>Agent</th>
+			<th>Bank Details</th>
 			<th>Status</th>
+<!--			<th>Actions</th>-->
 		</tr>
 		</thead>
 		<tbody>
-		<tr>
-			<td></td>
-		</tr>
+		<?php
+		$x=1; foreach($allpayments as $row){
+
+
+			?>
+			<tr>
+<!--				<td>--><?php //echo $x; ?><!--</td>-->
+				<td><?php echo $row['amount']; ?></td>
+				<td><?php echo
+						"Bank Name: ".$row['bankname']. "<br>"
+						."Account Name: ".$row['accountname']."<br>"
+						."Account Number: ".$row['accountnumber'];
+					?></td>
+				<td><?php echo paymentToText($row['status']); ?></td>
+			</tr>
+			<?php
+			$x=$x+1;
+		}?>
 		</tbody>
 	</table>
 

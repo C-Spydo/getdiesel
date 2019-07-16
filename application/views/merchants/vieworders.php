@@ -114,7 +114,7 @@ $allorders=getMerchantOrders($uuid);
 
 					<thead>
 					<tr>
-						<th>S/N</th>
+<!--						<th>S/N</th>-->
 						<th>Quantity</th>
 						<th>Client</th>
 						<th>Status</th>
@@ -131,7 +131,7 @@ $allorders=getMerchantOrders($uuid);
 
 						?>
 						<tr>
-							<td><?php echo $x; ?></td>
+<!--							<td>--><?php //echo $x; ?><!--</td>-->
 							<td><?php echo $row['quantity']." litres";?></td>
 
 							<!--							<td>--><?php //echo $row['price'];?><!--</td>-->

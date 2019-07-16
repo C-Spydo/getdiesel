@@ -64,12 +64,18 @@ function getMerchantOrders($uuid){
 	return $result;
 }
 
+function getMerchantPayments($uuid){
+	$CI = get_instance();
+	$result = $CI->Teacher_M->getMerchantPayments($uuid);
+	return $result;
+}
+
 
 function confirmDelivery($order_id,$confirm_id,$amount,$merchant,$bankAccount){
-	echo $order_id.$confirm_id;
-	if($order_id=$confirm_id) {
+	//echo $order_id.$confirm_id;
+	if($order_id==$confirm_id) {
 		$CI = get_instance();
-		$result = $CI->Teacher_M->confirmDelivery($order_id, $confirm_id,$amount,$merchant.$bankAccount);
+		$result = $CI->Teacher_M->confirmDelivery($order_id, $confirm_id,$amount,$merchant,$bankAccount);
 	}
 	else{
 		$result=4;

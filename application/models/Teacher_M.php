@@ -232,6 +232,21 @@ Class Teacher_M extends CI_Model {
 		return $q;
 	}
 
+	public function getMerchantPayments($uuid) {
+		$this->db->select('*');
+		$this->db->from('payments');
+		$this->db->where('merchant',$uuid);
+		$this->db->order_by("id", "desc");
+		$query = $this->db->get();
+
+		$q=array();
+		if ($query->num_rows() >0) {
+			$q=$query->result_array();
+		}
+		return $q;
+
+	}
+
 }
 
 ?>
