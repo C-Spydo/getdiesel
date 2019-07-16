@@ -37,7 +37,7 @@ class Client extends CI_Controller {
 
 		// Load database
 		$this->load->model('Client_M');
-//		$this->load->model('dashboard');
+		$this->load->model('Control_M');
 //
 		$this->load->helper('control');
 		$this->load->helper('client');

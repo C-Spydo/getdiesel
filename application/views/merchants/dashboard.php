@@ -182,6 +182,7 @@ else{
 						if($link=='5'){
 							$this->view('merchants/profile');
 						}
+
 					}
 					?>
 				</div>

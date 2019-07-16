@@ -148,7 +148,7 @@ Class Client_M extends CI_Model {
 
 		$this->db->select_sum('quantity');
 		$this->db->where('user',$u_id);
-		$this->db->where('status',1);
+		$this->db->where('status< ',5);
 		$query = $this->db->get('students')->row();
 		return $query->quantity;
 

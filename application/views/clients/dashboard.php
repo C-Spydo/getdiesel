@@ -78,6 +78,7 @@ else{
 				<ul class="sidebar-menu">
 
 					<li class="menu-header">Menu</li>
+					<li><a class="nav-link" href="?link=7"><i class="far fa-square"></i> <span>Make Order</span></a></li>
 					<li><a class="nav-link" href="?link=2"><i class="far fa-square"></i> <span>View Orders</span></a></li>
 					<li><a class="nav-link" href="?link=5"><i class="far fa-square"></i> <span>Profile</span></a></li>
 					<li><a class="nav-link" href="logout"><i class="far fa-square"></i> <span>Logout</span></a></li>
@@ -108,7 +109,7 @@ else{
 									<h4>Total Orders</h4>
 								</div>
 								<div class="card-body">
-									<?php echo countOrders($uuid)." ltrs"; ?>
+									<?php echo countOrders($uuid); ?>
 								</div>
 							</div>
 						</div>
@@ -120,7 +121,7 @@ else{
 							</div>
 							<div class="card-wrap">
 								<div class="card-header">
-									<h4>Total Orders</h4>
+									<h4>Total Quantity</h4>
 								</div>
 								<div class="card-body">
 									<?php echo getLitres($uuid)." ltrs"; ?>
@@ -169,6 +170,9 @@ else{
 						}
 						if($link=='5'){
 							$this->view('clients/profile');
+						}
+						if($link=='7'){
+							$this->view('clients/makeorder');
 						}
 					}
 					?>
