@@ -63,6 +63,13 @@ function countMerchants(){
 
 }
 
+function confirmPaymentAdmin($id){
+	$CI = get_instance();
+	$result = $CI->Admin_M->confirmPayment($id);
+	return $result;
+
+}
+
 
 
 ?>

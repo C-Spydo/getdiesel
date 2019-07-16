@@ -117,7 +117,8 @@ Class Control_M extends CI_Model {
 
 	public function confirmPayment($order_id,$amount){
 
-		$amount=$this->session->userdata['client_in']['current_amount'];
+//		$amount=$this->session->userdata['current_amount_realer'];
+//		echo "Confirm".$amount;
 		$this->db->where('uuid', $order_id);
 		$this->db->where('amount', $amount);
 		$this->db->update('students', array('status' => 2));

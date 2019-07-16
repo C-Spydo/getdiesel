@@ -51,10 +51,23 @@
 
 <?php
 $allpayments=getPayments();
+
+$msg='';
+if (isset($_GET['msg'])) {
+	$msg = $_GET['msg'];
+}
+
 ?>
 <div class="container">
 	<div class="header_wrap">
 		<h5><strong>View Payments</strong></h5>
+		<font color="red">
+			<?php echo "<div class='error_msg'>";
+			echo $msg;
+			echo "</div>";
+
+			?>
+		</font>
 		<div class="num_rows">
 
 			<div class="form-group"> 	<!--		Show Numbers Of Rows 		-->
@@ -102,15 +115,20 @@ $allpayments=getPayments();
 				echo $mchant['business_name'];
 				?></td>
 			<td><?php echo $row['amount']; ?></td>
-			<td></td>
-			<td><?php echo $row['status']; ?></td>
+			<td><?php echo
+					"Bank Name: ".$row['bankname']. "<br>"
+					."Account Name: ".$row['accountname']."<br>"
+					."Account Number: ".$row['accountnumber'];
+				?></td>
+			<td><?php echo paymentToText($row['status']); ?></td>
 			<td>
 				<?php
-				$editUrl="dashboard?link=201&order_id=" . $row['id'];
+				$editUrl="dashboard?link=202&travis=" . $row['id'];
+				if($row['status']!=5){
 				?>
 
-				<a href="<?php echo $editUrl ?>"><font color="green">Confirm Payment</font></a>
-
+				<a href="<?php echo $editUrl ; ?>"><font color="green">Confirm Payment</font></a>
+				<?php } ?>
 			</td>
 		</tr>
 			<?php

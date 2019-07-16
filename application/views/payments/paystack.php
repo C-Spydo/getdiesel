@@ -11,7 +11,9 @@ $phone=$_GET['phone'];
 $amount=$_GET['amount'];
 $altRef=$_GET['altRef'];
 
-$amount=$this->session->userdata['client_in']['current_amount'];
+$amount=$this->session->userdata['current_amount_realer'];
+
+//echo $amount;
 
 ?>
 

@@ -207,6 +207,7 @@ Class Teacher_M extends CI_Model {
 		$this->db->select('*');
 		$this->db->from('students');
 		$this->db->where('merchant',$uuid);
+		$this->db->order_by("uuid", "desc");
 		$query = $this->db->get();
 
 		$q=array();

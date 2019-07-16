@@ -177,6 +177,9 @@ else{
 						if($link=='201'){
 							$this->view('admins/vieworder');
 						}
+						if($link=='202'){
+							$this->view('admins/confirmpayment');
+						}
 						if($link=='3'){
 							$this->view('admins/viewpayments');
 						}

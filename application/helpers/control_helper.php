@@ -60,7 +60,7 @@ if(!function_exists('verifyHashedPassword'))
 }
 
 
-function confirmPayment($id,$amount){
+function confirmPaymentClient($id,$amount){
 	$CI = get_instance();
 	$result = $CI->Control_M->confirmPayment($id,$amount);
 	return $result;
@@ -88,6 +88,20 @@ function statusToText($status){
 	}
 	else if($status==5){
 		$stext='DELIVERED';
+	}
+	else{
+		$stext='UNKNOWN';
+	}
+	return $stext;
+}
+
+function paymentToText($status){
+	$stext='';
+	if($status==5){
+		$stext='PAID';
+	}
+	else if(($status>0)&&($status<5)){
+		$stext='NOT PAID';
 	}
 	else{
 		$stext='UNKNOWN';

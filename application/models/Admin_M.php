@@ -132,7 +132,7 @@ Class Admin_M extends CI_Model {
 //		$condition = "regstatus = 2";
 		$this->db->select('*');
 		$this->db->from('students');
-//		$this->db->where($condition);
+		$this->db->order_by("uuid", "desc");
 		$query = $this->db->get();
 
 		$q=array();
@@ -159,6 +159,7 @@ Class Admin_M extends CI_Model {
 
 		$this->db->select('*');
 		$this->db->from('payments');
+		$this->db->order_by("id", "desc");
 		$query = $this->db->get();
 
 		$q=array();
@@ -267,6 +268,19 @@ Class Admin_M extends CI_Model {
 
 	}
 
+
+	public function confirmPayment($payment_id){
+		$this->db->where('id',$payment_id);
+		$this->db->update('payments', array('status' => 5));
+
+		if ($this->db->affected_rows() > 0) {
+			return true;
+		}
+		else{
+			return false;
+		}
+
+	}
 
 
 }

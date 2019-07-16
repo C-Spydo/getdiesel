@@ -15,16 +15,19 @@ if (isset($this->session->userdata['current_price'])) {
 
 if (isset($this->session->userdata['client_in'])) {
 
-	$firstname = ($this->session->userdata['client_in']['firstname']);
-	$email = ($this->session->userdata['client_in']['email']);
-	$lastname = ($this->session->userdata['client_in']['lastname']);
-	$name = $firstname." ".$lastname;
+	try {
+		$firstname = ($this->session->userdata['client_in']['firstname']);
+		$email = ($this->session->userdata['client_in']['email']);
+		$lastname = ($this->session->userdata['client_in']['lastname']);
+		$name = $firstname . " " . $lastname;
 
-	$loginroute='dashboard';
-	$logintext='Dashboard';
+		$loginroute = 'dashboard';
+		$logintext = 'Dashboard';
 
-	$signuproute='logout';
-	$signuptext='Logout';
+		$signuproute = 'logout';
+		$signuptext = 'Logout';
+	}
+	catch(exception $e){}
 
 
 }
@@ -140,6 +143,7 @@ if (isset($this->session->userdata['client_in'])) {
 							<!--===Navigation===-->
 							<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 								<ul class="nav navbar-nav mobile-menu">
+									<li> <a href=""></a></li>
 									<li> <a href="index">Home</a></li>
 									<li> <a href="about">About us</a>
 										<ul class="dropdown-menu">

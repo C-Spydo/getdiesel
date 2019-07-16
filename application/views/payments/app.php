@@ -24,7 +24,7 @@
 					if (status == "success"){
 					//successful transaction
 						alert('Transaction was successful, Click OK');
-					var eUrl = "paystack_confirm/?travis=" + order_id+"&scott="+amount;
+					var eUrl = "paystack_confirm/?travis=" + order_id;
 					window.location.replace(eUrl);
 				}
 					else {

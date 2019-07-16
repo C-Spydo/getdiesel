@@ -127,7 +127,7 @@ class Control extends CI_Controller {
 					$eUrl=base_url()."paystack?email=".$data['email']."&phone=".$data['phone'].
 						"&amount=".$data['amount']."&altRef=".$data['uuid'];
 
-					$this->session->userdata['client_in']['current_amount']=$data['amount'];
+					$this->session->userdata['current_amount_realer']=$data['amount'];
 					$this->send_order_email($data);
 
 					redirect($eUrl);
