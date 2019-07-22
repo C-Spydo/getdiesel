@@ -4,7 +4,7 @@ Class Control_M extends CI_Model {
 
 	// Insert registration data in database
 	public function make_order($data) {
-		    print_r($data);
+		    //print_r($data);
 			$this->db->insert('students', $data);
 			if ($this->db->affected_rows() > 0) {
 				return true;
@@ -133,12 +133,6 @@ Class Control_M extends CI_Model {
 
 
 
-
-
-
-	public function user_profile_update($data){
-
-	}
 
 }
 

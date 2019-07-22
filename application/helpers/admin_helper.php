@@ -8,6 +8,15 @@ function getOrders(){
 
 }
 
+function getUsers(){
+	$CI = get_instance();
+
+	$result = $CI->Admin_M->getUsers();
+
+	return $result;
+
+}
+
 function getPayments(){
 	$CI = get_instance();
 

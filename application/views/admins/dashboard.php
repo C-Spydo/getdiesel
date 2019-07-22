@@ -85,6 +85,7 @@ else{
 					<li class="menu-header">Menu</li>
 					<li><a class="nav-link" href="?link=2"><i class="far fa-square"></i> <span>View Orders</span></a></li>
 					<li><a class="nav-link" href="?link=3"><i class="far fa-square"></i> <span>View Payments</span></a></li>
+					<li><a class="nav-link" href="?link=7"><i class="far fa-square"></i> <span>View All Users</span></a></li>
 					<li><a class="nav-link" href="?link=4"><i class="far fa-square"></i> <span>Set Diesel Price</span></a></li>
 <!--					<li><a class="nav-link" href="?link=5"><i class="far fa-square"></i> <span>Profile</span></a></li>-->
 					<li><a class="nav-link" href="logout"><i class="far fa-square"></i> <span>Logout</span></a></li>
@@ -188,6 +189,9 @@ else{
 						}
 						if($link=='5'){
 							$this->view('admins/profile');
+						}
+						if($link=='7'){
+							$this->view('admins/viewusers');
 						}
 					}
 					?>

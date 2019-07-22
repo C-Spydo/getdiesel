@@ -67,6 +67,11 @@ class Control extends CI_Controller {
 		$this->load->view('contact');
 	}
 
+	public function forgotpassword()
+	{
+		$this->load->view('forgotpassword');
+	}
+
 	public function ravepay()
 	{
 		$this->load->view('payments/ravepay');
@@ -192,7 +197,7 @@ class Control extends CI_Controller {
 		\n\nA payment receipt will be sent once payment is confirmed.
 		\n\nKindly give the Payment Code to the Merchant once your Order is delivered.\n\nThanks.
 		"."\n\n"."Quantity: ".$data['quantity']." litres".
-			"\n"."Amount: ".$data['amount']."\n"."Order Code: ".$data['order_id']
+			"\n"."Amount: ".$data['amount']."\n"."Order Code: ".$data['uuid']
 			."\n"."State: ".$data['state']."\n"."Address: ".$data['address'];
 
 		;
@@ -208,5 +213,8 @@ class Control extends CI_Controller {
 
 
 	}
+
+
+
 
 }

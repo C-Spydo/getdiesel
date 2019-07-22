@@ -52,14 +52,14 @@
 
 <?php
 
-$allorders=getOrders();
+$allorders=getUsers();
 ?>
 <section class="section">
 	<div class="card">
 
-			<div class="container">
+		<div class="container">
 			<div class="header_wrap">
-				<h5><strong>View Orders</strong></h5>
+				<h5><strong>View Users</strong></h5>
 				<div class="num_rows">
 
 					<div class="form-group"> 	<!--		Show Numbers Of Rows 		-->
@@ -81,74 +81,64 @@ $allorders=getOrders();
 					<input type="text" id="search_input_all" onkeyup="FilterkeyWord_all_table()" placeholder="Search.." class="form-control">
 				</div>
 			</div>
-				<div class="card-body">
-			<table class="table"  id= "table-id" border="1">
+			<div class="card-body">
+				<table class="table"  id= "table-id" border="1">
 
 
-				<thead>
-				<tr>
-					<th>S/N</th>
-					<th>Quantity/Amount</th>
-<!--					<th>Price</th>-->
-<!--					<th>Amount</th>-->
-					<th>Client</th>
-					<th>Merchant</th>
-					<th>Status</th>
-					<th>Date</th>
-					<th>Actions</th>
-				</tr>
-				</thead>
+					<thead>
+					<tr>
+						<th>S/N</th>
+						<th>Name</th>
+						<th>Address</th>
+						<th>Email</th>
+						<th>Phone</th>
+						<th>Date</th>
+						<th>Actions</th>
+					</tr>
+					</thead>
 
-				<tbody>
+					<tbody>
 
-				<?php
-				$x=1; foreach($allorders as $row){
+					<?php
+					$x=1; foreach($allorders as $row){
 
 
 						?>
 						<tr>
 							<td><?php echo $x; ?></td>
-							<td><?php echo $row['quantity']." litres"."<br>".$row['amount']." naira";?></td>
+							<td><?php echo $row['firstname']." ".$row['lastname'];?></td>
 
-<!--							<td>--><?php //echo $row['price'];?><!--</td>-->
-
-<!--							<td>--><?php //echo $row['amount'];?><!--</td>-->
 							<td><?php echo
-								$row['name']."<br>".$row['email']."<br>".$row['phone'];
-							?></td>
-
-							<td><?php
-								$mchant=getMerchantWithId($row['merchant']);
-		//						print_r($mchant);
-								echo $mchant['business_name'];
+									$row['address']."<br>".$row['lga']."<br>".$row['state']." state";
 								?></td>
-							<td><?php echo statusToText($row['status']);?></td>
+							<td><?php echo $row['email'];?></td>
+							<td><?php echo $row['phone'];?></td>
 							<td><?php echo $row['datetime'];?></td>
 
 							<td>
-								<?php
-								$editUrl="dashboard?link=201&order_id=" . $row['uuid'];
+<!--								--><?php
+//								$editUrl="dashboard?link=201&order_id=" . $row['uuid'];
+//
+//
+//								//						if($row['merchant']!='') {
+//								?>
+<!---->
+<!--								<a href="--><?php //echo $editUrl ?><!--">-->
+<!--									<button class="btn btn-primary btn-lg btn-icon icon-right" tabindex="4">-->
+<!--										View-->
+<!--									</button>-->
+<!--								</a>-->
 
+							</td>
+						</tr>
+						<?php
+						//						}
+						$x=$x+1;
+					}?>
 
-		//						if($row['merchant']!='') {
-									?>
-
-									<a href="<?php echo $editUrl ?>">
-										<button class="btn btn-primary btn-lg btn-icon icon-right" tabindex="4">
-										View
-										</button>
-									</a>
-
-									</td>
-									</tr>
-									<?php
-		//						}
-					$x=$x+1;
-				}?>
-
-				</tbody>
-			</table>
-				</div>
+					</tbody>
+				</table>
+			</div>
 			<!--		Start Pagination -->
 			<div class='pagination-container'>
 				<nav>

@@ -194,6 +194,40 @@ Class Client_M extends CI_Model {
 
 	}
 
+
+
+	public function forgot_password($data){
+
+		$this->load->helper('control');
+		$password=$data['password'];
+		$email=$data['email'];
+
+		$this->db->select('*');
+		$this->db->from('pupils');
+		$this->db->where('email', $email);
+		$this->db->limit(1);
+		$query = $this->db->get();
+
+		if ($query->num_rows() == 1) {
+			$newpassword=getHashedPassword($password);
+			$new_status = array('password'=>$newpassword);
+			$this->db->where('email', $email);
+			$this->db->update('pupils', $new_status);
+
+			if ($this->db->affected_rows() > 0) {
+				return 1;
+			}
+			else{
+				return 0;
+			}
+		}
+		else{
+			return 2;
+		}
+
+	}
+
+
 }
 
 ?>

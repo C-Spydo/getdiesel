@@ -50,7 +50,7 @@ if (isset($_GET['msg'])) {
                 </form>
               </div>
               <div class="card-action no-border text-right">
-<!--				  <a href="">Login</a>-->
+				  <a href="forgotpassword" class="color-primary">Forgot Password?</a>
 				  <a href="register" class="color-primary">New? Create Account</a> </div>
             </div>
           </div>

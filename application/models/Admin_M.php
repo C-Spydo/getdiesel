@@ -127,9 +127,6 @@ Class Admin_M extends CI_Model {
 	}
 
 	public function getOrders() {
-		$allusers=array();
-
-//		$condition = "regstatus = 2";
 		$this->db->select('*');
 		$this->db->from('students');
 		$this->db->order_by("uuid", "desc");
@@ -139,24 +136,28 @@ Class Admin_M extends CI_Model {
 		if ($query->num_rows() >0) {
 			$q=$query->result_array();
 
-
-			foreach ($q as $row)
-			{
-				$user=$row;
-
-				array_push($allusers,$user);
-			}
 		}
 
+		return $q;
+	}
 
-		$allusers=$q;
-		return $allusers;
+	public function getUsers() {
+		$this->db->select('*');
+		$this->db->from('pupils');
+		$this->db->order_by("uuid", "desc");
+		$query = $this->db->get();
+
+		$q=array();
+		if ($query->num_rows() >0) {
+			$q=$query->result_array();
+
+		}
+
+		return $q;
 
 	}
 
 	public function getPayments() {
-		$allusers=array();
-
 		$this->db->select('*');
 		$this->db->from('payments');
 		$this->db->order_by("id", "desc");
@@ -165,14 +166,8 @@ Class Admin_M extends CI_Model {
 		$q=array();
 		if ($query->num_rows() >0) {
 			$q=$query->result_array();
-			foreach ($q as $row)
-			{
-				$user=$row;
-				array_push($allusers,$user);
-			}
 		}
-		$allusers=$q;
-		return $allusers;
+		return $q;
 	}
 
 	public function getMerchantWithId($id) {

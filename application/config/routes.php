@@ -57,7 +57,7 @@ $route['translate_uri_dashes'] = TRUE;
 $route['register'] = "control/register";
 $route['login'] = "control/login";
 $route['logout'] = "logout";
-$route['forgot_password'] = "control/forgot_password";
+$route['forgotpassword'] = "control/forgotpassword";
 
 $route['about'] = "control/about";
 $route['index'] = "control/index";

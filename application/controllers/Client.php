@@ -120,7 +120,7 @@ class Client extends CI_Controller {
 				if ($result == TRUE) {
 					echo "<script> alert ('Registration Successful, Proceed to Login !'); </script>";
 					$this->send_welcome_email($data['business_email'],$this->input->post('password'));
-					$eUrl=base_url()."login";
+					$eUrl=base_url()."login?msg=Registration Successful, Please Sign in";
 					redirect($eUrl);
 
 				} elseif($result==1) {
@@ -276,6 +276,114 @@ class Client extends CI_Controller {
 		@mail($email, $email_subject, $email_message, $headers);
 
 		echo "<script> alert ('Hello, You have been sent a Registration Email'); </script>";
+
+
+	}
+
+
+	public function forgot_pass(){
+		$mynewPass=$this->makeNewPassword();
+		$data = array(
+			'password' => $mynewPass,
+			'email' => $this->input->post('email')
+		);
+
+		$result = $this->Client_M->forgot_password($data);
+		// echo $result;
+
+		if($result==2){
+			$eUrl=base_url()."forgotpassword?msg="."The email does not exist in our records";
+			redirect($eUrl);
+		}
+		elseif($result==0){
+			$eUrl=base_url()."forgotpassword?msg="."Could not reset password. Please Try Again Or contact Support";
+			redirect($eUrl);
+		}
+		else{
+			$this->send_password_email($data['email'],$mynewPass);
+			echo "<script> alert ('Password Reset Successful.Check your Email for New Password'); </script>";
+			$eUrl=base_url()."login?msg="."Password Reset Successful. Check your Email for New Password";
+			redirect($eUrl);
+
+		}
+
+	}
+
+	public function send_password_email($email,$password){
+		$this->load->library('email');
+
+
+		$email_subject='GetDiesel || Password Reset Successful';
+		$email_message='Your new Password has been Set'."\n\n"."Email: ".$email.
+			"\n"."Password: ".$password.
+			"\n"."Kindly change your password when you Log in";
+
+		$email_from='info@getdiesel.ng';
+		$headers = 'From: '.$email_from."\r\n".
+			'Reply-To: '.$email_from."\r\n" .
+			'X-Mailer: PHP/' . phpversion();
+
+		@mail($email, $email_subject, $email_message, $headers);
+
+		echo "<script> alert ('Hello, You have been sent a Password Reset Email'); </script>";
+
+	}
+
+	public function makeNewPassword()
+	{
+		$keyspace2 = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+
+		$str = '';
+
+
+		$max = mb_strlen($keyspace2, '8bit') - 1;
+		for ($i = 0; $i <7; ++$i) {
+			$str .= $keyspace2[rand(0, $max)];
+		}
+
+		return $str;
+	}
+
+	public function user_password_updates($data){
+
+		$this->load->helper('pwd_hash');
+		$password=$data['password'];
+		$ipassword=$data['ipassword'];
+		$user_id=$data['user_id'];
+
+		$condition = "user_id =" . "'" . $data['user_id']. "'";
+		$this->db->select('*');
+		$this->db->from('user_login');
+		$this->db->where($condition);
+		$this->db->limit(1);
+		$query = $this->db->get();
+
+		if ($query->num_rows() == 1) {
+			$q=$query->result_array();
+			if(verifyHashedPassword($ipassword, $q[0]['password'])){
+
+				$newpassword=getHashedPassword($password);
+				$new_status = array('password'=>$newpassword);
+				$this->db->where('user_id', $user_id);
+				$this->db->update('user_login', $new_status);
+
+				if ($this->db->affected_rows() > 0) {
+					return 4;
+				}
+				else{
+					return 1;
+				}
+			}
+			else{
+				return 2;
+			}
+		}
+		else{
+			return 3;
+		}
+
+
 
 
 	}
