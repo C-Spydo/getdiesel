@@ -189,32 +189,37 @@ class Control extends CI_Controller {
 
 
 	public function send_order_email($data){
+		$this->load->config('email');
 		$this->load->library('email');
 
 
 		$email_subject='GetDiesel || Order Successful';
 		$email_message="You have Successfully Placed an order.
-		\n\nA payment receipt will be sent once payment is confirmed.
-		\n\nKindly give the Payment Code to the Merchant once your Order is delivered.\n\nThanks.
+		\nA payment receipt will be sent once payment is confirmed.
+		\nKindly give the Payment Code to the Merchant once your Order is delivered.Thanks.
 		"."\n\n"."Quantity: ".$data['quantity']." litres".
 			"\n"."Amount: ".$data['amount']."\n"."Order Code: ".$data['uuid']
 			."\n"."State: ".$data['state']."\n"."Address: ".$data['address'];
 
-		;
 
-		$email_from='info@getdiesel.ng';
-		$headers = 'From: '.$email_from."\r\n".
-			'Reply-To: '.$email_from."\r\n" .
-			'X-Mailer: PHP/' . phpversion();
+		$from = $this->config->item('smtp_user');
+		$to = $data['email'];
+		$subject = $email_subject;
+		$message = $email_message;
 
-		@mail($data['email'], $email_subject, $email_message, $headers);
+		$this->email->set_newline("\r\n");
+		$this->email->from($from);
+		$this->email->to($to);
+		$this->email->subject($subject);
+		$this->email->message($message);
 
-		//echo "<script> alert ('Hello, You have been sent a Registration Email'); </script>";
-
+		$this->email->send();
+//		if ($this->email->send()) {
+//			echo 'Your Email has successfully been sent.';
+//		} else {
+//			show_error($this->email->print_debugger());
+//		}
 
 	}
-
-
-
 
 }

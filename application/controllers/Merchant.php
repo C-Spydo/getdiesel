@@ -355,17 +355,21 @@ class Merchant extends CI_Controller {
 
 
 		$email_subject='GetDiesel || Registration Successful';
-		$email_message='You have Successfully Registered, Welcome to GetDiesel'."\n\n"."Email: ".$email.
-			"\n"."Password: ".$password
+		$email_message='You have Successfully Registered, Welcome to GetDiesel'."\n"."Email: ".$email.
+			"\n"."Password: ".$password;
 
-		;
+		$from = $this->config->item('smtp_user');
+		$to = $email;
+		$subject = $email_subject;
+		$message = $email_message;
 
-		$email_from='info@getdiesel.ng';
-		$headers = 'From: '.$email_from."\r\n".
-			'Reply-To: '.$email_from."\r\n" .
-			'X-Mailer: PHP/' . phpversion();
+		$this->email->set_newline("\r\n");
+		$this->email->from($from);
+		$this->email->to($to);
+		$this->email->subject($subject);
+		$this->email->message($message);
 
-		@mail($email, $email_subject, $email_message, $headers);
+		$this->email->send();
 
 		echo "<script> alert ('Hello, You have been sent a Registration Email'); </script>";
 

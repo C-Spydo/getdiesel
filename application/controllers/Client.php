@@ -268,12 +268,18 @@ class Client extends CI_Controller {
 
 		;
 
-		$email_from='info@getdiesel.ng';
-		$headers = 'From: '.$email_from."\r\n".
-			'Reply-To: '.$email_from."\r\n" .
-			'X-Mailer: PHP/' . phpversion();
+		$from = $this->config->item('smtp_user');
+		$to = $email;
+		$subject = $email_subject;
+		$message = $email_message;
 
-		@mail($email, $email_subject, $email_message, $headers);
+		$this->email->set_newline("\r\n");
+		$this->email->from($from);
+		$this->email->to($to);
+		$this->email->subject($subject);
+		$this->email->message($message);
+
+		$this->email->send();
 
 		echo "<script> alert ('Hello, You have been sent a Registration Email'); </script>";
 
@@ -314,16 +320,22 @@ class Client extends CI_Controller {
 
 
 		$email_subject='GetDiesel || Password Reset Successful';
-		$email_message='Your new Password has been Set'."\n\n"."Email: ".$email.
+		$email_message='Your new Password has been Set'."\n"."Email: ".$email.
 			"\n"."Password: ".$password.
 			"\n"."Kindly change your password when you Log in";
 
-		$email_from='info@getdiesel.ng';
-		$headers = 'From: '.$email_from."\r\n".
-			'Reply-To: '.$email_from."\r\n" .
-			'X-Mailer: PHP/' . phpversion();
+		$from = $this->config->item('smtp_user');
+		$to = $email;
+		$subject = $email_subject;
+		$message = $email_message;
 
-		@mail($email, $email_subject, $email_message, $headers);
+		$this->email->set_newline("\r\n");
+		$this->email->from($from);
+		$this->email->to($to);
+		$this->email->subject($subject);
+		$this->email->message($message);
+
+		$this->email->send();
 
 		echo "<script> alert ('Hello, You have been sent a Password Reset Email'); </script>";
 

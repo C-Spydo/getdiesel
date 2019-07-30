@@ -321,19 +321,23 @@ class Admin extends CI_Controller {
 
 
 		$email_subject='GetDiesel || Registration Successful';
-		$email_message='You have Successfully Registered, Welcome to GetDiesel'."\n\n"."Email: ".$email.
+		$email_message='You have Successfully Registered, Welcome to GetDiesel'."\n"."Email: ".$email.
 			"\n"."Password: ".$password
 
 		;
 
-		$email_from='info@getdiesel.ng';
-		$headers = 'From: '.$email_from."\r\n".
-			'Reply-To: '.$email_from."\r\n" .
-			'X-Mailer: PHP/' . phpversion();
+		$from = $this->config->item('smtp_user');
+		$to = $email;
+		$subject = $email_subject;
+		$message = $email_message;
 
-		@mail($email, $email_subject, $email_message, $headers);
+		$this->email->set_newline("\r\n");
+		$this->email->from($from);
+		$this->email->to($to);
+		$this->email->subject($subject);
+		$this->email->message($message);
 
-		echo "<script> alert ('Hello, You have been sent a Registration Email'); </script>";
+		$this->email->send();
 
 
 	}
