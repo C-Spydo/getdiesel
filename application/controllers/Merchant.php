@@ -141,7 +141,7 @@ class Merchant extends CI_Controller {
 				if(($this->input->post('password')) !=$this->input->post('password-confirm')){
 
 					$data['message_display'] = 'Passwords Do Not Match';
-					$this->load->view('merchant/register', $data);
+					$this->load->view('merchants/register', $data);
 					//echo 'Passwords Do Not Match';
 				}
 
@@ -149,20 +149,25 @@ class Merchant extends CI_Controller {
 					$result = $this->Teacher_M->registration($data);
 					$result2 = $this->Teacher_M->uuid_insert($data2);
 
-					if ($result == TRUE) {
+					if ($result == 2) {
 						$data['message_display'] = 'Registration Successful, Proceed to Login !';
 
 						// echo "Selected Uplink".$uplink;
 
-						echo "<script> alert ('Registration Successful, Proceed to Login !'); </script>";
+						//echo "<script> alert ('Registration Successful, Proceed to Login !'); </script>";
 						$this->send_welcome_email($data['business_email'],$this->input->post('password'));
-						$this->load->view('login', $data);
+
+						$eUrl=base_url()."merchant/login?msg=Registration Successful, You have been sent an Email . Please Sign in";
+						redirect($eUrl);
+
+						//$this->load->view('merchants/login', $data);
 					} elseif($result==1) {
 						$data['message_display'] = 'Email  already exists, Try another!';
-						$this->load->view('merchant/register', $data);
+						$this->load->view('merchants/register', $data);
 					}
 					else{
-
+						$data['message_display'] = 'Error! occured , Could not register, Please Retry';
+						$this->load->view('merchants/register', $data);
 					}
 				}
 			}
@@ -351,11 +356,11 @@ class Merchant extends CI_Controller {
 
 
 	public function send_welcome_email($email,$password){
+		$this->load->config('email');
 		$this->load->library('email');
 
-
 		$email_subject='GetDiesel || Registration Successful';
-		$email_message='You have Successfully Registered, Welcome to GetDiesel'."\n"."Email: ".$email.
+		$email_message='You have Successfully Registered as a Merchant, Welcome to GetDiesel'."\n"."Email: ".$email.
 			"\n"."Password: ".$password;
 
 		$from = $this->config->item('smtp_user');
@@ -371,8 +376,7 @@ class Merchant extends CI_Controller {
 
 		$this->email->send();
 
-		echo "<script> alert ('Hello, You have been sent a Registration Email'); </script>";
-
+		//echo "<script> alert ('Hello, You have been sent a Registration Email'); </script>";
 
 	}
 

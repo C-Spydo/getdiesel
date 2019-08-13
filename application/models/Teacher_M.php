@@ -23,7 +23,10 @@ Class Teacher_M extends CI_Model {
 			// 	Query to insert data in database
 			$this->db->insert('teachers', $data);
 			if ($this->db->affected_rows() > 0) {
-				return true;
+				return 2;
+			}
+			else{
+				return 3;
 			}
 		}
 

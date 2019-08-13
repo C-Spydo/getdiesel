@@ -117,10 +117,10 @@ class Client extends CI_Controller {
 				$result = $this->Client_M->registration($data);
 				$result2 = $this->Client_M->uuid_insert($data2);
 
-				if ($result == TRUE) {
-					echo "<script> alert ('Registration Successful, Proceed to Login !'); </script>";
-					$this->send_welcome_email($data['business_email'],$this->input->post('password'));
-					$eUrl=base_url()."login?msg=Registration Successful, Please Sign in";
+				if ($result == 2) {
+					$this->send_welcome_email($data['email'],$this->input->post('password'));
+					//echo "<script> alert ('Hello, Registration Successful. You have been sent a Registration Email'); </script>";
+					$eUrl=base_url()."login?msg=Registration Successful, You have been sent an Email . Please Sign in";
 					redirect($eUrl);
 
 				} elseif($result==1) {
@@ -259,14 +259,14 @@ class Client extends CI_Controller {
 
 
 	public function send_welcome_email($email,$password){
+		$this->load->config('email');
 		$this->load->library('email');
+
 
 
 		$email_subject='GetDiesel || Registration Successful';
 		$email_message='You have Successfully Registered, Welcome to GetDiesel'."\n\n"."Email: ".$email.
-			"\n"."Password: ".$password
-
-		;
+			"\n"."Password: ".$password;
 
 		$from = $this->config->item('smtp_user');
 		$to = $email;
@@ -281,7 +281,7 @@ class Client extends CI_Controller {
 
 		$this->email->send();
 
-		echo "<script> alert ('Hello, You have been sent a Registration Email'); </script>";
+		//echo "<script> alert ('Hello, Registration Successful. You have been sent a Registration Email'); </script>";
 
 
 	}
@@ -307,7 +307,7 @@ class Client extends CI_Controller {
 		}
 		else{
 			$this->send_password_email($data['email'],$mynewPass);
-			echo "<script> alert ('Password Reset Successful.Check your Email for New Password'); </script>";
+			//echo "<script> alert ('Password Reset Successful.Check your Email for New Password'); </script>";
 			$eUrl=base_url()."login?msg="."Password Reset Successful. Check your Email for New Password";
 			redirect($eUrl);
 
@@ -316,6 +316,7 @@ class Client extends CI_Controller {
 	}
 
 	public function send_password_email($email,$password){
+		$this->load->config('email');
 		$this->load->library('email');
 
 
@@ -337,7 +338,7 @@ class Client extends CI_Controller {
 
 		$this->email->send();
 
-		echo "<script> alert ('Hello, You have been sent a Password Reset Email'); </script>";
+		//echo "<script> alert ('Hello, You have been sent a Password Reset Email'); </script>";
 
 	}
 

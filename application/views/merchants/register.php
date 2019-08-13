@@ -31,7 +31,7 @@
 </head>
 
 <body>
-<?php echo form_open('Merchant/Register'); ?>
+<?php echo form_open('Merchant/sign_up'); ?>
 
 <?php
 echo "<div class='error_msg'>";
@@ -56,6 +56,7 @@ echo "</div>";
               <div class="card-header"><h4>Register</h4></div>
 
               <div class="card-body">
+				  <font color="red">
 				  <?php echo "<div class='error_msg'>";
 				  if (isset($message_display)) {
 					  echo $message_display;
@@ -63,6 +64,7 @@ echo "</div>";
 				  echo "</div>";
 
 				  ?>
+				  </font>
 
                 <form method="POST" action="../../index.html">
 					<div class="form-divider">

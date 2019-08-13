@@ -89,5 +89,5 @@ function getBankAccount($id){
 	$result = $CI->Teacher_M->getBankAccount($id);
 	return $result[0];
 }
-?>
+
 

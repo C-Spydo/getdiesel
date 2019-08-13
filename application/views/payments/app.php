@@ -4,7 +4,8 @@
 		var amount2=Math.ceil(parseFloat(amount.replace(/,/g, '')));
 		var amount3=amount2*100;
 		var handler = PaystackPop.setup({
-			key: 'pk_test_98a4c99dccfb56caa2ce716d70a8d49ea01c6e97', //put your public key here
+			// key: 'pk_test_98a4c99dccfb56caa2ce716d70a8d49ea01c6e97', //put your public key here
+			key:'pk_live_a90b5e53601e399093971a80d261e6a812b10ade',
 			email: email, //put your customer's email here
 			amount: amount3, //amount the customer is supposed to pay
 			metadata: {
